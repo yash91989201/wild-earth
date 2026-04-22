@@ -1,0 +1,24 @@
+{
+  "name": "@wild-earth/auth",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "scripts": {},
+  "dependencies": {
+    "@wild-earth/db": "workspace:*",
+    "@wild-earth/env": "workspace:*",
+    "better-auth": "catalog:",
+    "dotenv": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@wild-earth/config": "workspace:*",
+    "typescript": "catalog:"
+  }
+}
