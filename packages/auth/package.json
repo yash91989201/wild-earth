@@ -13,12 +13,12 @@
   "dependencies": {
     "@wild-earth/db": "workspace:*",
     "@wild-earth/env": "workspace:*",
-    "better-auth": "catalog:",
-    "dotenv": "catalog:",
-    "zod": "catalog:"
+    "better-auth": "^1.6.7",
+    "dotenv": "^17.4.2",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@wild-earth/config": "workspace:*",
-    "typescript": "catalog:"
+    "typescript": "^6.0.3"
   }
 }
