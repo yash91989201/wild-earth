@@ -167,7 +167,7 @@ export default function BookingSection() {
 														field.setValue(Math.min(current + 1, 50));
 													}}
 												>
-													&plus;
+													+
 												</InputGroupButton>
 											</field.InputGroup>
 										)}
