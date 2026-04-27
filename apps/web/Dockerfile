@@ -17,8 +17,8 @@ COPY packages/db/package.json ./packages/db/package.json
 COPY packages/env/package.json ./packages/env/package.json
 COPY packages/ui/package.json ./packages/ui/package.json
 
-# 2. Install dependencies (frozen lockfile for reproducibility)
-RUN bun install --frozen-lockfile
+# 2. Install dependencies
+RUN bun install
 
 # 3. Copy source code
 COPY apps/web ./apps/web
@@ -37,7 +37,7 @@ WORKDIR /app/apps/web
 
 # Create non-root user if not present
 RUN groupadd -r appgroup 2>/dev/null || true && \
-    useradd -r -g appgroup appuser 2>/dev/null || true
+  useradd -r -g appgroup appuser 2>/dev/null || true
 
 # Copy only runtime artifacts from builder
 COPY --from=builder --chown=appuser:appgroup /app/apps/web/dist ./dist
