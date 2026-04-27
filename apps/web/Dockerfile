@@ -49,10 +49,6 @@ USER appuser
 # Expose the default port (overridable via PORT env var)
 EXPOSE 3100
 
-# Healthcheck
-HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
-  CMD bun -e "const r=await fetch('http://localhost:'+(process.env.PORT||3100)+'/');process.exit(r.ok?0:1)" || exit 1
-
 ENV NODE_ENV=production
 
 CMD ["bun", "run", "server.ts"]
