@@ -5,25 +5,29 @@
 # ------------------------------------------------------------------------------
 FROM oven/bun:1.3.13 AS builder
 
+# Create app directory for the bun user to avoid permission issues
+RUN mkdir -p /app && chown -R bun:bun /app
+
+USER bun
 WORKDIR /app
 
 # 1. Copy workspace manifests first (for layer caching)
-COPY package.json bun.lock ./
-COPY apps/web/package.json ./apps/web/package.json
-COPY packages/api/package.json ./packages/api/package.json
-COPY packages/auth/package.json ./packages/auth/package.json
-COPY packages/config/package.json ./packages/config/package.json
-COPY packages/db/package.json ./packages/db/package.json
-COPY packages/env/package.json ./packages/env/package.json
-COPY packages/ui/package.json ./packages/ui/package.json
+COPY --chown=bun:bun package.json bun.lock ./
+COPY --chown=bun:bun apps/web/package.json ./apps/web/package.json
+COPY --chown=bun:bun packages/api/package.json ./packages/api/package.json
+COPY --chown=bun:bun packages/auth/package.json ./packages/auth/package.json
+COPY --chown=bun:bun packages/config/package.json ./packages/config/package.json
+COPY --chown=bun:bun packages/db/package.json ./packages/db/package.json
+COPY --chown=bun:bun packages/env/package.json ./packages/env/package.json
+COPY --chown=bun:bun packages/ui/package.json ./packages/ui/package.json
 
 # 2. Install dependencies
 RUN bun install
 
 # 3. Copy source code
-COPY apps/web ./apps/web
-COPY packages ./packages
-COPY tsconfig.json ./tsconfig.json
+COPY --chown=bun:bun apps/web ./apps/web
+COPY --chown=bun:bun packages ./packages
+COPY --chown=bun:bun tsconfig.json ./tsconfig.json
 
 # 4. Build the application
 RUN cd apps/web && bun run build
@@ -33,11 +37,14 @@ RUN cd apps/web && bun run build
 # ------------------------------------------------------------------------------
 FROM oven/bun:1.3.13-slim AS production
 
-WORKDIR /app/apps/web
-
 # Create non-root user if not present
 RUN groupadd -r appgroup 2>/dev/null || true && \
   useradd -r -g appgroup appuser 2>/dev/null || true
+
+# Ensure workdir is owned by appuser before switching
+RUN mkdir -p /app/apps/web && chown -R appuser:appgroup /app/apps/web
+
+WORKDIR /app/apps/web
 
 # Copy only runtime artifacts from builder
 COPY --from=builder --chown=appuser:appgroup /app/apps/web/dist ./dist
