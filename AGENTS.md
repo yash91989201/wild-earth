@@ -1,126 +1,165 @@
-# Ultracite Code Standards
+# AGENTS.md
 
-This project uses **Ultracite**, a zero-config preset that enforces strict code quality standards through automated formatting and linting.
-
-## Quick Reference
-
-- **Format code**: `bun x ultracite fix`
-- **Check for issues**: `bun x ultracite check`
-- **Diagnose setup**: `bun x ultracite doctor`
-
-Biome (the underlying engine) provides robust linting and formatting. Most issues are automatically fixable.
+> **Purpose:** This file defines mandatory tooling rules and workflow patterns for AI agents operating in this codebase.
+All rules are non-negotiable unless explicitly stated otherwise.
 
 ---
 
-## Core Principles
+## Table of Contents
 
-Write code that is **accessible, performant, type-safe, and maintainable**. Focus on clarity and explicit intent over brevity.
-
-### Type Safety & Explicitness
-
-- Use explicit types for function parameters and return values when they enhance clarity
-- Prefer `unknown` over `any` when the type is genuinely unknown
-- Use const assertions (`as const`) for immutable values and literal types
-- Leverage TypeScript's type narrowing instead of type assertions
-- Use meaningful variable names instead of magic numbers - extract constants with descriptive names
-
-### Modern JavaScript/TypeScript
-
-- Use arrow functions for callbacks and short functions
-- Prefer `for...of` loops over `.forEach()` and indexed `for` loops
-- Use optional chaining (`?.`) and nullish coalescing (`??`) for safer property access
-- Prefer template literals over string concatenation
-- Use destructuring for object and array assignments
-- Use `const` by default, `let` only when reassignment is needed, never `var`
-
-### Async & Promises
-
-- Always `await` promises in async functions - don't forget to use the return value
-- Use `async/await` syntax instead of promise chains for better readability
-- Handle errors appropriately in async code with try-catch blocks
-- Don't use async functions as Promise executors
-
-### React & JSX
-
-- Use function components over class components
-- Call hooks at the top level only, never conditionally
-- Specify all dependencies in hook dependency arrays correctly
-- Use the `key` prop for elements in iterables (prefer unique IDs over array indices)
-- Nest children between opening and closing tags instead of passing as props
-- Don't define components inside other components
-- Use semantic HTML and ARIA attributes for accessibility:
-  - Provide meaningful alt text for images
-  - Use proper heading hierarchy
-  - Add labels for form inputs
-  - Include keyboard event handlers alongside mouse events
-  - Use semantic elements (`<button>`, `<nav>`, etc.) instead of divs with roles
-
-### Error Handling & Debugging
-
-- Remove `console.log`, `debugger`, and `alert` statements from production code
-- Throw `Error` objects with descriptive messages, not strings or other values
-- Use `try-catch` blocks meaningfully - don't catch errors just to rethrow them
-- Prefer early returns over nested conditionals for error cases
-
-### Code Organization
-
-- Keep functions focused and under reasonable cognitive complexity limits
-- Extract complex conditions into well-named boolean variables
-- Use early returns to reduce nesting
-- Prefer simple conditionals over nested ternary operators
-- Group related code together and separate concerns
-
-### Security
-
-- Add `rel="noopener"` when using `target="_blank"` on links
-- Avoid `dangerouslySetInnerHTML` unless absolutely necessary
-- Don't use `eval()` or assign directly to `document.cookie`
-- Validate and sanitize user input
-
-### Performance
-
-- Avoid spread syntax in accumulators within loops
-- Use top-level regex literals instead of creating them in loops
-- Prefer specific imports over namespace imports
-- Avoid barrel files (index files that re-export everything)
-- Use proper image components (e.g., Next.js `<Image>`) over `<img>` tags
-
-### Framework-Specific Guidance
-
-**Next.js:**
-
-- Use Next.js `<Image>` component for images
-- Use `next/head` or App Router metadata API for head elements
-- Use Server Components for async data fetching instead of async Client Components
-
-**React 19+:**
-
-- Use ref as a prop instead of `React.forwardRef`
-
-**Solid/Svelte/Vue/Qwik:**
-
-- Use `class` and `for` attributes (not `className` or `htmlFor`)
+1. [Communication Style — Caveman Mode](#0-communication-style--caveman-mode)
+2. [File Editing](#1-file-editing)
+3. [Codebase Exploration — `warp-grep`](#2-codebase-exploration--warp-grep)
+4. [Browser Automation — `agent-browser`](#3-browser-automation--agent-browser)
+5. [Context-Mode — Mandatory Routing Rules](#5-context-mode--mandatory-routing-rules)
 
 ---
 
-## Testing
+## 0. Communication Style — Caveman Mode
 
-- Write assertions inside `it()` or `test()` blocks
-- Avoid done callbacks in async tests - use async/await instead
-- Don't use `.only` or `.skip` in committed code
-- Keep test suites reasonably flat - avoid excessive `describe` nesting
+**Rule:** Always active. No exceptions. No revert after many turns. No filler drift.
 
-## When Biome Can't Help
-
-Biome's linter will catch most issues automatically. Focus your attention on:
-
-1. **Business logic correctness** - Biome can't validate your algorithms
-2. **Meaningful naming** - Use descriptive names for functions, variables, and types
-3. **Architecture decisions** - Component structure, data flow, and API design
-4. **Edge cases** - Handle boundary conditions and error states
-5. **User experience** - Accessibility, performance, and usability considerations
-6. **Documentation** - Add comments for complex logic, but prefer self-documenting code
+- Terse like caveman. Technical substance exact. Only fluff die.
+- Drop: articles, filler (`just` / `really` / `basically`), pleasantries, hedging.
+- Fragments OK. Short synonyms. Code unchanged.
+- Pattern: `[thing] [action] [reason]. [next step].`
+- Code / commits / PRs: write normally.
+- Off: user says `"stop caveman"` or `"normal mode"`.
 
 ---
 
-Most formatting and common issues are automatically fixed by Biome. Run `bun x ultracite fix` before committing to ensure compliance.
+## 1. File Editing
+
+**Rule:** Always use `edit_file`. Never use `str_replace` or full file rewrites.
+
+**Why:** `edit_file` accepts partial snippets, minimises diffs, and reduces unintended side effects.
+
+---
+
+## 2. Codebase Exploration — `warp-grep`
+
+`warp-grep` is a subagent for fast semantic codebase search.
+
+**Rule:** Always run `warp-grep` at the start of any investigation before writing or modifying code.
+
+**Query style — intent over keywords:**
+
+| ✅ Good Queries | ❌ Avoid |
+| --- | --- |
+| `"Find the XYZ flow"` | Exact keyword searches |
+| `"How does XYZ work?"` | Overly narrow or literal queries |
+| `"Where is <e> coming from?"` | — |
+
+---
+
+## 3. Browser Automation — `agent-browser`
+
+Run `agent-browser --help` for the full reference.
+
+### Core Commands
+
+```sh
+agent-browser open <url>       # Navigate to a URL
+agent-browser snapshot -i      # List interactive elements (refs: @e1, @e2, …)
+agent-browser click @e1        # Click an element by ref
+agent-browser fill @e2 "text"  # Fill an input by ref
+```
+
+> **Important:** Re-snapshot after every page change before interacting with new elements.
+
+---
+
+## 5. Context-Mode — Mandatory Routing Rules
+
+> **Critical:** These rules are **not optional**. A single unrouted command can dump 56 KB into context and waste the entire session. Follow the routing rules exactly.
+
+---
+
+### 5.1 Blocked Commands
+
+The following commands are **intercepted and blocked** by the context-mode plugin. Do not retry them in any form.
+
+#### `curl` / `wget` — BLOCKED
+
+**Do not use.** Use these instead:
+
+- `context-mode_ctx_fetch_and_index(url, source)` — fetch and index web pages.
+- `context-mode_ctx_execute(language: "javascript", code: "const r = await fetch(...)")` — run HTTP calls in sandbox.
+
+#### Inline HTTP calls — BLOCKED
+
+Shell commands containing `fetch('http`, `requests.get(`, `requests.post(`, `http.get(`, or `http.request(` are blocked.
+
+**Use instead:** `context-mode_ctx_execute(language, code)` to run HTTP calls in sandbox.
+
+#### Direct URL fetching — BLOCKED
+
+**Use instead:** `context-mode_ctx_fetch_and_index(url, source)` → then `context-mode_ctx_search(queries)`.
+
+---
+
+### 5.2 Redirected Tools — Use Sandbox Equivalents
+
+#### Shell (output > 20 lines)
+
+Shell is **only** permitted for short-output commands:
+`git`, `mkdir`, `rm`, `mv`, `cd`, `ls`, `npm install`, `pip install`
+
+For everything else:
+
+- `context-mode_ctx_batch_execute(commands, queries)` — run multiple commands and search in one call.
+- `context-mode_ctx_execute(language: "shell", code: "...")` — only stdout enters context.
+
+#### File Reading
+
+| Intent | Tool |
+| --- | --- |
+| Reading a file **to edit it** | Read directly (content must be in context) |
+| Reading a file **to analyse/summarise** | `context-mode_ctx_execute_file(path, language, code)` — only your printed summary enters context |
+
+#### `grep` / Search (large results)
+
+Search results can flood context.
+
+**Use:** `context-mode_ctx_execute(language: "shell", code: "grep ...")` — only your summary enters context.
+
+---
+
+### 5.3 Tool Selection Hierarchy
+
+Use tools in this priority order:
+
+1. **GATHER** — `context-mode_ctx_batch_execute(commands, queries)`
+   Primary tool. Runs all commands, auto-indexes output, returns search results. One call replaces 30+ individual calls.
+
+2. **FOLLOW-UP** — `context-mode_ctx_search(queries: ["q1", "q2", ...])`
+   Query indexed content. Pass **all** questions as an array in one call.
+
+3. **PROCESSING** — `context-mode_ctx_execute(language, code)` or `context-mode_ctx_execute_file(path, language, code)`
+   Sandbox execution. Only stdout enters context.
+
+4. **WEB** — `context-mode_ctx_fetch_and_index(url, source)` → then `context-mode_ctx_search(queries)`
+   Fetch, chunk, index, query. Raw HTML never enters context.
+
+5. **INDEX** — `context-mode_ctx_index(content, source)`
+   Store content in FTS5 knowledge base for later search. Use descriptive `source` labels.
+
+---
+
+### 5.4 Output Constraints
+
+- Keep responses **under 500 words**.
+- Write all artifacts (code, configs, PRDs) to **files** — never return them as inline text. Return only: file path + one-line description.
+- Use descriptive source labels when indexing so content can be retrieved via `search(source: "label")`.
+
+---
+
+### 5.5 `ctx` Utility Commands
+
+| Command | Action |
+| --- | --- |
+| `ctx stats` | Call the `stats` MCP tool and display full output verbatim |
+| `ctx doctor` | Call the `doctor` MCP tool, run returned shell command, display as checklist |
+| `ctx upgrade` | Call the `upgrade` MCP tool, run returned shell command, display as checklist |
+
+📖 [API Client Usage Guide](docs/technical/api-client-usage.md)

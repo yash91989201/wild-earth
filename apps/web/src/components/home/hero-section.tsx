@@ -1,5 +1,5 @@
+import { IconArrowRight, IconShieldCheck } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, ShieldCheck } from "lucide-react";
 import { motion, useInView, useScroll, useTransform } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
@@ -59,17 +59,17 @@ export default function HeroSection() {
 					style={{ y, scale: 1.15 }}
 					width={1920}
 				/>
-				<div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-[#f5f1ed]" />
+				<div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-background" />
 			</div>
 
-			<div className="relative z-10 max-w-4xl px-6 text-center">
+			<div className="relative z-10 max-w-5xl px-6 text-center">
 				<motion.div
 					animate={{ opacity: 1, y: 0 }}
 					className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 backdrop-blur-md"
 					initial={false}
 					transition={{ duration: 0.8, ease: easeOutExpo, delay: 0.2 }}
 				>
-					<ShieldCheck className="h-4 w-4 text-[#d4af6a]" />
+					<IconShieldCheck className="h-4 w-4 text-accent" />
 					<span className="font-bold text-white text-xs uppercase tracking-widest">
 						Verified Ground Operations &bull; Direct Booking
 					</span>
@@ -102,7 +102,7 @@ export default function HeroSection() {
 					transition={{ duration: 0.8, ease: easeOutExpo, delay: 0.8 }}
 				>
 					<Link
-						className="w-full rounded-full bg-[#1f4d2b] px-10 py-5 font-bold text-lg text-white shadow-2xl transition-all hover:-translate-y-0.5 hover:bg-[#2d5a3d] hover:shadow-xl sm:w-auto"
+						className="w-full rounded-full bg-primary px-10 py-5 font-bold text-lg text-primary-foreground shadow-2xl transition-all hover:-translate-y-0.5 hover:bg-brand-green-dark hover:shadow-xl sm:w-auto"
 						hash="booking-form"
 						to="/"
 					>
@@ -113,7 +113,7 @@ export default function HeroSection() {
 						to="/destinations"
 					>
 						Explore All Parks
-						<ArrowRight className="h-5 w-5" />
+						<IconArrowRight className="h-5 w-5" />
 					</Link>
 				</motion.div>
 
@@ -124,7 +124,7 @@ export default function HeroSection() {
 					transition={{ duration: 0.8, ease: easeOutExpo, delay: 1.0 }}
 				>
 					<div className="flex flex-col items-center">
-						<span className="font-bold font-serif text-3xl text-[#d4af6a]">
+						<span className="font-bold font-serif text-3xl text-accent">
 							<AnimatedCounter suffix="+" target={5000} />
 						</span>
 						<span className="mt-1 text-white/60 text-xs uppercase tracking-widest">
@@ -132,7 +132,7 @@ export default function HeroSection() {
 						</span>
 					</div>
 					<div className="flex flex-col items-center">
-						<span className="font-bold font-serif text-3xl text-[#d4af6a]">
+						<span className="font-bold font-serif text-3xl text-accent">
 							<AnimatedCounter suffix="%" target={100} />
 						</span>
 						<span className="mt-1 text-white/60 text-xs uppercase tracking-widest">
@@ -140,7 +140,7 @@ export default function HeroSection() {
 						</span>
 					</div>
 					<div className="flex flex-col items-center">
-						<span className="font-bold font-serif text-3xl text-[#d4af6a]">
+						<span className="font-bold font-serif text-3xl text-accent">
 							<AnimatedCounter suffix="hr" target={24} />
 						</span>
 						<span className="mt-1 text-white/60 text-xs uppercase tracking-widest">
@@ -148,7 +148,7 @@ export default function HeroSection() {
 						</span>
 					</div>
 					<div className="flex flex-col items-center">
-						<span className="font-bold font-serif text-3xl text-[#d4af6a]">
+						<span className="font-bold font-serif text-3xl text-accent">
 							ISO
 						</span>
 						<span className="mt-1 text-white/60 text-xs uppercase tracking-widest">

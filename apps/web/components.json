@@ -1,24 +1,25 @@
 {
   "$schema": "https://ui.shadcn.com/schema.json",
-  "style": "base-lyra",
+  "style": "radix-luma",
   "rsc": false,
   "tsx": true,
   "tailwind": {
     "config": "",
     "css": "../../packages/ui/src/styles/globals.css",
-    "baseColor": "neutral",
+    "baseColor": "olive",
     "cssVariables": true,
     "prefix": ""
   },
-  "iconLibrary": "lucide",
+  "iconLibrary": "tabler",
+  "rtl": false,
   "aliases": {
-    "components": "@/components",
+    "components": "@wild-earth/ui/components",
     "utils": "@wild-earth/ui/lib/utils",
     "ui": "@wild-earth/ui/components",
-    "lib": "@/lib",
-    "hooks": "@/hooks"
+    "lib": "@wild-earth/ui/lib",
+    "hooks": "@wild-earth/ui/hooks"
   },
-  "menuColor": "default",
+  "menuColor": "default-translucent",
   "menuAccent": "subtle",
   "registries": {}
 }

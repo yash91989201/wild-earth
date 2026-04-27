@@ -1,5 +1,5 @@
+import { IconArrowRight } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
 import { staggerItem } from "@/lib/animations";
 
@@ -50,7 +50,7 @@ export default function ParkCard({ park }: { park: Park }) {
 					to={park.link}
 				>
 					Explore {park.name.split(" ")[0]}
-					<ArrowRight className="h-5 w-5" />
+					<IconArrowRight className="h-5 w-5" />
 				</Link>
 			</div>
 		</motion.div>

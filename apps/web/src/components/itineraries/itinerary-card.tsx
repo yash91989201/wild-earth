@@ -1,5 +1,10 @@
+import {
+	IconArrowRight,
+	IconChevronDown,
+	IconMapPin,
+} from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, ChevronDown, MapPin } from "lucide-react";
+import { Button } from "@wild-earth/ui/components/button";
 import { motion } from "motion/react";
 import { useState } from "react";
 import { staggerItem } from "@/lib/animations";
@@ -32,16 +37,16 @@ function AccordionItem({
 	const [open, setOpen] = useState(defaultOpen);
 	return (
 		<div className="border-gray-100 border-b">
-			<button
-				className="flex w-full items-center justify-between py-3 text-left"
+			<Button
+				className="flex h-auto w-full items-center justify-between py-3 text-left font-bold text-sm hover:bg-transparent"
 				onClick={() => setOpen((v) => !v)}
-				type="button"
+				variant="ghost"
 			>
-				<span className="font-bold text-[#1f4d2b] text-sm">{day.title}</span>
-				<ChevronDown
-					className={`h-4 w-4 text-[#1f4d2b] transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+				<span>{day.title}</span>
+				<IconChevronDown
+					className={`h-4 w-4 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
 				/>
-			</button>
+			</Button>
 			{open && (
 				<motion.div
 					animate={{ opacity: 1, y: 0 }}
@@ -83,7 +88,7 @@ export default function ItineraryCard({ itinerary }: { itinerary: Itinerary }) {
 					{itinerary.duration}
 				</span>
 				<span className="flex items-center gap-1 text-gray-500 text-sm">
-					<MapPin className="h-4 w-4" />
+					<IconMapPin className="h-4 w-4" />
 					{itinerary.route}
 				</span>
 			</div>
@@ -97,18 +102,18 @@ export default function ItineraryCard({ itinerary }: { itinerary: Itinerary }) {
 			{/* Tabs */}
 			<div className="mb-6 flex gap-6 border-gray-200 border-b">
 				{tabs.map((tab) => (
-					<button
-						className={`pb-3 font-bold text-sm uppercase tracking-wider transition-colors ${
+					<Button
+						className={`h-auto rounded-none border-b-2 pb-3 font-bold text-sm uppercase tracking-wider transition-colors ${
 							activeTab === tab.id
-								? "border-[#1f4d2b] border-b-2 text-[#1f4d2b]"
-								: "text-gray-400 hover:text-gray-600"
+								? "border-primary text-primary hover:bg-transparent"
+								: "border-transparent text-muted-foreground hover:bg-transparent hover:text-foreground"
 						}`}
 						key={tab.id}
 						onClick={() => setActiveTab(tab.id)}
-						type="button"
+						variant="ghost"
 					>
 						{tab.label}
-					</button>
+					</Button>
 				))}
 			</div>
 
@@ -128,7 +133,7 @@ export default function ItineraryCard({ itinerary }: { itinerary: Itinerary }) {
 							to="/"
 						>
 							Request Quote
-							<ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+							<IconArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
 						</Link>
 					</motion.div>
 				)}

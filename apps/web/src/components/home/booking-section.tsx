@@ -1,24 +1,55 @@
-import { CircleCheck, Leaf, Send, ShieldCheck } from "lucide-react";
+import {
+	IconCircleCheck,
+	IconLeaf,
+	IconSend,
+	IconShieldCheck,
+} from "@tabler/icons-react";
+import { Link } from "@tanstack/react-router";
+import { Button, buttonVariants } from "@wild-earth/ui/components/button";
+import { FieldGroup } from "@wild-earth/ui/components/field";
+import { useAppForm } from "@wild-earth/ui/components/form/hooks";
+import { InputGroupButton } from "@wild-earth/ui/components/input-group";
+import { SelectItem } from "@wild-earth/ui/components/select";
+import { cn } from "@wild-earth/ui/lib/utils";
 import { motion } from "motion/react";
 import { useState } from "react";
 import { fadeLeft, fadeRight, viewportOnce } from "@/lib/animations";
+import { BookingFormSchema } from "@/lib/schemas/booking";
+import type { BookingFormType } from "@/lib/types/booking";
 
 export default function BookingSection() {
 	const [submitted, setSubmitted] = useState(false);
 
-	const handleSubmit = (e: React.FormEvent) => {
-		e.preventDefault();
-		setSubmitted(true);
-		setTimeout(() => setSubmitted(false), 3000);
-	};
+	const form = useAppForm({
+		defaultValues: {
+			park: "",
+			dates: "",
+			groupSize: 1,
+			email: "",
+			interests: "",
+		} satisfies BookingFormType as BookingFormType,
+		validators: {
+			onSubmit: BookingFormSchema,
+		},
+		onSubmit: async ({ value }) => {
+			// Simulate API call
+			await new Promise((resolve) => setTimeout(resolve, 1500));
+			console.log("Booking request:", value);
+			setSubmitted(true);
+			setTimeout(() => {
+				setSubmitted(false);
+				form.reset();
+			}, 3000);
+		},
+	});
 
 	return (
 		<section
-			className="relative overflow-hidden bg-[#1f4d2b] py-24"
+			className="relative overflow-hidden bg-primary py-24"
 			id="booking-form"
 		>
 			<div className="pointer-events-none absolute top-0 right-0 translate-x-1/4 -translate-y-1/4 opacity-5">
-				<Leaf className="h-[600px] w-[600px] rotate-45 text-white" />
+				<IconLeaf className="h-[600px] w-[600px] rotate-45 text-white" />
 			</div>
 
 			<div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-16 px-6 lg:grid-cols-2">
@@ -39,8 +70,8 @@ export default function BookingSection() {
 					</p>
 					<div className="space-y-6">
 						<div className="flex items-start gap-4">
-							<div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-white/10 text-[#d4af6a]">
-								<CircleCheck className="h-6 w-6" />
+							<div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-white/10 text-accent">
+								<IconCircleCheck className="h-6 w-6" />
 							</div>
 							<div>
 								<h4 className="mb-1 font-bold">Direct On-Ground Execution</h4>
@@ -51,8 +82,8 @@ export default function BookingSection() {
 							</div>
 						</div>
 						<div className="flex items-start gap-4">
-							<div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-white/10 text-[#d4af6a]">
-								<ShieldCheck className="h-6 w-6" />
+							<div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-white/10 text-accent">
+								<IconShieldCheck className="h-6 w-6" />
 							</div>
 							<div>
 								<h4 className="mb-1 font-bold">Transparent Pricing</h4>
@@ -66,123 +97,156 @@ export default function BookingSection() {
 				</motion.div>
 
 				<motion.div
-					className="relative rounded-[40px] bg-white p-8 shadow-2xl md:p-12"
+					className="relative rounded-[40px] bg-card p-8 shadow-2xl md:p-12"
 					initial="hidden"
 					variants={fadeRight}
 					viewport={viewportOnce}
 					whileInView="visible"
 				>
 					<div className="mb-8">
-						<h3 className="mb-2 font-bold font-serif text-2xl text-[#1f4d2b]">
+						<h3 className="mb-2 font-bold font-serif text-2xl text-primary">
 							Plan Your Safari
 						</h3>
-						<p className="text-gray-500 text-sm">
+						<p className="text-muted-foreground text-sm">
 							Share your preferences for a personalized proposal.
 						</p>
 					</div>
-					<form className="space-y-6" onSubmit={handleSubmit}>
-						<div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-							<div className="space-y-2">
-								<label
-									className="font-bold text-gray-400 text-xs uppercase tracking-widest"
-									htmlFor="park"
-								>
-									National Park
-								</label>
-								<select
-									className="w-full rounded-xl border border-gray-100 bg-gray-50 px-5 py-4 transition-all focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#d4af6a]"
-									id="park"
-								>
-									<option>Ranthambore</option>
-									<option>Jim Corbett</option>
-									<option>Kaziranga</option>
-									<option>Tadoba</option>
-									<option>Pench</option>
-								</select>
-							</div>
-							<div className="space-y-2">
-								<label
-									className="font-bold text-gray-400 text-xs uppercase tracking-widest"
-									htmlFor="dates"
-								>
-									Travel Dates
-								</label>
-								<input
-									className="w-full rounded-xl border border-gray-100 bg-gray-50 px-5 py-4 transition-all focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#d4af6a]"
-									id="dates"
-									type="date"
-								/>
-							</div>
-						</div>
-						<div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-							<div className="space-y-2">
-								<label
-									className="font-bold text-gray-400 text-xs uppercase tracking-widest"
-									htmlFor="group-size"
-								>
-									Group Size
-								</label>
-								<input
-									className="w-full rounded-xl border border-gray-100 bg-gray-50 px-5 py-4 transition-all focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#d4af6a]"
-									id="group-size"
-									placeholder="Number of People"
-									type="number"
-								/>
-							</div>
-							<div className="space-y-2">
-								<label
-									className="font-bold text-gray-400 text-xs uppercase tracking-widest"
-									htmlFor="email"
-								>
-									Contact Email
-								</label>
-								<input
-									className="w-full rounded-xl border border-gray-100 bg-gray-50 px-5 py-4 transition-all focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#d4af6a]"
-									id="email"
-									placeholder="hello@example.com"
-									type="email"
-								/>
-							</div>
-						</div>
-						<div className="space-y-2">
-							<label
-								className="font-bold text-gray-400 text-xs uppercase tracking-widest"
-								htmlFor="interests"
-							>
-								Special Interests
-							</label>
-							<textarea
-								className="w-full rounded-xl border border-gray-100 bg-gray-50 px-5 py-4 transition-all focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#d4af6a]"
-								id="interests"
-								placeholder="E.g., Photography focus, bird watching, luxury lodging preferences..."
-								rows={3}
-							/>
-						</div>
-						<button
-							className={`flex w-full items-center justify-center gap-2 rounded-xl py-5 font-bold text-lg transition-all ${submitted ? "pointer-events-none bg-green-600 text-white opacity-80" : "bg-[#d4af6a] text-[#1f4d2b] hover:bg-[#c49b59]"}`}
-							disabled={submitted}
-							type="submit"
+
+					<form.AppForm>
+						<form
+							className="space-y-6"
+							onSubmit={(e) => {
+								e.preventDefault();
+								form.handleSubmit();
+							}}
 						>
-							{submitted ? (
-								<>
-									<CircleCheck className="h-5 w-5" />
-									Request Sent!
-								</>
-							) : (
-								<>
-									Request Custom Proposal
-									<Send className="h-5 w-5" />
-								</>
-							)}
-						</button>
-						<p className="text-center text-[11px] text-gray-400">
-							By submitting, you agree to our{" "}
-							<button className="underline" type="button">
-								Cancellation & Refund Policy
-							</button>
-							.
-						</p>
-					</form>
+							<FieldGroup>
+								<div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+									<form.AppField name="park">
+										{(field) => (
+											<field.Select
+												label="National Park"
+												placeholder="Select a park"
+											>
+												<SelectItem value="ranthambore">Ranthambore</SelectItem>
+												<SelectItem value="corbett">Jim Corbett</SelectItem>
+												<SelectItem value="kaziranga">Kaziranga</SelectItem>
+												<SelectItem value="tadoba">Tadoba</SelectItem>
+												<SelectItem value="pench">Pench</SelectItem>
+											</field.Select>
+										)}
+									</form.AppField>
+
+									<form.AppField name="dates">
+										{(field) => <field.Calendar label="Travel Dates" />}
+									</form.AppField>
+								</div>
+
+								<div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+									<form.AppField name="groupSize">
+										{(field) => (
+											<field.InputGroup label="Group Size">
+												<InputGroupButton
+													className="font-semibold text-lg"
+													onClick={() => {
+														const current = Number(field.state.value) || 1;
+														field.setValue(Math.max(current - 1, 1));
+													}}
+												>
+													&minus;
+												</InputGroupButton>
+												<field.InputGroupInput
+													className="[appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+													placeholder="Number of People"
+													type="number"
+												/>
+												<InputGroupButton
+													className="font-semibold text-lg"
+													onClick={() => {
+														const current = Number(field.state.value) || 1;
+														field.setValue(Math.min(current + 1, 50));
+													}}
+												>
+													&plus;
+												</InputGroupButton>
+											</field.InputGroup>
+										)}
+									</form.AppField>
+
+									<form.AppField name="email">
+										{(field) => (
+											<field.Input
+												label="Contact Email"
+												placeholder="hello@example.com"
+												type="email"
+											/>
+										)}
+									</form.AppField>
+								</div>
+
+								<form.AppField name="interests">
+									{(field) => (
+										<field.Textarea
+											label="Special Interests"
+											placeholder="E.g., Photography focus, bird watching, luxury lodging preferences..."
+											rows={5}
+										/>
+									)}
+								</form.AppField>
+
+								<form.Subscribe
+									selector={(state) => [
+										state.canSubmit,
+										state.isValidating,
+										state.isSubmitting,
+									]}
+								>
+									{([canSubmit, isValidating, isSubmitting]) => (
+										<Button
+											className="w-full py-5 font-bold text-lg"
+											disabled={
+												!canSubmit || isValidating || isSubmitting || submitted
+											}
+											size="lg"
+											type="submit"
+											variant={submitted ? "secondary" : "default"}
+										>
+											{submitted ? (
+												<>
+													<IconCircleCheck className="h-5 w-5" />
+													Request Sent!
+												</>
+											) : isSubmitting ? (
+												<>
+													<span className="h-5 w-5 animate-spin rounded-full border-2 border-current border-t-transparent" />
+													Submitting...
+												</>
+											) : (
+												<>
+													Request Custom Proposal
+													<IconSend className="h-5 w-5" />
+												</>
+											)}
+										</Button>
+									)}
+								</form.Subscribe>
+
+								<p className="text-center text-muted-foreground text-xs">
+									By submitting, you agree to our{" "}
+									<Link
+										className={cn(
+											buttonVariants({ variant: "link" }),
+											"h-auto p-0 font-normal text-xs"
+										)}
+										to="/"
+									>
+										Cancellation & Refund Policy
+									</Link>
+									.
+								</p>
+							</FieldGroup>
+						</form>
+					</form.AppForm>
 				</motion.div>
 			</div>
 		</section>

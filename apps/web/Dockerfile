@@ -1,0 +1,58 @@
+# syntax=docker/dockerfile:1
+
+# ------------------------------------------------------------------------------
+# Stage 1 — Build
+# ------------------------------------------------------------------------------
+FROM oven/bun:1.3.13 AS builder
+
+WORKDIR /app
+
+# 1. Copy workspace manifests first (for layer caching)
+COPY package.json bun.lock ./
+COPY apps/web/package.json ./apps/web/package.json
+COPY packages/api/package.json ./packages/api/package.json
+COPY packages/auth/package.json ./packages/auth/package.json
+COPY packages/config/package.json ./packages/config/package.json
+COPY packages/db/package.json ./packages/db/package.json
+COPY packages/env/package.json ./packages/env/package.json
+COPY packages/ui/package.json ./packages/ui/package.json
+
+# 2. Install dependencies (frozen lockfile for reproducibility)
+RUN bun install --frozen-lockfile
+
+# 3. Copy source code
+COPY apps/web ./apps/web
+COPY packages ./packages
+COPY tsconfig.json ./tsconfig.json
+
+# 4. Build the application
+RUN cd apps/web && bun run build
+
+# ------------------------------------------------------------------------------
+# Stage 2 — Production
+# ------------------------------------------------------------------------------
+FROM oven/bun:1.3.13-slim AS production
+
+WORKDIR /app/apps/web
+
+# Create non-root user if not present
+RUN groupadd -r appgroup 2>/dev/null || true && \
+    useradd -r -g appgroup appuser 2>/dev/null || true
+
+# Copy only runtime artifacts from builder
+COPY --from=builder --chown=appuser:appgroup /app/apps/web/dist ./dist
+COPY --from=builder --chown=appuser:appgroup /app/apps/web/server.ts ./server.ts
+COPY --from=builder --chown=appuser:appgroup /app/apps/web/package.json ./package.json
+
+USER appuser
+
+# Expose the default port (overridable via PORT env var)
+EXPOSE 3100
+
+# Healthcheck
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
+  CMD bun -e "const r=await fetch('http://localhost:'+(process.env.PORT||3100)+'/');process.exit(r.ok?0:1)" || exit 1
+
+ENV NODE_ENV=production
+
+CMD ["bun", "run", "server.ts"]

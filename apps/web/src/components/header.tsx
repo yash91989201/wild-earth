@@ -1,5 +1,6 @@
+import { IconMenu, IconTent, IconX } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
-import { Menu, Tent, X } from "lucide-react";
+import { Button } from "@wild-earth/ui/components/button";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 
@@ -49,16 +50,16 @@ export default function Header() {
 	return (
 		<>
 			<nav
-				className={`glass-nav fixed top-0 right-0 left-0 z-50 border-gray-100 border-b transition-all duration-300 ${isTransparent ? "transparent" : "scrolled"}`}
+				className={`fixed top-0 right-0 left-0 z-50 border-b transition-all duration-300 ${isTransparent ? "border-transparent bg-transparent backdrop-blur-none" : "border-border bg-white/92 backdrop-blur-xl"}`}
 			>
 				<div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
 					<Link className="flex items-center gap-2" to="/">
-						<Tent
-							className={`text-3xl transition-colors ${isTransparent ? "text-[#d4af6a]" : "text-[#1f4d2b]"}`}
+						<IconTent
+							className={`text-3xl transition-colors ${isTransparent ? "text-accent" : "text-primary"}`}
 							strokeWidth={1.5}
 						/>
 						<span
-							className={`font-bold font-serif text-2xl tracking-tight transition-colors ${isTransparent ? "text-white" : "text-[#1f4d2b]"}`}
+							className={`font-bold font-serif text-2xl tracking-tight transition-colors ${isTransparent ? "text-white" : "text-primary"}`}
 						>
 							WildEarth
 						</span>
@@ -67,7 +68,7 @@ export default function Header() {
 					<div className="hidden items-center space-x-8 lg:flex">
 						{navLinks.map((link) => (
 							<Link
-								className={`font-medium text-sm transition-colors hover:text-[#d4af6a] ${isTransparent ? "text-white/90" : "text-[#1a1a1a]"}`}
+								className={`font-medium text-sm transition-colors hover:text-accent ${isTransparent ? "text-white/90" : "text-foreground"}`}
 								key={link.to}
 								to={link.to}
 							>
@@ -78,7 +79,7 @@ export default function Header() {
 
 					<div className="flex items-center gap-4">
 						<a
-							className={`hidden items-center gap-2 rounded-full border px-4 py-2 font-semibold text-sm transition-all sm:flex ${isTransparent ? "border-white/20 bg-white/10 text-white hover:bg-white/20" : "border-[#1f4d2b]/10 bg-[#1f4d2b]/5 text-[#1f4d2b] hover:bg-[#1f4d2b]/10"}`}
+							className={`hidden items-center gap-2 rounded-full border px-4 py-2 font-semibold text-sm transition-all sm:flex ${isTransparent ? "border-white/20 bg-white/10 text-white hover:bg-white/20" : "border-primary/10 bg-primary/5 text-primary hover:bg-primary/10"}`}
 							href="https://wa.me/919876543210"
 							rel="noopener noreferrer"
 							target="_blank"
@@ -87,26 +88,26 @@ export default function Header() {
 							+91 98765 43210
 						</a>
 						<Link
-							className="rounded-full bg-[#1f4d2b] px-6 py-3 font-bold text-sm text-white uppercase tracking-wide transition-all hover:-translate-y-0.5 hover:bg-[#2d5a3d] hover:shadow-lg"
+							className="rounded-full bg-primary px-6 py-3 font-bold text-primary-foreground text-sm uppercase tracking-wide transition-all hover:-translate-y-0.5 hover:bg-brand-green-dark hover:shadow-lg"
 							hash="booking-form"
 							to="/"
 						>
 							Plan My Safari
 						</Link>
-						<button
+						<Button
 							aria-label="Toggle menu"
-							className="relative z-[200] flex flex-col gap-[5px] p-2 lg:hidden"
+							className="relative z-[200] h-auto p-2 lg:hidden"
 							onClick={() => setMenuOpen((v) => !v)}
-							type="button"
+							variant="ghost"
 						>
 							{menuOpen ? (
-								<X className="h-6 w-6 text-white" />
+								<IconX className="h-6 w-6 text-white" />
 							) : (
-								<Menu
-									className={`h-6 w-6 transition-colors ${isTransparent ? "text-white" : "text-[#1a1a1a]"}`}
+								<IconMenu
+									className={`h-6 w-6 transition-colors ${isTransparent ? "text-white" : "text-foreground"}`}
 								/>
 							)}
-						</button>
+						</Button>
 					</div>
 				</div>
 			</nav>
@@ -115,19 +116,19 @@ export default function Header() {
 				{menuOpen && (
 					<motion.div
 						animate={{ x: 0 }}
-						className="mobile-menu"
+						className="fixed inset-0 z-[100] flex flex-col items-center justify-center gap-8 bg-primary"
 						exit={{ x: "100%" }}
 						initial={{ x: "100%" }}
 						transition={{ duration: 0.5, ease: easeOutExpo }}
 					>
-						<button
+						<Button
 							aria-label="Close menu"
-							className="absolute top-6 right-6 p-2 text-white"
+							className="absolute top-6 right-6 h-auto p-2 text-white hover:bg-white/10"
 							onClick={() => setMenuOpen(false)}
-							type="button"
+							variant="ghost"
 						>
-							<X className="h-8 w-8" />
-						</button>
+							<IconX className="h-8 w-8" />
+						</Button>
 						{navLinks.map((link, i) => (
 							<motion.div
 								animate={{ opacity: 1, x: 0 }}
@@ -139,7 +140,11 @@ export default function Header() {
 									ease: easeOutExpo,
 								}}
 							>
-								<Link onClick={() => setMenuOpen(false)} to={link.to}>
+								<Link
+									className="font-bold font-serif text-3xl text-white"
+									onClick={() => setMenuOpen(false)}
+									to={link.to}
+								>
 									{link.label}
 								</Link>
 							</motion.div>
@@ -154,7 +159,7 @@ export default function Header() {
 							}}
 						>
 							<Link
-								className="text-[#d4af6a]"
+								className="text-accent"
 								hash="booking-form"
 								onClick={() => setMenuOpen(false)}
 								to="/"

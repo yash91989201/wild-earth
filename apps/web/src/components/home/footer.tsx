@@ -1,5 +1,5 @@
+import { IconMail, IconMapPin, IconPhone, IconTent } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
-import { Mail, MapPin, Phone, Tent } from "lucide-react";
 
 function InstagramIcon({ className }: { className?: string }) {
 	return (
@@ -62,12 +62,12 @@ const trustLinks = [
 
 export default function Footer() {
 	return (
-		<footer className="bg-[#1a1a1a] px-6 pt-24 pb-12 text-white">
+		<footer className="bg-gray-950 px-6 pt-24 pb-12 text-white">
 			<div className="mx-auto max-w-7xl">
 				<div className="mb-20 grid grid-cols-1 gap-16 md:grid-cols-4">
 					<div className="md:col-span-1">
 						<Link className="mb-8 flex items-center gap-2" to="/">
-							<Tent className="h-8 w-8 text-[#d4af6a]" strokeWidth={1.5} />
+							<IconTent className="h-8 w-8 text-accent" strokeWidth={1.5} />
 							<span className="font-bold font-serif text-3xl tracking-tight">
 								WildEarth
 							</span>
@@ -79,19 +79,19 @@ export default function Footer() {
 						</p>
 						<div className="flex gap-4">
 							<a
-								className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 transition-all hover:bg-[#d4af6a] hover:text-[#1f4d2b]"
+								className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 transition-all hover:bg-accent hover:text-primary"
 								href="https://instagram.com"
 							>
 								<InstagramIcon className="h-4 w-4" />
 							</a>
 							<a
-								className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 transition-all hover:bg-[#d4af6a] hover:text-[#1f4d2b]"
+								className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 transition-all hover:bg-accent hover:text-primary"
 								href="https://facebook.com"
 							>
 								<FacebookIcon className="h-4 w-4" />
 							</a>
 							<a
-								className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 transition-all hover:bg-[#d4af6a] hover:text-[#1f4d2b]"
+								className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 transition-all hover:bg-accent hover:text-primary"
 								href="https://youtube.com"
 							>
 								<YoutubeIcon className="h-4 w-4" />
@@ -100,7 +100,7 @@ export default function Footer() {
 					</div>
 
 					<div>
-						<h4 className="mb-8 font-bold text-[#d4af6a] text-xs uppercase tracking-widest">
+						<h4 className="mb-8 font-bold text-accent text-xs uppercase tracking-widest">
 							Explore
 						</h4>
 						<ul className="space-y-4 text-sm text-white/60">
@@ -118,7 +118,7 @@ export default function Footer() {
 					</div>
 
 					<div>
-						<h4 className="mb-8 font-bold text-[#d4af6a] text-xs uppercase tracking-widest">
+						<h4 className="mb-8 font-bold text-accent text-xs uppercase tracking-widest">
 							Trust Center
 						</h4>
 						<ul className="space-y-4 text-sm text-white/60">
@@ -136,12 +136,12 @@ export default function Footer() {
 					</div>
 
 					<div>
-						<h4 className="mb-8 font-bold text-[#d4af6a] text-xs uppercase tracking-widest">
+						<h4 className="mb-8 font-bold text-accent text-xs uppercase tracking-widest">
 							Connect
 						</h4>
 						<ul className="space-y-6 text-sm text-white/60">
 							<li className="flex items-start gap-4">
-								<MapPin className="h-5 w-5 flex-shrink-0 text-[#d4af6a]" />
+								<IconMapPin className="h-5 w-5 flex-shrink-0 text-accent" />
 								<span>
 									Level 4, Safdarjung Enclave,
 									<br />
@@ -149,7 +149,7 @@ export default function Footer() {
 								</span>
 							</li>
 							<li className="flex items-center gap-4">
-								<Mail className="h-5 w-5 flex-shrink-0 text-[#d4af6a]" />
+								<IconMail className="h-5 w-5 flex-shrink-0 text-accent" />
 								<a
 									className="transition-colors hover:text-white"
 									href="mailto:expeditions@wildearth.com"
@@ -158,7 +158,7 @@ export default function Footer() {
 								</a>
 							</li>
 							<li className="flex items-center gap-4">
-								<Phone className="h-5 w-5 flex-shrink-0 text-[#d4af6a]" />
+								<IconPhone className="h-5 w-5 flex-shrink-0 text-accent" />
 								<span>+91 98765 43210</span>
 							</li>
 						</ul>

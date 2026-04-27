@@ -37,7 +37,7 @@ export default function JourneySteps() {
 	return (
 		<div className="mx-auto max-w-7xl text-center">
 			<motion.span
-				className="mb-4 block font-bold text-[#d4af6a] text-xs uppercase tracking-[0.2em]"
+				className="mb-4 block font-bold text-accent text-xs uppercase tracking-[0.2em]"
 				initial="hidden"
 				variants={fadeUp}
 				viewport={viewportOnce}
@@ -46,7 +46,7 @@ export default function JourneySteps() {
 				Operational Excellence
 			</motion.span>
 			<motion.h2
-				className="mb-20 font-bold font-serif text-4xl text-[#1f4d2b] md:text-5xl"
+				className="mb-20 font-bold font-serif text-4xl text-primary md:text-5xl"
 				initial="hidden"
 				variants={fadeUp}
 				viewport={viewportOnce}
@@ -68,13 +68,28 @@ export default function JourneySteps() {
 						key={step.number}
 						variants={staggerItem}
 					>
+						{/* Connector line — hidden on last step and mobile */}
+						{index < steps.length - 1 && (
+							<div
+								className="absolute top-8 hidden h-px bg-border md:block"
+								style={{
+									left: "calc(50% + 2rem)",
+									width: "calc(100% + 3rem - 4rem)",
+								}}
+							/>
+						)}
+
 						<div
-							className={`step-number relative z-10 mb-8 flex h-16 w-16 items-center justify-center rounded-full border-2 font-bold text-2xl ${index === 3 ? "border-[#1f4d2b] bg-[#1f4d2b] text-white" : "border-[#d4af6a] bg-white text-[#1f4d2b]"}`}
+							className={`relative z-10 mb-8 flex h-16 w-16 items-center justify-center rounded-full border-2 font-bold text-2xl ${
+								index === 3
+									? "border-primary bg-primary text-primary-foreground"
+									: "border-accent bg-card text-primary"
+							}`}
 						>
 							{step.number}
 						</div>
 						<h3 className="mb-3 font-bold text-xl">{step.title}</h3>
-						<p className="px-4 text-gray-500 text-sm leading-relaxed">
+						<p className="px-4 text-muted-foreground text-sm leading-relaxed">
 							{step.description}
 						</p>
 					</motion.div>

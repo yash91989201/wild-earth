@@ -1,0 +1,15 @@
+@import "@wild-earth/ui/globals.css";
+
+@keyframes float-pulse {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-6px);
+	}
+}
+
+@theme inline {
+	--animate-float-pulse: float-pulse 3s ease-in-out infinite;
+}

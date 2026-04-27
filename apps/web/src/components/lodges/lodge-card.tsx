@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { IconArrowRight } from "@tabler/icons-react";
 import { motion } from "motion/react";
 import { staggerItem } from "@/lib/animations";
 
@@ -31,7 +31,7 @@ export default function LodgeCard({ lodge }: { lodge: Lodge }) {
 			<p className="mb-4 line-clamp-3 text-gray-600">{lodge.description}</p>
 			<span className="flex items-center gap-2 font-bold text-sm transition-colors group-hover:text-[#d4af6a]">
 				Explore Lodge
-				<ArrowRight className="h-4 w-4" />
+				<IconArrowRight className="h-4 w-4" />
 			</span>
 		</motion.div>
 	);

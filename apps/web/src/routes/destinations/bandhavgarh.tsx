@@ -1,28 +1,66 @@
+import {
+	IconCalendar,
+	IconMapPin,
+	IconRuler,
+	IconTree,
+} from "@tabler/icons-react";
 import { createFileRoute } from "@tanstack/react-router";
-import { motion } from "motion/react";
-import { Calendar, MapPin, Ruler, TreePine } from "lucide-react";
 import { Button } from "@wild-earth/ui/components/button";
-import { fadeUp, staggerContainer, staggerItem, viewportOnce } from "@/lib/animations";
+import { motion } from "motion/react";
+import {
+	fadeUp,
+	staggerContainer,
+	staggerItem,
+	viewportOnce,
+} from "@/lib/animations";
 
 const keyFacts = [
-	{ icon: MapPin, label: "Location", value: "Umaria, Madhya Pradesh" },
-	{ icon: Ruler, label: "Area", value: "1,536 sq km" },
-	{ icon: Calendar, label: "Established", value: "1968 (Tiger Reserve 1993)" },
-	{ icon: TreePine, label: "Zones", value: "3 Safari Zones" },
+	{ icon: IconMapPin, label: "Location", value: "Umaria, Madhya Pradesh" },
+	{ icon: IconRuler, label: "Area", value: "1,536 sq km" },
+	{
+		icon: IconCalendar,
+		label: "Established",
+		value: "1968 (Tiger Reserve 1993)",
+	},
+	{ icon: IconTree, label: "Zones", value: "3 Safari Zones" },
 ];
 
 const wildlife = [
-	{ name: "Royal Bengal Tiger", desc: "Bandhavgarh holds the world's highest known density of tigers — sightings are remarkably consistent, especially in the Tala zone." },
-	{ name: "Indian Leopard", desc: "Agile climbers often seen on rocky outcrops and in the dense bamboo thickets of the Magdhi zone." },
-	{ name: "Gaur (Indian Bison)", desc: "Massive herds graze the grasslands and forest clearings, particularly in the Khitauli zone." },
-	{ name: "Sambar Deer", desc: "The park's largest deer species and a primary prey base, visible throughout the reserve at waterholes." },
-	{ name: "Wild Boar", desc: "Omnivorous and alert, these bristly foragers are a common and entertaining sight on every safari." },
-	{ name: "Nilgai", desc: "India's largest antelope, often spotted at dawn near the park's meadows and forest edges." },
+	{
+		name: "Royal Bengal Tiger",
+		desc: "Bandhavgarh holds the world's highest known density of tigers — sightings are remarkably consistent, especially in the Tala zone.",
+	},
+	{
+		name: "Indian Leopard",
+		desc: "Agile climbers often seen on rocky outcrops and in the dense bamboo thickets of the Magdhi zone.",
+	},
+	{
+		name: "Gaur (Indian Bison)",
+		desc: "Massive herds graze the grasslands and forest clearings, particularly in the Khitauli zone.",
+	},
+	{
+		name: "Sambar Deer",
+		desc: "The park's largest deer species and a primary prey base, visible throughout the reserve at waterholes.",
+	},
+	{
+		name: "Wild Boar",
+		desc: "Omnivorous and alert, these bristly foragers are a common and entertaining sight on every safari.",
+	},
+	{
+		name: "Nilgai",
+		desc: "India's largest antelope, often spotted at dawn near the park's meadows and forest edges.",
+	},
 ];
 
 const zones = [
-	{ name: "Tala Zone", desc: "The crown jewel of Bandhavgarh. The oldest and most scenic zone, home to the highest tiger density, ancient fort ruins, and the iconic Shesh Shaiya statue. This is where legendary tigers like Charger and Sita once ruled." },
-	{ name: "Magdhi & Khitauli", desc: "Magdhi offers excellent leopard and tiger sightings amidst bamboo groves, while Khitauli is the park's newest zone with open grasslands perfect for gaur, nilgai, and birding." },
+	{
+		name: "Tala Zone",
+		desc: "The crown jewel of Bandhavgarh. The oldest and most scenic zone, home to the highest tiger density, ancient fort ruins, and the iconic Shesh Shaiya statue. This is where legendary tigers like Charger and Sita once ruled.",
+	},
+	{
+		name: "Magdhi & Khitauli",
+		desc: "Magdhi offers excellent leopard and tiger sightings amidst bamboo groves, while Khitauli is the park's newest zone with open grasslands perfect for gaur, nilgai, and birding.",
+	},
 ];
 
 const gallery = [
@@ -82,14 +120,15 @@ function RouteComponent() {
 						<h2 className="mb-6 font-bold font-serif text-3xl text-[#1f4d2b] md:text-4xl">
 							The Kingdom of Tigers
 						</h2>
-						<p className="leading-relaxed text-gray-600">
-							Bandhavgarh is where tiger lore meets living reality. Set amidst the Vindhya
-							ranges of Madhya Pradesh, this compact reserve harbours the highest known
-							density of Royal Bengal Tigers on Earth. Ancient sal forests, bamboo groves,
-							and open grasslands are overlooked by the hilltop Bandhavgarh Fort — a
-							2,000-year-old citadel whose caves still bear Brahmi inscriptions. From the
-							legendary Charger and Sita to today's rising stars, every tiger here has a
-							story, and the forest feels alive with history.
+						<p className="text-gray-600 leading-relaxed">
+							Bandhavgarh is where tiger lore meets living reality. Set amidst
+							the Vindhya ranges of Madhya Pradesh, this compact reserve
+							harbours the highest known density of Royal Bengal Tigers on
+							Earth. Ancient sal forests, bamboo groves, and open grasslands are
+							overlooked by the hilltop Bandhavgarh Fort — a 2,000-year-old
+							citadel whose caves still bear Brahmi inscriptions. From the
+							legendary Charger and Sita to today's rising stars, every tiger
+							here has a story, and the forest feels alive with history.
 						</p>
 					</motion.div>
 
@@ -102,8 +141,8 @@ function RouteComponent() {
 					>
 						{keyFacts.map((fact) => (
 							<motion.div
-								key={fact.label}
 								className="rounded-lg bg-[#f5f1ed] p-6"
+								key={fact.label}
 								variants={staggerItem}
 							>
 								<fact.icon className="mb-4 h-8 w-8 text-[#d4af6a]" />
@@ -142,14 +181,14 @@ function RouteComponent() {
 					>
 						{wildlife.map((animal) => (
 							<motion.div
-								key={animal.name}
 								className="rounded-lg bg-white p-8"
+								key={animal.name}
 								variants={staggerItem}
 							>
-								<h3 className="mb-3 font-bold font-serif text-xl text-[#1f4d2b]">
+								<h3 className="mb-3 font-bold font-serif text-[#1f4d2b] text-xl">
 									{animal.name}
 								</h3>
-								<p className="leading-relaxed text-gray-600">{animal.desc}</p>
+								<p className="text-gray-600 leading-relaxed">{animal.desc}</p>
 							</motion.div>
 						))}
 					</motion.div>
@@ -175,8 +214,10 @@ function RouteComponent() {
 							<div className="space-y-8">
 								{zones.map((zone) => (
 									<div key={zone.name}>
-										<h3 className="mb-2 font-bold text-lg text-[#1a1a1a]">{zone.name}</h3>
-										<p className="leading-relaxed text-gray-600">{zone.desc}</p>
+										<h3 className="mb-2 font-bold text-[#1a1a1a] text-lg">
+											{zone.name}
+										</h3>
+										<p className="text-gray-600 leading-relaxed">{zone.desc}</p>
 									</div>
 								))}
 							</div>
@@ -191,8 +232,8 @@ function RouteComponent() {
 						>
 							{gallery.map((src, i) => (
 								<motion.div
-									key={src}
 									className={`group overflow-hidden rounded-lg ${i === 0 ? "col-span-2 aspect-[16/9]" : "aspect-square"}`}
+									key={src}
 									variants={staggerItem}
 								>
 									<img
@@ -222,23 +263,27 @@ function RouteComponent() {
 						<h2 className="mb-6 font-bold font-serif text-3xl md:text-4xl">
 							Best Time to Visit
 						</h2>
-						<p className="mx-auto mb-10 max-w-2xl leading-relaxed text-white/80">
-							The park welcomes visitors from October to June. Summer (March – June)
-							is the golden window for tiger sightings as the forest thins and animals
-							gather at water sources. Winter mornings are misty and magical, perfect
-							for photography and exploring the ancient fort. The monsoon closes the
-							park from July to September.
+						<p className="mx-auto mb-10 max-w-2xl text-white/80 leading-relaxed">
+							The park welcomes visitors from October to June. Summer (March –
+							June) is the golden window for tiger sightings as the forest thins
+							and animals gather at water sources. Winter mornings are misty and
+							magical, perfect for photography and exploring the ancient fort.
+							The monsoon closes the park from July to September.
 						</p>
 						<div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
 							<div className="rounded-lg border border-white/20 p-6">
 								<p className="mb-2 text-gray-300 text-sm">Winter</p>
 								<p className="font-bold text-lg">Oct – Feb</p>
-								<p className="mt-2 text-gray-400 text-sm">Misty mornings, fort treks</p>
+								<p className="mt-2 text-gray-400 text-sm">
+									Misty mornings, fort treks
+								</p>
 							</div>
 							<div className="rounded-lg border border-[#d4af6a] bg-[#d4af6a]/10 p-6">
 								<p className="mb-2 text-[#d4af6a] text-sm">Summer</p>
 								<p className="font-bold text-lg">Mar – Jun</p>
-								<p className="mt-2 text-gray-300 text-sm">Unmatched tiger sightings</p>
+								<p className="mt-2 text-gray-300 text-sm">
+									Unmatched tiger sightings
+								</p>
 							</div>
 							<div className="rounded-lg border border-white/20 p-6">
 								<p className="mb-2 text-gray-300 text-sm">Monsoon</p>
@@ -262,10 +307,10 @@ function RouteComponent() {
 						<h2 className="mb-6 font-bold font-serif text-3xl text-[#1f4d2b] md:text-4xl">
 							Enter the Tiger's Kingdom
 						</h2>
-						<p className="mx-auto mb-10 max-w-2xl leading-relaxed text-gray-600">
-							Experience the world's most tiger-dense forest with our bespoke Bandhavgarh
-							safaris — expert naturalists, premium zone permits, and stays at the finest
-							jungle lodges.
+						<p className="mx-auto mb-10 max-w-2xl text-gray-600 leading-relaxed">
+							Experience the world's most tiger-dense forest with our bespoke
+							Bandhavgarh safaris — expert naturalists, premium zone permits,
+							and stays at the finest jungle lodges.
 						</p>
 						<Button className="bg-[#1f4d2b] px-8 py-6 font-semibold text-lg text-white hover:bg-[#163b21]">
 							Enquire Now

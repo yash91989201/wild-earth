@@ -1,5 +1,7 @@
+import { IconArrowRight } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { buttonVariants } from "@wild-earth/ui/components/button";
+import { cn } from "@wild-earth/ui/lib/utils";
 import { motion } from "motion/react";
 import {
 	fadeUp,
@@ -55,7 +57,7 @@ function ParkCard({ park }: { park: (typeof parks)[number] }) {
 			/>
 			<div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
 			<div className="absolute bottom-0 left-0 w-full p-8">
-				<div className="mb-2 font-bold text-[#d4af6a] text-xs uppercase tracking-widest">
+				<div className="mb-2 font-bold text-accent text-xs uppercase tracking-widest">
 					{park.state}
 				</div>
 				<h3 className="mb-4 font-bold font-serif text-3xl text-white">
@@ -72,7 +74,10 @@ function ParkCard({ park }: { park: (typeof parks)[number] }) {
 					))}
 				</div>
 				<Link
-					className="block w-full translate-y-4 rounded-xl bg-[#d4af6a] py-3 text-center font-bold text-[#1f4d2b] opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
+					className={cn(
+						buttonVariants({ variant: "secondary" }),
+						"w-full translate-y-4 py-3 font-bold opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
+					)}
 					to={park.link}
 				>
 					View Safari Details
@@ -84,7 +89,7 @@ function ParkCard({ park }: { park: (typeof parks)[number] }) {
 
 export default function FeaturedParks() {
 	return (
-		<section className="bg-white px-6 py-24" id="parks">
+		<section className="px-6 py-24" id="parks">
 			<div className="mx-auto max-w-7xl">
 				<motion.div
 					className="mb-16 flex flex-col items-end justify-between gap-6 md:flex-row"
@@ -94,21 +99,21 @@ export default function FeaturedParks() {
 					whileInView="visible"
 				>
 					<div className="max-w-2xl">
-						<h2 className="mb-6 font-bold font-serif text-4xl text-[#1f4d2b] md:text-5xl">
+						<h2 className="mb-6 font-bold font-serif text-4xl text-primary md:text-5xl">
 							The Heart of the Wild
 						</h2>
-						<p className="text-gray-600 text-lg">
+						<p className="text-lg text-muted-foreground">
 							Our deep expertise spans across India&apos;s most iconic wildlife
 							reserves. From the tiger-rich hills of Ranthambore to the wetlands
 							of Kaziranga, we ensure direct coordination with every local team.
 						</p>
 					</div>
 					<Link
-						className="group flex items-center gap-2 font-bold text-[#8b6f47] text-sm uppercase tracking-widest"
+						className="group flex items-center gap-2 font-bold text-brand-brown text-sm uppercase tracking-widest"
 						to="/destinations"
 					>
 						View All Parks
-						<ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+						<IconArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
 					</Link>
 				</motion.div>
 

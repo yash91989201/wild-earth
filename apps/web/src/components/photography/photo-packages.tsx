@@ -1,5 +1,11 @@
+import {
+	IconArrowRight,
+	IconCar,
+	IconChartBar,
+	IconClock,
+	IconUsers,
+} from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, BarChart3, Car, Clock, Users } from "lucide-react";
 import { motion } from "motion/react";
 import {
 	fadeUp,
@@ -118,10 +124,14 @@ function PackageCard({ pkg }: { pkg: PhotoPackage }) {
 				{pkg.description}
 			</p>
 			<div className="mb-8 grid grid-cols-2 gap-x-8 gap-y-4 text-sm">
-				<PackageMeta icon={Clock} label="Duration" value={pkg.duration} />
-				<PackageMeta icon={BarChart3} label="Level" value={pkg.level} />
-				<PackageMeta icon={Car} label="Drives" value={pkg.drives} />
-				<PackageMeta icon={Users} label="Group Size" value={pkg.groupSize} />
+				<PackageMeta icon={IconClock} label="Duration" value={pkg.duration} />
+				<PackageMeta icon={IconChartBar} label="Level" value={pkg.level} />
+				<PackageMeta icon={IconCar} label="Drives" value={pkg.drives} />
+				<PackageMeta
+					icon={IconUsers}
+					label="Group Size"
+					value={pkg.groupSize}
+				/>
 			</div>
 			<Link
 				className={`inline-flex w-max items-center justify-center gap-2 rounded-xl px-8 py-4 font-bold transition-all ${
@@ -133,7 +143,7 @@ function PackageCard({ pkg }: { pkg: PhotoPackage }) {
 				to="/"
 			>
 				Enquire Availability
-				<ArrowRight className="h-5 w-5" />
+				<IconArrowRight className="h-5 w-5" />
 			</Link>
 		</div>
 	);

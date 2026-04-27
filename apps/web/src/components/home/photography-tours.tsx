@@ -1,5 +1,5 @@
+import { IconCamera, IconChevronRight } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
-import { Camera, ChevronRight } from "lucide-react";
 import { motion } from "motion/react";
 import { fadeUp, viewportOnce } from "@/lib/animations";
 
@@ -11,7 +11,7 @@ const features = [
 
 export default function PhotographyTours() {
 	return (
-		<section className="bg-[#f2e8da] px-6 py-24" id="photography">
+		<section className="px-6 py-24" id="photography">
 			<motion.div
 				className="mx-auto max-w-7xl overflow-hidden"
 				initial="hidden"
@@ -51,18 +51,18 @@ export default function PhotographyTours() {
 								width={517}
 							/>
 						</div>
-						<div className="absolute -right-6 -bottom-6 rounded-full border-4 border-[#f2e8da] bg-[#1f4d2b] p-8 text-white shadow-2xl">
-							<Camera className="h-10 w-10" />
+						<div className="absolute -right-6 -bottom-6 rounded-full border-4 border-secondary bg-primary p-8 text-primary-foreground shadow-2xl">
+							<IconCamera className="h-10 w-10" />
 						</div>
 					</div>
 					<div className="order-1 lg:order-2">
-						<h2 className="mb-8 font-bold font-serif text-4xl text-[#1f4d2b] leading-tight md:text-5xl">
+						<h2 className="mb-8 font-bold font-serif text-4xl text-primary leading-tight md:text-5xl">
 							Photography Tours: For the Perfect Frame
 						</h2>
-						<p className="mb-6 font-medium text-[#8b6f47] text-sm uppercase tracking-widest">
+						<p className="mb-6 font-medium text-brand-brown text-sm uppercase tracking-widest">
 							Fixed Departures &bull; Max 4 Participants
 						</p>
-						<p className="mb-10 text-gray-600 text-lg">
+						<p className="mb-10 text-lg text-muted-foreground">
 							Led by award-winning wildlife photographers, these tours
 							prioritize patience, lighting, and positioning. Gain exclusive
 							insights into animal behavior while mastering your wildlife
@@ -71,13 +71,13 @@ export default function PhotographyTours() {
 						<ul className="mb-10 space-y-4">
 							{features.map((feature) => (
 								<li className="flex items-center gap-3" key={feature}>
-									<ChevronRight className="h-5 w-5 flex-shrink-0 text-[#d4af6a]" />
+									<IconChevronRight className="h-5 w-5 flex-shrink-0 text-accent" />
 									<span className="font-medium">{feature}</span>
 								</li>
 							))}
 						</ul>
 						<Link
-							className="inline-block rounded-full bg-[#1f4d2b] px-10 py-5 font-bold text-white transition-all hover:-translate-y-0.5 hover:bg-[#2d5a3d] hover:shadow-lg"
+							className="inline-block rounded-full bg-primary px-10 py-5 font-bold text-primary-foreground transition-all hover:-translate-y-0.5 hover:bg-brand-green-dark hover:shadow-lg"
 							to="/photography"
 						>
 							Explore Photo Tours

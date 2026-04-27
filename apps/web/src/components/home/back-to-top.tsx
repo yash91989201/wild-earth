@@ -1,4 +1,4 @@
-import { ChevronUp } from "lucide-react";
+import { IconChevronUp } from "@tabler/icons-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 
@@ -20,14 +20,14 @@ export default function BackToTop() {
 				<motion.button
 					animate={{ opacity: 1, y: 0 }}
 					aria-label="Back to top"
-					className="back-to-top"
+					className="fixed bottom-24 left-8 z-[998] flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white shadow-lg transition-all hover:-translate-y-1 hover:bg-brand-green-dark"
 					exit={{ opacity: 0, y: 20 }}
 					initial={{ opacity: 0, y: 20 }}
 					onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
 					transition={{ duration: 0.4, ease: easeOutExpo }}
 					type="button"
 				>
-					<ChevronUp className="h-5 w-5" />
+					<IconChevronUp className="h-5 w-5" />
 				</motion.button>
 			)}
 		</AnimatePresence>

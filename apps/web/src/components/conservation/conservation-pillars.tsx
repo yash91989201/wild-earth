@@ -1,22 +1,22 @@
-import { Footprints, Leaf, Users } from "lucide-react";
+import { IconLeaf, IconPaw, IconUsers } from "@tabler/icons-react";
 import { motion } from "motion/react";
 import { staggerContainer, staggerItem, viewportOnce } from "@/lib/animations";
 
 const pillars = [
 	{
-		icon: Leaf,
+		icon: IconLeaf,
 		title: "Care of the Land",
 		description:
 			"We operate with a zero-plastic policy across all our ground operations. Our camps utilize solar power and rainwater harvesting to ensure our footprint in the jungle is absolute zero. We leave the land exactly as we found it.",
 	},
 	{
-		icon: Footprints,
+		icon: IconPaw,
 		title: "Care of the Wildlife",
 		description:
 			"A percentage of every safari goes directly to the Corbett and Ranthambore Foundation. We adhere to strict ethical viewing guidelines—never crowding an animal, and always prioritizing their peace over a photograph.",
 	},
 	{
-		icon: Users,
+		icon: IconUsers,
 		title: "Care of the People",
 		description:
 			"100% of our naturalists, drivers, and guides are hired from local indigenous communities bordering the parks. By making wildlife tourism profitable for locals, we turn them into the fiercest protectors of the forest.",

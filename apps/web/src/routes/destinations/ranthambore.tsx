@@ -1,28 +1,62 @@
+import {
+	IconCalendar,
+	IconMapPin,
+	IconRuler,
+	IconTree,
+} from "@tabler/icons-react";
 import { createFileRoute } from "@tanstack/react-router";
-import { motion } from "motion/react";
-import { Calendar, MapPin, Ruler, TreePine } from "lucide-react";
 import { Button } from "@wild-earth/ui/components/button";
-import { fadeUp, staggerContainer, staggerItem, viewportOnce } from "@/lib/animations";
+import { motion } from "motion/react";
+import {
+	fadeUp,
+	staggerContainer,
+	staggerItem,
+	viewportOnce,
+} from "@/lib/animations";
 
 const keyFacts = [
-	{ icon: MapPin, label: "Location", value: "Sawai Madhopur, Rajasthan" },
-	{ icon: Ruler, label: "Area", value: "392 sq km" },
-	{ icon: Calendar, label: "Established", value: "1980 (National Park)" },
-	{ icon: TreePine, label: "Zones", value: "10 Safari Zones" },
+	{ icon: IconMapPin, label: "Location", value: "Sawai Madhopur, Rajasthan" },
+	{ icon: IconRuler, label: "Area", value: "392 sq km" },
+	{ icon: IconCalendar, label: "Established", value: "1980 (National Park)" },
+	{ icon: IconTree, label: "Zones", value: "10 Safari Zones" },
 ];
 
 const wildlife = [
-	{ name: "Bengal Tiger", desc: "The star attraction — Ranthambore is one of the best places in the world to spot wild tigers." },
-	{ name: "Indian Leopard", desc: "Often seen resting on rocky outcrops or scampering through the dry deciduous forest." },
-	{ name: "Sloth Bear", desc: "Shaggy and nocturnal, frequently spotted near the park's many berry-laden bushes." },
-	{ name: "Crocodile", desc: "Mugger crocodiles bask along the banks of Padam Talao and Malik Talao." },
-	{ name: "Sambar Deer", desc: "The largest Indian deer, a primary prey species and common sighting across all zones." },
-	{ name: "Striped Hyena", desc: "Elusive scavenger most active at dawn and dusk in the park's quieter corners." },
+	{
+		name: "Bengal Tiger",
+		desc: "The star attraction — Ranthambore is one of the best places in the world to spot wild tigers.",
+	},
+	{
+		name: "Indian Leopard",
+		desc: "Often seen resting on rocky outcrops or scampering through the dry deciduous forest.",
+	},
+	{
+		name: "Sloth Bear",
+		desc: "Shaggy and nocturnal, frequently spotted near the park's many berry-laden bushes.",
+	},
+	{
+		name: "Crocodile",
+		desc: "Mugger crocodiles bask along the banks of Padam Talao and Malik Talao.",
+	},
+	{
+		name: "Sambar Deer",
+		desc: "The largest Indian deer, a primary prey species and common sighting across all zones.",
+	},
+	{
+		name: "Striped Hyena",
+		desc: "Elusive scavenger most active at dawn and dusk in the park's quieter corners.",
+	},
 ];
 
 const zones = [
-	{ name: "Zone 1 – 5", desc: "The core tiger habitat with the highest density of sightings. Zone 3 and 4 are especially productive, surrounding Padam Talao and Malik Talao." },
-	{ name: "Zone 6 – 10", desc: "The buffer zones offer a wilder, less-crowded experience with excellent birding and increasing tiger movement." },
+	{
+		name: "Zone 1 – 5",
+		desc: "The core tiger habitat with the highest density of sightings. Zone 3 and 4 are especially productive, surrounding Padam Talao and Malik Talao.",
+	},
+	{
+		name: "Zone 6 – 10",
+		desc: "The buffer zones offer a wilder, less-crowded experience with excellent birding and increasing tiger movement.",
+	},
 ];
 
 const gallery = [
@@ -82,13 +116,14 @@ function RouteComponent() {
 						<h2 className="mb-6 font-bold font-serif text-3xl text-[#1f4d2b] md:text-4xl">
 							Where Tigers Roam Ancient Ruins
 						</h2>
-						<p className="leading-relaxed text-gray-600">
-							Ranthambore National Park is one of India's most celebrated wildlife reserves.
-							Set against the dramatic backdrop of the 10th-century Ranthambore Fort,
-							the park's dry deciduous forests, open grasslands, and serene lakes create
-							the perfect stage for unforgettable tiger encounters. Once the private hunting
-							ground of the Maharajas of Jaipur, it is now a global beacon for conservation
-							and responsible wildlife tourism.
+						<p className="text-gray-600 leading-relaxed">
+							Ranthambore National Park is one of India's most celebrated
+							wildlife reserves. Set against the dramatic backdrop of the
+							10th-century Ranthambore Fort, the park's dry deciduous forests,
+							open grasslands, and serene lakes create the perfect stage for
+							unforgettable tiger encounters. Once the private hunting ground of
+							the Maharajas of Jaipur, it is now a global beacon for
+							conservation and responsible wildlife tourism.
 						</p>
 					</motion.div>
 
@@ -101,8 +136,8 @@ function RouteComponent() {
 					>
 						{keyFacts.map((fact) => (
 							<motion.div
-								key={fact.label}
 								className="rounded-lg bg-[#f5f1ed] p-6"
+								key={fact.label}
 								variants={staggerItem}
 							>
 								<fact.icon className="mb-4 h-8 w-8 text-[#d4af6a]" />
@@ -141,14 +176,14 @@ function RouteComponent() {
 					>
 						{wildlife.map((animal) => (
 							<motion.div
-								key={animal.name}
 								className="rounded-lg bg-white p-8"
+								key={animal.name}
 								variants={staggerItem}
 							>
-								<h3 className="mb-3 font-bold font-serif text-xl text-[#1f4d2b]">
+								<h3 className="mb-3 font-bold font-serif text-[#1f4d2b] text-xl">
 									{animal.name}
 								</h3>
-								<p className="leading-relaxed text-gray-600">{animal.desc}</p>
+								<p className="text-gray-600 leading-relaxed">{animal.desc}</p>
 							</motion.div>
 						))}
 					</motion.div>
@@ -174,8 +209,10 @@ function RouteComponent() {
 							<div className="space-y-8">
 								{zones.map((zone) => (
 									<div key={zone.name}>
-										<h3 className="mb-2 font-bold text-lg text-[#1a1a1a]">{zone.name}</h3>
-										<p className="leading-relaxed text-gray-600">{zone.desc}</p>
+										<h3 className="mb-2 font-bold text-[#1a1a1a] text-lg">
+											{zone.name}
+										</h3>
+										<p className="text-gray-600 leading-relaxed">{zone.desc}</p>
 									</div>
 								))}
 							</div>
@@ -190,8 +227,8 @@ function RouteComponent() {
 						>
 							{gallery.map((src, i) => (
 								<motion.div
-									key={src}
 									className={`group overflow-hidden rounded-lg ${i === 0 ? "col-span-2 aspect-[16/9]" : "aspect-square"}`}
+									key={src}
 									variants={staggerItem}
 								>
 									<img
@@ -221,22 +258,27 @@ function RouteComponent() {
 						<h2 className="mb-6 font-bold font-serif text-3xl md:text-4xl">
 							Best Time to Visit
 						</h2>
-						<p className="mx-auto mb-10 max-w-2xl leading-relaxed text-white/80">
-							October to June is the prime window for tiger sightings. The summer months
-							(April – June) offer the highest probability of encounters as animals gather
-							around the park's remaining water bodies. The park remains closed during the
-							monsoon season from July to September.
+						<p className="mx-auto mb-10 max-w-2xl text-white/80 leading-relaxed">
+							October to June is the prime window for tiger sightings. The
+							summer months (April – June) offer the highest probability of
+							encounters as animals gather around the park's remaining water
+							bodies. The park remains closed during the monsoon season from
+							July to September.
 						</p>
 						<div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
 							<div className="rounded-lg border border-white/20 p-6">
 								<p className="mb-2 text-gray-300 text-sm">Winter</p>
 								<p className="font-bold text-lg">Oct – Feb</p>
-								<p className="mt-2 text-gray-400 text-sm">Pleasant weather, lush greens</p>
+								<p className="mt-2 text-gray-400 text-sm">
+									Pleasant weather, lush greens
+								</p>
 							</div>
 							<div className="rounded-lg border border-[#d4af6a] bg-[#d4af6a]/10 p-6">
 								<p className="mb-2 text-[#d4af6a] text-sm">Summer</p>
 								<p className="font-bold text-lg">Mar – Jun</p>
-								<p className="mt-2 text-gray-300 text-sm">Peak tiger sightings</p>
+								<p className="mt-2 text-gray-300 text-sm">
+									Peak tiger sightings
+								</p>
 							</div>
 							<div className="rounded-lg border border-white/20 p-6">
 								<p className="mb-2 text-gray-300 text-sm">Monsoon</p>
@@ -260,9 +302,10 @@ function RouteComponent() {
 						<h2 className="mb-6 font-bold font-serif text-3xl text-[#1f4d2b] md:text-4xl">
 							Ready to Track the Tiger?
 						</h2>
-						<p className="mx-auto mb-10 max-w-2xl leading-relaxed text-gray-600">
-							Let us craft a bespoke Ranthambore safari experience for you — complete with
-							expert naturalists, zone-optimized game drives, and stays at the finest lodges.
+						<p className="mx-auto mb-10 max-w-2xl text-gray-600 leading-relaxed">
+							Let us craft a bespoke Ranthambore safari experience for you —
+							complete with expert naturalists, zone-optimized game drives, and
+							stays at the finest lodges.
 						</p>
 						<Button className="bg-[#1f4d2b] px-8 py-6 font-semibold text-lg text-white hover:bg-[#163b21]">
 							Enquire Now

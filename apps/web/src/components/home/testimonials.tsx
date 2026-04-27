@@ -1,4 +1,4 @@
-import { Star } from "lucide-react";
+import { IconStarFilled } from "@tabler/icons-react";
 import { motion } from "motion/react";
 import {
 	fadeUp,
@@ -31,23 +31,23 @@ function TestimonialCard({
 	testimonial: (typeof testimonials)[number];
 }) {
 	return (
-		<div className="flex flex-col justify-between rounded-[30px] border border-gray-100 bg-white p-10 shadow-sm">
+		<div className="flex flex-col justify-between rounded-[30px] border border-border bg-card p-10 shadow-sm">
 			<div>
-				<div className="mb-6 flex gap-1">
+				<div className="mb-6 flex items-center justify-center gap-1">
 					{[1, 2, 3, 4, 5].map((star) => (
-						<Star
-							className="h-5 w-5 fill-[#d4af6a] text-[#d4af6a]"
+						<IconStarFilled
+							className="h-5 w-5 fill-accent text-accent"
 							key={star}
 						/>
 					))}
 				</div>
-				<p className="mb-8 text-gray-600 italic leading-relaxed">
+				<p className="mb-8 text-muted-foreground italic leading-relaxed">
 					&ldquo;{testimonial.text}&rdquo;
 				</p>
 			</div>
 			<div>
 				<div className="font-bold">{testimonial.name}</div>
-				<div className="text-gray-400 text-xs uppercase tracking-widest">
+				<div className="text-muted-foreground text-xs uppercase tracking-widest">
 					{testimonial.location}
 				</div>
 			</div>
@@ -57,10 +57,10 @@ function TestimonialCard({
 
 export default function Testimonials() {
 	return (
-		<section className="px-6 py-24">
+		<section className="bg-secondary px-6 py-24">
 			<div className="mx-auto max-w-7xl text-center">
 				<motion.h2
-					className="mb-16 font-bold font-serif text-4xl text-[#1f4d2b] md:text-5xl"
+					className="mb-16 font-bold font-serif text-4xl text-primary md:text-5xl"
 					initial="hidden"
 					variants={fadeUp}
 					viewport={viewportOnce}
@@ -81,21 +81,6 @@ export default function Testimonials() {
 						</motion.div>
 					))}
 				</motion.div>
-
-				<div className="mt-16 flex flex-wrap items-center justify-center gap-12 opacity-40">
-					<span className="font-bold text-sm uppercase tracking-widest">
-						Razorpay
-					</span>
-					<span className="font-bold text-sm uppercase tracking-widest">
-						Visa
-					</span>
-					<span className="font-bold text-sm uppercase tracking-widest">
-						Mastercard
-					</span>
-					<span className="font-bold text-sm uppercase tracking-widest">
-						TripAdvisor
-					</span>
-				</div>
 			</div>
 		</section>
 	);

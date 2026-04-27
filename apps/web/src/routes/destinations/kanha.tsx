@@ -1,28 +1,70 @@
+import {
+	IconCalendar,
+	IconMapPin,
+	IconRuler,
+	IconTree,
+} from "@tabler/icons-react";
 import { createFileRoute } from "@tanstack/react-router";
-import { motion } from "motion/react";
-import { Calendar, MapPin, Ruler, TreePine } from "lucide-react";
 import { Button } from "@wild-earth/ui/components/button";
-import { fadeUp, staggerContainer, staggerItem, viewportOnce } from "@/lib/animations";
+import { motion } from "motion/react";
+import {
+	fadeUp,
+	staggerContainer,
+	staggerItem,
+	viewportOnce,
+} from "@/lib/animations";
 
 const keyFacts = [
-	{ icon: MapPin, label: "Location", value: "Mandla & Balaghat, Madhya Pradesh" },
-	{ icon: Ruler, label: "Area", value: "2,005 sq km" },
-	{ icon: Calendar, label: "Established", value: "1955 (Tiger Reserve 1973)" },
-	{ icon: TreePine, label: "Zones", value: "4 Safari Zones" },
+	{
+		icon: IconMapPin,
+		label: "Location",
+		value: "Mandla & Balaghat, Madhya Pradesh",
+	},
+	{ icon: IconRuler, label: "Area", value: "2,005 sq km" },
+	{
+		icon: IconCalendar,
+		label: "Established",
+		value: "1955 (Tiger Reserve 1973)",
+	},
+	{ icon: IconTree, label: "Zones", value: "4 Safari Zones" },
 ];
 
 const wildlife = [
-	{ name: "Bengal Tiger", desc: "Kanha's sal forests and open meadows offer some of India's most scenic tiger sightings, often against a backdrop of golden grass." },
-	{ name: "Hard-ground Barasingha", desc: "Kanha is the sole home of this subspecies — saved from the brink of extinction, now numbering over 800 individuals." },
-	{ name: "Indian Leopard", desc: "Frequently spotted in the bamboo belts and along the Banjar river, especially during the early morning hours." },
-	{ name: "Wild Dog (Dhole)", desc: "Kanha harbours one of India's most stable dhole populations; their coordinated hunts across meadows are unforgettable." },
-	{ name: "Gaur (Indian Bison)", desc: "Massive dark herds move between the sal forests and grassy clearings, most active at dawn and dusk." },
-	{ name: "Indian Python", desc: "These powerful constrictors are often found near water bodies and in the park's warmer, rocky terrain." },
+	{
+		name: "Bengal Tiger",
+		desc: "Kanha's sal forests and open meadows offer some of India's most scenic tiger sightings, often against a backdrop of golden grass.",
+	},
+	{
+		name: "Hard-ground Barasingha",
+		desc: "Kanha is the sole home of this subspecies — saved from the brink of extinction, now numbering over 800 individuals.",
+	},
+	{
+		name: "Indian Leopard",
+		desc: "Frequently spotted in the bamboo belts and along the Banjar river, especially during the early morning hours.",
+	},
+	{
+		name: "Wild Dog (Dhole)",
+		desc: "Kanha harbours one of India's most stable dhole populations; their coordinated hunts across meadows are unforgettable.",
+	},
+	{
+		name: "Gaur (Indian Bison)",
+		desc: "Massive dark herds move between the sal forests and grassy clearings, most active at dawn and dusk.",
+	},
+	{
+		name: "Indian Python",
+		desc: "These powerful constrictors are often found near water bodies and in the park's warmer, rocky terrain.",
+	},
 ];
 
 const zones = [
-	{ name: "Kanha & Kisli", desc: "The core zones feature the park's most iconic meadows — Babathenga, Shravan, and the breeding ground of the hard-ground Barasingha. Kanha zone also leads to Bamni Dadar, the legendary Sunset Point." },
-	{ name: "Mukki & Sarhi", desc: "Mukki offers a quieter, more remote experience with excellent gaur and tiger sightings, while Sarhi's hilly terrain and mixed forests are a birder's delight." },
+	{
+		name: "Kanha & Kisli",
+		desc: "The core zones feature the park's most iconic meadows — Babathenga, Shravan, and the breeding ground of the hard-ground Barasingha. Kanha zone also leads to Bamni Dadar, the legendary Sunset Point.",
+	},
+	{
+		name: "Mukki & Sarhi",
+		desc: "Mukki offers a quieter, more remote experience with excellent gaur and tiger sightings, while Sarhi's hilly terrain and mixed forests are a birder's delight.",
+	},
 ];
 
 const gallery = [
@@ -82,14 +124,15 @@ function RouteComponent() {
 						<h2 className="mb-6 font-bold font-serif text-3xl text-[#1f4d2b] md:text-4xl">
 							The Jungle Book Come to Life
 						</h2>
-						<p className="leading-relaxed text-gray-600">
-							Kanha National Park is the very landscape that inspired Rudyard Kipling&apos;s
-							The Jungle Book. A pristine mosaic of lush sal forests, bamboo groves, and
-							expansive grassy meadows known as maidans, it is one of India&apos;s largest and
-							most meticulously managed tiger reserves. Kanha is also the sole sanctuary of
-							the hard-ground Barasingha, brought back from near-extinction through one of
-							conservation&apos;s greatest success stories. To safari here is to walk into a
-							living storybook.
+						<p className="text-gray-600 leading-relaxed">
+							Kanha National Park is the very landscape that inspired Rudyard
+							Kipling&apos;s The Jungle Book. A pristine mosaic of lush sal
+							forests, bamboo groves, and expansive grassy meadows known as
+							maidans, it is one of India&apos;s largest and most meticulously
+							managed tiger reserves. Kanha is also the sole sanctuary of the
+							hard-ground Barasingha, brought back from near-extinction through
+							one of conservation&apos;s greatest success stories. To safari
+							here is to walk into a living storybook.
 						</p>
 					</motion.div>
 
@@ -102,8 +145,8 @@ function RouteComponent() {
 					>
 						{keyFacts.map((fact) => (
 							<motion.div
-								key={fact.label}
 								className="rounded-lg bg-[#f5f1ed] p-6"
+								key={fact.label}
 								variants={staggerItem}
 							>
 								<fact.icon className="mb-4 h-8 w-8 text-[#d4af6a]" />
@@ -142,14 +185,14 @@ function RouteComponent() {
 					>
 						{wildlife.map((animal) => (
 							<motion.div
-								key={animal.name}
 								className="rounded-lg bg-white p-8"
+								key={animal.name}
 								variants={staggerItem}
 							>
-								<h3 className="mb-3 font-bold font-serif text-xl text-[#1f4d2b]">
+								<h3 className="mb-3 font-bold font-serif text-[#1f4d2b] text-xl">
 									{animal.name}
 								</h3>
-								<p className="leading-relaxed text-gray-600">{animal.desc}</p>
+								<p className="text-gray-600 leading-relaxed">{animal.desc}</p>
 							</motion.div>
 						))}
 					</motion.div>
@@ -175,8 +218,10 @@ function RouteComponent() {
 							<div className="space-y-8">
 								{zones.map((zone) => (
 									<div key={zone.name}>
-										<h3 className="mb-2 font-bold text-lg text-[#1a1a1a]">{zone.name}</h3>
-										<p className="leading-relaxed text-gray-600">{zone.desc}</p>
+										<h3 className="mb-2 font-bold text-[#1a1a1a] text-lg">
+											{zone.name}
+										</h3>
+										<p className="text-gray-600 leading-relaxed">{zone.desc}</p>
 									</div>
 								))}
 							</div>
@@ -191,8 +236,8 @@ function RouteComponent() {
 						>
 							{gallery.map((src, i) => (
 								<motion.div
-									key={src}
 									className={`group overflow-hidden rounded-lg ${i === 0 ? "col-span-2 aspect-[16/9]" : "aspect-square"}`}
+									key={src}
 									variants={staggerItem}
 								>
 									<img
@@ -222,22 +267,27 @@ function RouteComponent() {
 						<h2 className="mb-6 font-bold font-serif text-3xl md:text-4xl">
 							Best Time to Visit
 						</h2>
-						<p className="mx-auto mb-10 max-w-2xl leading-relaxed text-white/80">
-							Kanha opens in mid-October and remains accessible until June. The cool winter
-							months offer comfortable weather and lush landscapes after the monsoon.
-							By April and May, the meadows turn golden and wildlife concentrates around
-							water sources, making for spectacular sightings against dramatic light.
+						<p className="mx-auto mb-10 max-w-2xl text-white/80 leading-relaxed">
+							Kanha opens in mid-October and remains accessible until June. The
+							cool winter months offer comfortable weather and lush landscapes
+							after the monsoon. By April and May, the meadows turn golden and
+							wildlife concentrates around water sources, making for spectacular
+							sightings against dramatic light.
 						</p>
 						<div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
 							<div className="rounded-lg border border-white/20 p-6">
 								<p className="mb-2 text-gray-300 text-sm">Winter</p>
 								<p className="font-bold text-lg">Oct – Feb</p>
-								<p className="mt-2 text-gray-400 text-sm">Green meadows, pleasant days</p>
+								<p className="mt-2 text-gray-400 text-sm">
+									Green meadows, pleasant days
+								</p>
 							</div>
 							<div className="rounded-lg border border-[#d4af6a] bg-[#d4af6a]/10 p-6">
 								<p className="mb-2 text-[#d4af6a] text-sm">Summer</p>
 								<p className="font-bold text-lg">Mar – Jun</p>
-								<p className="mt-2 text-gray-300 text-sm">Golden grass, waterhole drama</p>
+								<p className="mt-2 text-gray-300 text-sm">
+									Golden grass, waterhole drama
+								</p>
 							</div>
 							<div className="rounded-lg border border-white/20 p-6">
 								<p className="mb-2 text-gray-300 text-sm">Monsoon</p>
@@ -261,10 +311,11 @@ function RouteComponent() {
 						<h2 className="mb-6 font-bold font-serif text-3xl text-[#1f4d2b] md:text-4xl">
 							Step Into the Jungle Book
 						</h2>
-						<p className="mx-auto mb-10 max-w-2xl leading-relaxed text-gray-600">
-							Let us curate your Kanha expedition — sunrise safaris across golden meadows,
-							tiger tracking with expert naturalists, and evenings at Bamni Dadar watching
-							the sun set over Kipling's forest.
+						<p className="mx-auto mb-10 max-w-2xl text-gray-600 leading-relaxed">
+							Let us curate your Kanha expedition — sunrise safaris across
+							golden meadows, tiger tracking with expert naturalists, and
+							evenings at Bamni Dadar watching the sun set over Kipling's
+							forest.
 						</p>
 						<Button className="bg-[#1f4d2b] px-8 py-6 font-semibold text-lg text-white hover:bg-[#163b21]">
 							Enquire Now

@@ -1,4 +1,4 @@
-import { Focus, Monitor, Users } from "lucide-react";
+import { IconDeviceDesktop, IconFocus, IconUsers } from "@tabler/icons-react";
 import { motion } from "motion/react";
 import {
 	fadeUp,
@@ -9,19 +9,19 @@ import {
 
 const features = [
 	{
-		icon: Focus,
+		icon: IconFocus,
 		title: "Customized Jeeps",
 		description:
 			"Our 4x4s are modified for photographers. With removed seats for extra space, specialized bean bag mounts on all rails, and a maximum of 3-4 photographers per vehicle.",
 	},
 	{
-		icon: Users,
+		icon: IconUsers,
 		title: "Expert Mentorship",
 		description:
 			"Accompanied by award-winning wildlife photographers and local naturalists who understand animal behavior and anticipate action before it happens.",
 	},
 	{
-		icon: Monitor,
+		icon: IconDeviceDesktop,
 		title: "Post-Processing",
 		description:
 			"Daily mid-day sessions at the lodge focusing on Lightroom/Photoshop workflows, image critiques, and developing your unique photographic style.",

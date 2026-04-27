@@ -17,7 +17,7 @@ function RouteComponent() {
 			<HeroSection />
 			<FeaturedParks />
 			<BookingSection />
-			<section className="px-6 py-24" id="how-it-works">
+			<section className="bg-secondary px-6 py-24" id="how-it-works">
 				<EthosSection />
 				<div className="mt-32">
 					<JourneySteps />

@@ -6,13 +6,13 @@ import {
 	Scripts,
 } from "@tanstack/react-router";
 import { Toaster } from "@wild-earth/ui/components/sonner";
+import { TooltipProvider } from "@wild-earth/ui/components/tooltip";
 import BackToTop from "@/components/home/back-to-top";
 import Footer from "@/components/home/footer";
 import WhatsAppFloat from "@/components/home/whatsapp-float";
+import appCss from "@/styles/index.css?url";
 import type { orpc } from "@/utils/orpc";
 import Header from "../components/header";
-
-import appCss from "../index.css?url";
 
 export interface RouterAppContext {
 	orpc: typeof orpc;
@@ -45,25 +45,33 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
 			},
 		],
 	}),
-
+	shellComponent: ShellComponent,
 	component: RootDocument,
 });
 
-function RootDocument() {
+function ShellComponent({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en">
 			<head>
 				<HeadContent />
 			</head>
 			<body>
-				<Header />
-				<Outlet />
-				<Footer />
-				<WhatsAppFloat />
-				<BackToTop />
-				<Toaster richColors />
-				<Scripts />
+				<TooltipProvider>{children}</TooltipProvider>
 			</body>
 		</html>
+	);
+}
+
+function RootDocument() {
+	return (
+		<>
+			<Header />
+			<Outlet />
+			<Footer />
+			<WhatsAppFloat />
+			<BackToTop />
+			<Toaster richColors />
+			<Scripts />
+		</>
 	);
 }
