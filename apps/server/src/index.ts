@@ -30,7 +30,7 @@ const apiHandler = new OpenAPIHandler(appRouter, {
 	],
 });
 
-const app = new Elysia()
+const _app = new Elysia()
 	.use(
 		cors({
 			origin: env.CORS_ORIGIN,
