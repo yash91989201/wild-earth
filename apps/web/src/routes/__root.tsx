@@ -7,8 +7,8 @@ import {
 } from "@tanstack/react-router";
 import { Toaster } from "@wild-earth/ui/components/sonner";
 import { TooltipProvider } from "@wild-earth/ui/components/tooltip";
+import Footer from "@/components/footer";
 import BackToTop from "@/components/home/back-to-top";
-import Footer from "@/components/home/footer";
 import WhatsAppFloat from "@/components/home/whatsapp-float";
 import appCss from "@/styles/index.css?url";
 import type { orpc } from "@/utils/orpc";

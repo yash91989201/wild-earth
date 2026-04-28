@@ -76,7 +76,7 @@ function ParkCard({ park }: { park: (typeof parks)[number] }) {
 				<Link
 					className={cn(
 						buttonVariants({ variant: "secondary" }),
-						"w-full translate-y-4 py-3 font-bold opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
+						"w-full py-3 font-bold transition-all duration-300 md:translate-y-4 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100"
 					)}
 					to={park.link}
 				>

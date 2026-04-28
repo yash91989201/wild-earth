@@ -1,12 +1,19 @@
-import {
-	IconArrowRight,
-	IconChevronDown,
-	IconMapPin,
-} from "@tabler/icons-react";
+import { IconArrowRight, IconMapPin } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
-import { Button } from "@wild-earth/ui/components/button";
+import {
+	Accordion,
+	AccordionContent,
+	AccordionItem,
+	AccordionTrigger,
+} from "@wild-earth/ui/components/accordion";
+import { Card } from "@wild-earth/ui/components/card";
+import {
+	Tabs,
+	TabsContent,
+	TabsList,
+	TabsTrigger,
+} from "@wild-earth/ui/components/tabs";
 import { motion } from "motion/react";
-import { useState } from "react";
 import { staggerItem } from "@/lib/animations";
 
 interface DayPlan {
@@ -27,50 +34,14 @@ interface Itinerary {
 	title: string;
 }
 
-function AccordionItem({
-	day,
-	defaultOpen = false,
-}: {
-	day: DayPlan;
-	defaultOpen?: boolean;
-}) {
-	const [open, setOpen] = useState(defaultOpen);
-	return (
-		<div className="border-gray-100 border-b">
-			<Button
-				className="flex h-auto w-full items-center justify-between py-3 text-left font-bold text-sm hover:bg-transparent"
-				onClick={() => setOpen((v) => !v)}
-				variant="ghost"
-			>
-				<span>{day.title}</span>
-				<IconChevronDown
-					className={`h-4 w-4 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
-				/>
-			</Button>
-			{open && (
-				<motion.div
-					animate={{ opacity: 1, y: 0 }}
-					className="pb-3 text-gray-600 text-sm"
-					initial={{ opacity: 0, y: -5 }}
-					transition={{ duration: 0.2 }}
-				>
-					{day.description}
-				</motion.div>
-			)}
-		</div>
-	);
-}
-
 export default function ItineraryCard({ itinerary }: { itinerary: Itinerary }) {
 	const tabs = [
 		{ id: "overview", label: "Overview" },
 		{ id: "itinerary", label: "Day by Day" },
 		...(itinerary.includes ? [{ id: "includes", label: "Includes" }] : []),
 	];
-	const [activeTab, setActiveTab] = useState("overview");
-
 	const imageBlock = (
-		<div className="group h-[500px] overflow-hidden">
+		<div className="group h-full overflow-hidden">
 			<img
 				alt={itinerary.imageAlt}
 				className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -99,92 +70,111 @@ export default function ItineraryCard({ itinerary }: { itinerary: Itinerary }) {
 				{itinerary.description}
 			</p>
 
-			{/* Tabs */}
-			<div className="mb-6 flex gap-6 border-gray-200 border-b">
-				{tabs.map((tab) => (
-					<Button
-						className={`h-auto rounded-none border-b-2 pb-3 font-bold text-sm uppercase tracking-wider transition-colors ${
-							activeTab === tab.id
-								? "border-primary text-primary hover:bg-transparent"
-								: "border-transparent text-muted-foreground hover:bg-transparent hover:text-foreground"
-						}`}
-						key={tab.id}
-						onClick={() => setActiveTab(tab.id)}
-						variant="ghost"
-					>
-						{tab.label}
-					</Button>
-				))}
-			</div>
-
-			{/* Tab Content */}
-			<div className="min-h-[160px]">
-				{activeTab === "overview" && (
-					<motion.div
-						animate={{ opacity: 1, y: 0 }}
-						initial={{ opacity: 0, y: 10 }}
-						key="overview"
-						transition={{ duration: 0.3 }}
-					>
-						<p className="text-gray-600 text-sm">{itinerary.overview}</p>
-						<Link
-							className="group mt-6 inline-flex items-center gap-2 font-bold text-[#d4af6a] text-sm uppercase tracking-widest"
-							hash="booking-form"
-							to="/"
+			<Tabs className="gap-6" defaultValue="overview">
+				<TabsList
+					className="w-full justify-start gap-6 border-gray-200 border-b p-0"
+					variant="line"
+				>
+					{tabs.map((tab) => (
+						<TabsTrigger
+							className="h-auto flex-none rounded-none px-0 pb-3 font-bold text-sm uppercase tracking-wider data-active:text-primary"
+							key={tab.id}
+							value={tab.id}
 						>
-							Request Quote
-							<IconArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-						</Link>
-					</motion.div>
-				)}
-				{activeTab === "itinerary" && (
-					<motion.div
-						animate={{ opacity: 1, y: 0 }}
-						initial={{ opacity: 0, y: 10 }}
-						key="itinerary"
-						transition={{ duration: 0.3 }}
-					>
-						{itinerary.days.map((day, i) => (
-							<AccordionItem day={day} defaultOpen={i === 0} key={day.title} />
-						))}
-					</motion.div>
-				)}
-				{activeTab === "includes" && itinerary.includes && (
-					<motion.div
-						animate={{ opacity: 1, y: 0 }}
-						initial={{ opacity: 0, y: 10 }}
-						key="includes"
-						transition={{ duration: 0.3 }}
-					>
-						<ul className="list-disc space-y-2 pl-5 text-gray-600 text-sm">
-							{itinerary.includes.map((item) => (
-								<li key={item}>{item}</li>
-							))}
-						</ul>
-					</motion.div>
-				)}
-			</div>
+							{tab.label}
+						</TabsTrigger>
+					))}
+				</TabsList>
+
+				<div className="min-h-[160px]">
+					<TabsContent value="overview">
+						<motion.div
+							animate={{ opacity: 1, y: 0 }}
+							initial={{ opacity: 0, y: 10 }}
+							key="overview"
+							transition={{ duration: 0.3 }}
+						>
+							<p className="text-gray-600 text-sm">{itinerary.overview}</p>
+							<Link
+								className="group mt-6 inline-flex items-center gap-2 font-bold text-[#d4af6a] text-sm uppercase tracking-widest"
+								hash="booking-form"
+								to="/"
+							>
+								Request Quote
+								<IconArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+							</Link>
+						</motion.div>
+					</TabsContent>
+
+					<TabsContent value="itinerary">
+						<motion.div
+							animate={{ opacity: 1, y: 0 }}
+							initial={{ opacity: 0, y: 10 }}
+							key="itinerary"
+							transition={{ duration: 0.3 }}
+						>
+							<Accordion
+								className="rounded-none border-0"
+								defaultValue={
+									itinerary.days[0]?.title ? [itinerary.days[0].title] : []
+								}
+							>
+								{itinerary.days.map((day) => (
+									<AccordionItem
+										className="border-gray-100 bg-transparent data-open:bg-transparent"
+										key={day.title}
+										value={day.title}
+									>
+										<AccordionTrigger className="px-0 py-3 font-bold text-foreground hover:no-underline">
+											{day.title}
+										</AccordionTrigger>
+										<AccordionContent className="px-0 pb-3 text-gray-600">
+											{day.description}
+										</AccordionContent>
+									</AccordionItem>
+								))}
+							</Accordion>
+						</motion.div>
+					</TabsContent>
+
+					{itinerary.includes && (
+						<TabsContent value="includes">
+							<motion.div
+								animate={{ opacity: 1, y: 0 }}
+								initial={{ opacity: 0, y: 10 }}
+								key="includes"
+								transition={{ duration: 0.3 }}
+							>
+								<ul className="list-disc space-y-2 pl-5 text-gray-600 text-sm">
+									{itinerary.includes.map((item) => (
+										<li key={item}>{item}</li>
+									))}
+								</ul>
+							</motion.div>
+						</TabsContent>
+					)}
+				</div>
+			</Tabs>
 		</div>
 	);
 
 	return (
-		<motion.div
-			className="overflow-hidden rounded-[40px] bg-white shadow-xl"
-			variants={staggerItem}
-		>
-			<div className="grid grid-cols-1 lg:grid-cols-2">
-				{itinerary.reverse ? (
-					<>
-						<div className="order-2 lg:order-1">{contentBlock}</div>
-						<div className="order-1 lg:order-2">{imageBlock}</div>
-					</>
-				) : (
-					<>
-						<div>{imageBlock}</div>
-						<div>{contentBlock}</div>
-					</>
-				)}
-			</div>
+		<motion.div variants={staggerItem}>
+			<Card className="overflow-hidden rounded-[40px] bg-white p-0 shadow-xl">
+				<div className="grid grid-cols-1 lg:grid-cols-2">
+					{itinerary.reverse ? (
+						<>
+							<div className="order-2 lg:order-1">{contentBlock}</div>
+							<div className="order-1 lg:order-2">{imageBlock}</div>
+						</>
+					) : (
+						<>
+							<div>{imageBlock}</div>
+							<div>{contentBlock}</div>
+						</>
+					)}
+				</div>
+			</Card>
 		</motion.div>
 	);
 }

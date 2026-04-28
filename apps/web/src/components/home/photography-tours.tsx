@@ -9,6 +9,37 @@ const features = [
 	"Exclusive access to key wildlife zones",
 ];
 
+const photos = [
+	{
+		alt: "Deer in a shadowed forest",
+		className: "h-[360px] sm:h-[420px]",
+		src: "https://images.unsplash.com/photo-1543946207-39bd91e70ca7?q=80&w=2070&auto=format&fit=crop",
+		width: 518,
+		height: 640,
+	},
+	{
+		alt: "Lion resting in the grass",
+		className: "h-[260px] sm:h-[300px]",
+		src: "https://images.unsplash.com/photo-1575550959106-5a7defe28b56?q=80&w=2070&auto=format&fit=crop",
+		width: 518,
+		height: 360,
+	},
+	{
+		alt: "Safari jeep at sunset",
+		className: "h-[300px] sm:h-[360px]",
+		src: "https://images.unsplash.com/photo-1516426122078-c23e76319801?q=80&w=2068&auto=format&fit=crop",
+		width: 517,
+		height: 360,
+	},
+	{
+		alt: "Sparrow on a branch",
+		className: "h-[320px] sm:h-[400px]",
+		src: "https://images.unsplash.com/photo-1444464666168-49d633b86797?q=80&w=2069&auto=format&fit=crop",
+		width: 517,
+		height: 300,
+	},
+];
+
 export default function PhotographyTours() {
 	return (
 		<section className="px-6 py-24" id="photography">
@@ -20,39 +51,28 @@ export default function PhotographyTours() {
 				whileInView="visible"
 			>
 				<div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
-					<div className="group relative order-2 lg:order-1">
-						<div className="grid grid-cols-2 gap-4">
-							<img
-								alt="Lion"
-								className="h-64 w-full rounded-2xl object-cover"
-								height={256}
-								src="https://images.unsplash.com/photo-1543946207-39bd91e70ca7?q=80&w=2070&auto=format&fit=crop"
-								width={518}
-							/>
-							<img
-								alt="Tiger"
-								className="mt-8 h-64 w-full rounded-2xl object-cover"
-								height={256}
-								src="https://images.unsplash.com/photo-1575550959106-5a7defe28b56?q=80&w=2070&auto=format&fit=crop"
-								width={518}
-							/>
-							<img
-								alt="Leopard"
-								className="-mt-8 h-64 w-full rounded-2xl object-cover"
-								height={256}
-								src="https://images.unsplash.com/photo-1516426122078-c23e76319801?q=80&w=2068&auto=format&fit=crop"
-								width={517}
-							/>
-							<img
-								alt="Bird"
-								className="h-64 w-full rounded-2xl object-cover"
-								height={256}
-								src="https://images.unsplash.com/photo-1444464666168-49d633b86797?q=80&w=2069&auto=format&fit=crop"
-								width={517}
-							/>
-						</div>
-						<div className="absolute -right-6 -bottom-6 rounded-full border-4 border-secondary bg-primary p-8 text-primary-foreground shadow-2xl">
-							<IconCamera className="h-10 w-10" />
+					<div className="relative order-2 lg:order-1">
+						<div className="columns-1 gap-5 sm:columns-2 [&>*]:mb-5">
+							{photos.map((photo) => (
+								<div
+									className={`group relative break-inside-avoid overflow-hidden rounded-[2rem] bg-gray-900 shadow-2xl shadow-primary/10 ring-1 ring-black/5 ${photo.className}`}
+									key={photo.alt}
+								>
+									<img
+										alt={photo.alt}
+										className="h-full w-full object-cover transition duration-700 ease-out group-hover:scale-105"
+										height={photo.height}
+										src={photo.src}
+										width={photo.width}
+									/>
+									<div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-white/10 opacity-80" />
+									{photo.alt === "Sparrow on a branch" ? (
+										<div className="absolute right-4 bottom-4 rounded-2xl border border-white/30 bg-primary/90 p-3 text-primary-foreground shadow-xl shadow-black/20 backdrop-blur-md sm:right-5 sm:bottom-5 sm:p-4">
+											<IconCamera className="h-6 w-6 sm:h-7 sm:w-7" />
+										</div>
+									) : null}
+								</div>
+							))}
 						</div>
 					</div>
 					<div className="order-1 lg:order-2">

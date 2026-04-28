@@ -1,6 +1,6 @@
 import { IconMapPin, IconMenu, IconTent, IconX } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
-import { Button } from "@wild-earth/ui/components/button";
+import { Button, buttonVariants } from "@wild-earth/ui/components/button";
 import {
 	NavigationMenu,
 	NavigationMenuContent,
@@ -9,6 +9,7 @@ import {
 	NavigationMenuList,
 	NavigationMenuTrigger,
 } from "@wild-earth/ui/components/navigation-menu";
+import { cn } from "@wild-earth/ui/lib/utils";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 
@@ -158,7 +159,7 @@ export default function Header() {
 							+91 98765 43210
 						</a>
 						<Link
-							className="rounded-full bg-primary px-6 py-3 font-bold text-primary-foreground text-sm uppercase tracking-wide transition-all hover:-translate-y-0.5 hover:bg-brand-green-dark hover:shadow-lg"
+							className="hidden rounded-full bg-primary px-6 py-3 font-bold text-primary-foreground text-sm uppercase tracking-wide transition-all hover:-translate-y-0.5 hover:bg-brand-green-dark hover:shadow-lg sm:block"
 							hash="booking-form"
 							to="/"
 						>
@@ -256,7 +257,10 @@ export default function Header() {
 							}}
 						>
 							<Link
-								className="text-accent"
+								className={cn(
+									buttonVariants({ variant: "secondary" }),
+									"w-full"
+								)}
 								hash="booking-form"
 								onClick={() => setMenuOpen(false)}
 								to="/"

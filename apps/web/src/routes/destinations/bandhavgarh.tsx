@@ -75,7 +75,7 @@ export const Route = createFileRoute("/destinations/bandhavgarh")({
 
 function RouteComponent() {
 	return (
-		<main className="flex-grow bg-white">
+		<main className="grow bg-white">
 			{/* Hero */}
 			<section className="relative flex h-[70vh] items-center justify-center overflow-hidden">
 				<div className="absolute inset-0 z-0">

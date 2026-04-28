@@ -1,5 +1,7 @@
 import { IconMail, IconMapPin, IconPhone, IconTent } from "@tabler/icons-react";
-import { Link } from "@tanstack/react-router";
+import { Link, linkOptions } from "@tanstack/react-router";
+import { buttonVariants } from "@wild-earth/ui/components/button";
+import { cn } from "@wild-earth/ui/lib/utils";
 
 function InstagramIcon({ className }: { className?: string }) {
 	return (
@@ -46,19 +48,24 @@ function YoutubeIcon({ className }: { className?: string }) {
 	);
 }
 
-const exploreLinks = [
+const footerLinkClassName = cn(
+	buttonVariants({ variant: "link" }),
+	"h-auto justify-start p-0 font-normal text-white/60 hover:text-white"
+);
+
+const exploreLinks = linkOptions([
 	{ label: "Destinations", to: "/destinations" },
 	{ label: "Signature Itineraries", to: "/itineraries" },
 	{ label: "Luxury Lodges", to: "/lodges" },
 	{ label: "Photography Tours", to: "/photography" },
-];
+]);
 
-const trustLinks = [
+const trustLinks = linkOptions([
 	{ label: "Conservation & Impact", to: "/conservation" },
 	{ label: "Our Expertise", to: "/about" },
-	{ label: "Ground Teams", to: "#" },
-	{ label: "Traveler FAQs", to: "#" },
-];
+	{ label: "Ground Teams", hash: "ground-teams", to: "/about" },
+	{ label: "Traveler FAQs", hash: "faqs", to: "/about" },
+]);
 
 export default function Footer() {
 	return (
@@ -103,13 +110,10 @@ export default function Footer() {
 						<h4 className="mb-8 font-bold text-accent text-xs uppercase tracking-widest">
 							Explore
 						</h4>
-						<ul className="space-y-4 text-sm text-white/60">
+						<ul className="space-y-4 text-sm">
 							{exploreLinks.map((link) => (
 								<li key={link.label}>
-									<Link
-										className="transition-colors hover:text-white"
-										to={link.to}
-									>
+									<Link className={footerLinkClassName} {...link}>
 										{link.label}
 									</Link>
 								</li>
@@ -121,13 +125,10 @@ export default function Footer() {
 						<h4 className="mb-8 font-bold text-accent text-xs uppercase tracking-widest">
 							Trust Center
 						</h4>
-						<ul className="space-y-4 text-sm text-white/60">
+						<ul className="space-y-4 text-sm">
 							{trustLinks.map((link) => (
 								<li key={link.label}>
-									<Link
-										className="transition-colors hover:text-white"
-										to={link.to}
-									>
+									<Link className={footerLinkClassName} {...link}>
 										{link.label}
 									</Link>
 								</li>
