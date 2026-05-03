@@ -3,11 +3,17 @@ import { Select, SelectContent, SelectTrigger, SelectValue } from "../select";
 import { FormBase, type FormControlProps } from "./form-base";
 import { useFieldContext } from "./hooks";
 
+export interface SelectItemData {
+	label: string;
+	value: string | null;
+}
+
 type FormSelectProps = FormControlProps & {
 	children: ReactNode;
 	className?: string;
 	size?: "sm" | "default";
 	placeholder?: string;
+	items: SelectItemData[];
 };
 
 export function FormSelect({
@@ -15,6 +21,7 @@ export function FormSelect({
 	className,
 	size,
 	placeholder,
+	items,
 	...props
 }: FormSelectProps) {
 	const field = useFieldContext<string>();
@@ -23,7 +30,8 @@ export function FormSelect({
 	return (
 		<FormBase {...props}>
 			<Select
-				onValueChange={(e) => field.handleChange(e)}
+				items={items}
+				onValueChange={(e) => field.handleChange(e ?? "")}
 				value={field.state.value}
 			>
 				<SelectTrigger

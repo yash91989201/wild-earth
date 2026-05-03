@@ -4,9 +4,11 @@ import {
 	IconSend,
 	IconShieldCheck,
 } from "@tabler/icons-react";
+import { formOptions } from "@tanstack/react-form";
 import { Link } from "@tanstack/react-router";
 import { Button, buttonVariants } from "@wild-earth/ui/components/button";
 import { FieldGroup } from "@wild-earth/ui/components/field";
+import type { SelectItemData } from "@wild-earth/ui/components/form/form-select";
 import { useAppForm } from "@wild-earth/ui/components/form/hooks";
 import { InputGroupButton } from "@wild-earth/ui/components/input-group";
 import { SelectItem } from "@wild-earth/ui/components/select";
@@ -17,19 +19,31 @@ import { fadeLeft, fadeRight, viewportOnce } from "@/lib/animations";
 import { BookingFormSchema } from "@/lib/schemas/booking";
 import type { BookingFormType } from "@/lib/types/booking";
 
+const parkItems: SelectItemData[] = [
+	{ label: "Ranthambore", value: "ranthambore" },
+	{ label: "Jim Corbett", value: "corbett" },
+	{ label: "Kaziranga", value: "kaziranga" },
+	{ label: "Tadoba", value: "tadoba" },
+	{ label: "Pench", value: "pench" },
+];
+
+const formOpts = formOptions({
+	defaultValues: {
+		park: "",
+		dates: "",
+		groupSize: 1,
+		email: "",
+		interests: "",
+	} satisfies BookingFormType as BookingFormType,
+});
+
 export default function BookingSection() {
 	const [submitted, setSubmitted] = useState(false);
 
 	const form = useAppForm({
-		defaultValues: {
-			park: "",
-			dates: "",
-			groupSize: 1,
-			email: "",
-			interests: "",
-		} satisfies BookingFormType as BookingFormType,
+		...formOpts,
 		validators: {
-			onSubmit: BookingFormSchema,
+			onSubmitAsync: BookingFormSchema,
 		},
 		onSubmit: async ({ value }) => {
 			// Simulate API call
@@ -125,14 +139,15 @@ export default function BookingSection() {
 									<form.AppField name="park">
 										{(field) => (
 											<field.Select
+												items={parkItems}
 												label="National Park"
 												placeholder="Select a park"
 											>
-												<SelectItem value="ranthambore">Ranthambore</SelectItem>
-												<SelectItem value="corbett">Jim Corbett</SelectItem>
-												<SelectItem value="kaziranga">Kaziranga</SelectItem>
-												<SelectItem value="tadoba">Tadoba</SelectItem>
-												<SelectItem value="pench">Pench</SelectItem>
+												{parkItems.map((item) => (
+													<SelectItem key={item.value} value={item.value}>
+														{item.label}
+													</SelectItem>
+												))}
 											</field.Select>
 										)}
 									</form.AppField>
