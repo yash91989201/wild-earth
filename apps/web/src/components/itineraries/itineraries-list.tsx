@@ -72,7 +72,7 @@ const itineraries = [
 
 export default function ItinerariesList() {
 	return (
-		<section className="bg-secondary px-6 pb-24">
+		<section className="bg-secondary px-6 py-24">
 			<div className="mx-auto max-w-7xl">
 				<motion.div
 					className="space-y-24"

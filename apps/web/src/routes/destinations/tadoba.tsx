@@ -60,9 +60,9 @@ const zones = [
 ];
 
 const gallery = [
-	"https://images.unsplash.com/photo-1616117436034-7041753c155d?q=80&w=2070&auto=format&fit=crop",
-	"https://images.unsplash.com/photo-1599387737213-92f7dc2cc893?q=80&w=2070&auto=format&fit=crop",
-	"https://images.unsplash.com/photo-1610486820251-87bf91937ff7?q=80&w=2070&auto=format&fit=crop",
+	"https://images.unsplash.com/photo-1500964757637-c85e8a162699?q=80&w=1964&auto=format&fit=crop",
+	"https://images.unsplash.com/photo-1549480017-d76466a4b7e8?q=80&w=2070&auto=format&fit=crop",
+	"https://images.unsplash.com/photo-1474511320723-9a56873867b5?q=80&w=2072&auto=format&fit=crop",
 ];
 
 export const Route = createFileRoute("/destinations/tadoba")({
@@ -78,7 +78,7 @@ function RouteComponent() {
 					<img
 						alt="Tadoba Andhari Tiger Reserve"
 						className="absolute inset-0 h-full w-full scale-[1.15] object-cover"
-						src="https://images.unsplash.com/photo-1616117436034-7041753c155d?q=80&w=2070&auto=format&fit=crop"
+						src="https://images.unsplash.com/photo-1500964757637-c85e8a162699?q=80&w=1964&auto=format&fit=crop"
 					/>
 					<div className="absolute inset-0 bg-black/50" />
 				</div>

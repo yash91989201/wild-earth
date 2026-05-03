@@ -1,5 +1,5 @@
 import { IconMapPin, IconMenu, IconTent, IconX } from "@tabler/icons-react";
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation } from "@tanstack/react-router";
 import { Button, buttonVariants } from "@wild-earth/ui/components/button";
 import {
 	NavigationMenu,
@@ -11,7 +11,7 @@ import {
 } from "@wild-earth/ui/components/navigation-menu";
 import { cn } from "@wild-earth/ui/lib/utils";
 import { AnimatePresence, motion } from "motion/react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const destinationParks = [
 	{ name: "Ranthambore", to: "/destinations/ranthambore" },
@@ -63,9 +63,34 @@ function NavLink({
 	);
 }
 
+const routesWithImageHero = [
+	"/",
+	"/photography",
+	"/conservation",
+	"/itineraries",
+	"/lodges",
+	"/destinations/",
+	"/about",
+];
+
+function usePageHasImageHero() {
+	const location = useLocation();
+	return useMemo(() => {
+		const pathname = location.pathname;
+		if (routesWithImageHero.includes(pathname)) return true;
+		if (
+			pathname.startsWith("/destinations/") &&
+			pathname !== "/destinations/"
+		)
+			return true;
+		return false;
+	}, [location.pathname]);
+}
+
 export default function Header() {
 	const [scrolled, setScrolled] = useState(false);
 	const [menuOpen, setMenuOpen] = useState(false);
+	const pageHasImageHero = usePageHasImageHero();
 
 	useEffect(() => {
 		const onScroll = () => setScrolled(window.scrollY > 80);
@@ -81,12 +106,12 @@ export default function Header() {
 		};
 	}, [menuOpen]);
 
-	const isTransparent = !(scrolled || menuOpen);
+	const isTransparent = pageHasImageHero && !(scrolled || menuOpen);
 
 	return (
 		<>
 			<nav
-				className={`fixed top-0 right-0 left-0 z-50 border-b transition-all duration-300 ${isTransparent ? "border-transparent bg-transparent backdrop-blur-none" : "border-border bg-white/92 backdrop-blur-xl"}`}
+				className={`fixed top-0 right-0 left-0 z-40 border-b transition-all duration-300 ${isTransparent ? "border-transparent bg-transparent backdrop-blur-none" : "border-border bg-background/92 backdrop-blur-xl"}`}
 			>
 				<div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
 					<Link className="flex items-center gap-2" to="/">
@@ -113,28 +138,23 @@ export default function Header() {
 									<NavigationMenuContent>
 										<div className="grid w-[400px] gap-3 p-4">
 											<div className="mb-2 px-3">
-												<p className="font-bold font-serif text-[#1f4d2b] text-lg">
+												<p className="font-bold font-serif text-primary text-lg">
 													National Parks
 												</p>
-												<p className="text-gray-500 text-sm">
+												<p className="text-muted-foreground text-sm">
 													Explore India's finest wildlife reserves
 												</p>
 											</div>
-											{destinationParks.map((park) => (
-												<NavigationMenuLink
-													className="flex items-center gap-2"
-													key={park.to}
-													onClick={() => {}}
-												>
-													<Link
-														className="flex items-center gap-2"
-														to={park.to}
-													>
-														<IconMapPin className="h-4 w-4 text-[#d4af6a]" />
-														<span>{park.name}</span>
-													</Link>
-												</NavigationMenuLink>
-											))}
+										{destinationParks.map((park) => (
+											<NavigationMenuLink
+												className="flex items-center gap-2"
+												key={park.to}
+												render={<Link to={park.to} />}
+											>
+												<IconMapPin className="h-4 w-4 text-accent" />
+												<span>{park.name}</span>
+											</NavigationMenuLink>
+										))}
 										</div>
 									</NavigationMenuContent>
 								</NavigationMenuItem>
@@ -167,7 +187,7 @@ export default function Header() {
 						</Link>
 						<Button
 							aria-label="Toggle menu"
-							className="relative z-[200] h-auto p-2 lg:hidden"
+							className="relative h-auto p-2 lg:hidden"
 							onClick={() => setMenuOpen((v) => !v)}
 							variant="ghost"
 						>
@@ -186,88 +206,145 @@ export default function Header() {
 			<AnimatePresence>
 				{menuOpen && (
 					<motion.div
-						animate={{ x: 0 }}
-						className="fixed inset-0 z-[100] flex flex-col items-center justify-center gap-8 bg-primary"
-						exit={{ x: "100%" }}
-						initial={{ x: "100%" }}
-						transition={{ duration: 0.5, ease: easeOutExpo }}
+						animate={{ opacity: 1, y: 0 }}
+						className="fixed inset-0 z-50 bg-background"
+						exit={{ opacity: 0, y: -20 }}
+						initial={{ opacity: 0, y: -20 }}
+						transition={{ duration: 0.3, ease: easeOutExpo }}
 					>
-						<Button
-							aria-label="Close menu"
-							className="absolute top-6 right-6 h-auto p-2 text-white hover:bg-white/10"
-							onClick={() => setMenuOpen(false)}
-							variant="ghost"
-						>
-							<IconX className="h-8 w-8" />
-						</Button>
-						<div className="flex flex-col items-center gap-4">
-							<p className="font-bold font-serif text-white/50 text-xl">
-								Destinations
-							</p>
-							{destinationParks.map((park, i) => (
-								<motion.div
-									animate={{ opacity: 1, x: 0 }}
-									initial={{ opacity: 0, x: 40 }}
-									key={park.to}
-									transition={{
-										delay: 0.1 + i * 0.1,
-										duration: 0.4,
-										ease: easeOutExpo,
-									}}
-								>
-									<Link
-										className="font-bold font-serif text-2xl text-white"
-										onClick={() => setMenuOpen(false)}
-										to={park.to}
-									>
-										{park.name}
-									</Link>
-								</motion.div>
-							))}
-						</div>
-						<div className="mt-4 h-px w-32 bg-white/20" />
-						{navLinks.map((link, i) => (
-							<motion.div
-								animate={{ opacity: 1, x: 0 }}
-								initial={{ opacity: 0, x: 40 }}
-								key={link.to}
-								transition={{
-									delay: 0.1 + (destinationParks.length + 1) * 0.1 + i * 0.1,
-									duration: 0.4,
-									ease: easeOutExpo,
-								}}
-							>
-								<Link
-									className="font-bold font-serif text-3xl text-white"
-									onClick={() => setMenuOpen(false)}
-									to={link.to}
-								>
-									{link.label}
+						<div className="flex h-full flex-col">
+							{/* Header */}
+							<div className="flex items-center justify-between px-6 py-5">
+								<Link className="flex items-center gap-2" to="/" onClick={() => setMenuOpen(false)}>
+									<IconTent className="text-3xl text-primary" strokeWidth={1.5} />
+									<span className="font-bold font-serif text-2xl tracking-tight text-primary">
+										WildEarth
+									</span>
 								</Link>
-							</motion.div>
-						))}
-						<motion.div
-							animate={{ opacity: 1, x: 0 }}
-							initial={{ opacity: 0, x: 40 }}
-							transition={{
-								delay:
-									0.1 + (destinationParks.length + 1 + navLinks.length) * 0.1,
-								duration: 0.4,
-								ease: easeOutExpo,
-							}}
-						>
-							<Link
-								className={cn(
-									buttonVariants({ variant: "secondary" }),
-									"w-full"
-								)}
-								hash="booking-form"
-								onClick={() => setMenuOpen(false)}
-								to="/"
-							>
-								Plan My Safari
-							</Link>
-						</motion.div>
+								<Button
+									aria-label="Close menu"
+									className="h-auto p-2 text-foreground hover:bg-muted"
+									onClick={() => setMenuOpen(false)}
+									variant="ghost"
+								>
+									<IconX className="h-6 w-6" />
+								</Button>
+							</div>
+
+							{/* Scrollable Content */}
+							<div className="flex-1 overflow-y-auto px-6 pb-8">
+								<div className="mx-auto max-w-md">
+									{/* Destinations Section */}
+									<motion.div
+										animate={{ opacity: 1, y: 0 }}
+										initial={{ opacity: 0, y: 20 }}
+										transition={{ delay: 0.1, duration: 0.4, ease: easeOutExpo }}
+									>
+										<p className="mb-4 font-bold text-muted-foreground text-xs uppercase tracking-[0.2em]">
+											Destinations
+										</p>
+										<div className="space-y-2">
+											{destinationParks.map((park, i) => (
+												<motion.div
+													key={park.to}
+													animate={{ opacity: 1, x: 0 }}
+													initial={{ opacity: 0, x: -20 }}
+													transition={{
+														delay: 0.15 + i * 0.05,
+														duration: 0.3,
+														ease: easeOutExpo,
+													}}
+												>
+													<Link
+														className="flex items-center gap-3 rounded-2xl p-4 transition-colors hover:bg-muted"
+														onClick={() => setMenuOpen(false)}
+														to={park.to}
+													>
+														<IconMapPin className="h-5 w-5 text-accent" />
+														<span className="font-bold font-serif text-lg text-foreground">
+															{park.name}
+														</span>
+													</Link>
+												</motion.div>
+											))}
+										</div>
+									</motion.div>
+
+									<div className="my-6 h-px bg-border" />
+
+									{/* Main Nav Section */}
+									<motion.div
+										animate={{ opacity: 1, y: 0 }}
+										initial={{ opacity: 0, y: 20 }}
+										transition={{ delay: 0.3, duration: 0.4, ease: easeOutExpo }}
+									>
+										<p className="mb-4 font-bold text-muted-foreground text-xs uppercase tracking-[0.2em]">
+											Experience
+										</p>
+										<div className="space-y-2">
+											{navLinks.map((link, i) => (
+												<motion.div
+													key={link.to}
+													animate={{ opacity: 1, x: 0 }}
+													initial={{ opacity: 0, x: -20 }}
+													transition={{
+														delay: 0.35 + i * 0.05,
+														duration: 0.3,
+														ease: easeOutExpo,
+													}}
+												>
+													<Link
+														className="block rounded-2xl p-4 font-bold font-serif text-2xl text-foreground transition-colors hover:bg-muted"
+														onClick={() => setMenuOpen(false)}
+														to={link.to}
+													>
+														{link.label}
+													</Link>
+												</motion.div>
+											))}
+										</div>
+									</motion.div>
+
+									{/* CTA */}
+									<motion.div
+										className="mt-8"
+										animate={{ opacity: 1, y: 0 }}
+										initial={{ opacity: 0, y: 20 }}
+										transition={{ delay: 0.5, duration: 0.4, ease: easeOutExpo }}
+									>
+										<Link
+											className={cn(
+												buttonVariants({ size: "lg" }),
+												"w-full rounded-full py-6 font-bold text-base uppercase tracking-wide"
+											)}
+											hash="booking-form"
+											onClick={() => setMenuOpen(false)}
+											to="/"
+										>
+											Plan My Safari
+										</Link>
+									</motion.div>
+
+									{/* Contact */}
+									<motion.div
+										className="mt-6 flex justify-center"
+										animate={{ opacity: 1 }}
+										initial={{ opacity: 0 }}
+										transition={{ delay: 0.6, duration: 0.4 }}
+									>
+											<a
+												className="flex w-full items-center justify-center gap-2 rounded-full border border-border px-6 py-3 font-semibold text-sm text-foreground transition-colors hover:bg-muted"
+												href="https://wa.me/919876543210"
+												rel="noopener noreferrer"
+												target="_blank"
+											>
+												<WhatsAppIcon className="h-5 w-5 text-green-600" />
+												+91 98765 43210
+											</a>
+									</motion.div>
+								</div>
+							</div>
+						</div>
 					</motion.div>
 				)}
 			</AnimatePresence>

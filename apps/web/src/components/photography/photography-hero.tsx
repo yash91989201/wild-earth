@@ -3,7 +3,7 @@ import { fadeUp, viewportOnce } from "@/lib/animations";
 
 export default function PhotographyHero() {
 	return (
-		<section className="relative flex h-[60vh] items-center justify-center overflow-hidden">
+		<section className="relative flex h-[80vh] items-center justify-center overflow-hidden">
 			<img
 				alt="Wildlife Photography"
 				className="absolute inset-0 h-full w-full object-cover"

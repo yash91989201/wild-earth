@@ -6,6 +6,7 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@wild-earth/ui/components/accordion";
+import { buttonVariants } from "@wild-earth/ui/components/button";
 import { Card } from "@wild-earth/ui/components/card";
 import {
 	Tabs,
@@ -13,6 +14,7 @@ import {
 	TabsList,
 	TabsTrigger,
 } from "@wild-earth/ui/components/tabs";
+import { cn } from "@wild-earth/ui/lib/utils";
 import { motion } from "motion/react";
 import { staggerItem } from "@/lib/animations";
 
@@ -72,7 +74,7 @@ export default function ItineraryCard({ itinerary }: { itinerary: Itinerary }) {
 
 			<Tabs className="gap-6" defaultValue="overview">
 				<TabsList
-					className="w-full justify-start gap-6 border-border border-b p-0"
+					className="w-full justify-start gap-6 border-border p-0"
 					variant="line"
 				>
 					{tabs.map((tab) => (
@@ -94,9 +96,11 @@ export default function ItineraryCard({ itinerary }: { itinerary: Itinerary }) {
 							key="overview"
 							transition={{ duration: 0.3 }}
 						>
-							<p className="text-muted-foreground text-sm">{itinerary.overview}</p>
+							<p className="text-muted-foreground text-sm">
+								{itinerary.overview}
+							</p>
 							<Link
-								className="group mt-6 inline-flex items-center gap-2 font-bold text-accent text-sm uppercase tracking-widest"
+								className={cn(buttonVariants({ variant: "link" }), "p-0")}
 								hash="booking-form"
 								to="/"
 							>
@@ -120,15 +124,15 @@ export default function ItineraryCard({ itinerary }: { itinerary: Itinerary }) {
 								}
 							>
 								{itinerary.days.map((day) => (
-											<AccordionItem
-												className="border-border bg-transparent data-open:bg-transparent"
+									<AccordionItem
+										className="border-border bg-transparent data-open:bg-transparent"
 										key={day.title}
 										value={day.title}
 									>
 										<AccordionTrigger className="px-0 py-3 font-bold text-foreground hover:no-underline">
 											{day.title}
 										</AccordionTrigger>
-												<AccordionContent className="px-0 pb-3 text-muted-foreground">
+										<AccordionContent className="px-0 pb-3 text-muted-foreground">
 											{day.description}
 										</AccordionContent>
 									</AccordionItem>

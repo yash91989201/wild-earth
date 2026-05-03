@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import AboutHero from "@/components/about/about-hero";
 
 export const Route = createFileRoute("/about")({
 	component: RouteComponent,
@@ -6,13 +7,16 @@ export const Route = createFileRoute("/about")({
 
 function RouteComponent() {
 	return (
-		<div className="flex min-h-[60vh] items-center justify-center">
-			<div className="text-center">
-			<h1 className="mb-4 font-bold font-serif text-4xl text-primary">
-				Coming Soon
-			</h1>
-			<p className="text-muted-foreground">This page is under construction.</p>
-			</div>
-		</div>
+		<main className="flex-grow bg-background">
+			<AboutHero />
+			<section className="flex min-h-[40vh] items-center justify-center px-6 py-24">
+				<div className="text-center">
+					<h2 className="mb-4 font-bold font-serif text-4xl text-primary">
+						Coming Soon
+					</h2>
+					<p className="text-muted-foreground">This page is under construction.</p>
+				</div>
+			</section>
+		</main>
 	);
 }

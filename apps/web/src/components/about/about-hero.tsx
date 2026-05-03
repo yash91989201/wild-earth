@@ -1,14 +1,14 @@
 import { motion } from "motion/react";
 import { fadeUp, viewportOnce } from "@/lib/animations";
 
-export default function ParksHero() {
+export default function AboutHero() {
 	return (
 		<section className="relative flex h-[80vh] items-center justify-center overflow-hidden">
 			<img
-				alt="Indian National Parks"
+				alt="WildEarth Team in the Wild"
 				className="absolute inset-0 h-full w-full object-cover"
 				height={800}
-				src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=2074&auto=format&fit=crop"
+				src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?q=80&w=2070&auto=format&fit=crop"
 				width={1920}
 			/>
 			<div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
@@ -20,7 +20,7 @@ export default function ParksHero() {
 					viewport={viewportOnce}
 					whileInView="visible"
 				>
-					Explore the Wild
+					Our Story
 				</motion.span>
 				<motion.h1
 					className="mb-6 font-bold font-serif text-5xl md:text-7xl"
@@ -30,7 +30,7 @@ export default function ParksHero() {
 					viewport={viewportOnce}
 					whileInView="visible"
 				>
-					India&apos;s Premier National Parks
+					About WildEarth
 				</motion.h1>
 				<motion.p
 					className="text-white/90 text-xl"
@@ -40,9 +40,9 @@ export default function ParksHero() {
 					viewport={viewportOnce}
 					whileInView="visible"
 				>
-					Explore the raw beauty of India&apos;s wilderness. We offer direct
-					access to the most exclusive and wildlife-rich reserves in the
-					country.
+					Passionate naturalists and conservationists dedicated to crafting
+					unforgettable wildlife experiences across India&apos;s most pristine
+					landscapes.
 				</motion.p>
 			</div>
 		</section>

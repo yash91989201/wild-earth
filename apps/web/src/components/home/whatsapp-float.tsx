@@ -15,7 +15,7 @@ export default function WhatsAppFloat() {
 	return (
 		<a
 			aria-label="Chat on WhatsApp"
-			className="fixed right-8 bottom-8 z-[999] flex h-[60px] w-[60px] animate-float-pulse items-center justify-center rounded-full bg-green-500 text-white shadow-xl transition-all hover:-translate-y-[3px] hover:scale-110"
+			className="fixed right-8 bottom-8 z-30 flex h-[60px] w-[60px] animate-float-pulse items-center justify-center rounded-full bg-green-500 text-white shadow-xl transition-all hover:-translate-y-[3px] hover:scale-110"
 			href="https://wa.me/919876543210"
 			rel="noopener noreferrer"
 			target="_blank"

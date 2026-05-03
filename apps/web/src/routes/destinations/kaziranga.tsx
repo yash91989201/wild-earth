@@ -60,9 +60,9 @@ const zones = [
 ];
 
 const gallery = [
-	"https://images.unsplash.com/photo-1629813244248-3568779a5573?q=80&w=2072&auto=format&fit=crop",
-	"https://images.unsplash.com/photo-1603525281486-0925dbdb9bce?q=80&w=2070&auto=format&fit=crop",
-	"https://images.unsplash.com/photo-1581007871115-f14bc016e0a4?q=80&w=2070&auto=format&fit=crop",
+	"https://images.unsplash.com/photo-1549366021-9f761d450615?q=80&w=2070&auto=format&fit=crop",
+	"https://images.unsplash.com/photo-1500964757637-c85e8a162699?q=80&w=1964&auto=format&fit=crop",
+	"https://images.unsplash.com/photo-1535591273668-578e31182c4f?q=80&w=2072&auto=format&fit=crop",
 ];
 
 export const Route = createFileRoute("/destinations/kaziranga")({
@@ -78,7 +78,7 @@ function RouteComponent() {
 					<img
 						alt="Kaziranga National Park"
 						className="absolute inset-0 h-full w-full scale-[1.15] object-cover"
-						src="https://images.unsplash.com/photo-1629813244248-3568779a5573?q=80&w=2072&auto=format&fit=crop"
+						src="https://images.unsplash.com/photo-1549366021-9f761d450615?q=80&w=2070&auto=format&fit=crop"
 					/>
 					<div className="absolute inset-0 bg-black/50" />
 				</div>

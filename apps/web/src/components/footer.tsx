@@ -53,18 +53,20 @@ const footerLinkClassName = cn(
 	"h-auto justify-start p-0 font-normal text-white/60 hover:text-white"
 );
 
-const exploreLinks = linkOptions([
-	{ label: "Destinations", to: "/destinations" },
-	{ label: "Signature Itineraries", to: "/itineraries" },
-	{ label: "Luxury Lodges", to: "/lodges" },
-	{ label: "Photography Tours", to: "/photography" },
+const destinationLinks = linkOptions([
+	{ label: "Ranthambore", to: "/destinations/ranthambore" },
+	{ label: "Jim Corbett", to: "/destinations/corbett" },
+	{ label: "Kaziranga", to: "/destinations/kaziranga" },
+	{ label: "Tadoba", to: "/destinations/tadoba" },
+	{ label: "Kanha", to: "/destinations/kanha" },
+	{ label: "Bandhavgarh", to: "/destinations/bandhavgarh" },
 ]);
 
-const trustLinks = linkOptions([
-	{ label: "Conservation & Impact", to: "/conservation" },
-	{ label: "Our Expertise", to: "/about" },
-	{ label: "Ground Teams", hash: "ground-teams", to: "/about" },
-	{ label: "Traveler FAQs", hash: "faqs", to: "/about" },
+const exploreLinks = linkOptions([
+	{ label: "Itineraries", to: "/itineraries" },
+	{ label: "Lodges", to: "/lodges" },
+	{ label: "Photography", to: "/photography" },
+	{ label: "Impact", to: "/conservation" },
 ]);
 
 export default function Footer() {
@@ -108,10 +110,10 @@ export default function Footer() {
 
 					<div>
 						<h4 className="mb-8 font-bold text-accent text-xs uppercase tracking-widest">
-							Explore
+							Destinations
 						</h4>
 						<ul className="space-y-4 text-sm">
-							{exploreLinks.map((link) => (
+							{destinationLinks.map((link) => (
 								<li key={link.label}>
 									<Link className={footerLinkClassName} {...link}>
 										{link.label}
@@ -123,10 +125,10 @@ export default function Footer() {
 
 					<div>
 						<h4 className="mb-8 font-bold text-accent text-xs uppercase tracking-widest">
-							Trust Center
+							Explore
 						</h4>
 						<ul className="space-y-4 text-sm">
-							{trustLinks.map((link) => (
+							{exploreLinks.map((link) => (
 								<li key={link.label}>
 									<Link className={footerLinkClassName} {...link}>
 										{link.label}
