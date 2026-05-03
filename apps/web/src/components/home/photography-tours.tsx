@@ -55,7 +55,7 @@ export default function PhotographyTours() {
 						<div className="columns-1 gap-5 sm:columns-2 [&>*]:mb-5">
 							{photos.map((photo) => (
 								<div
-									className={`group relative break-inside-avoid overflow-hidden rounded-[2rem] bg-gray-900 shadow-2xl shadow-primary/10 ring-1 ring-black/5 ${photo.className}`}
+									className={`group relative break-inside-avoid overflow-hidden rounded-[2rem] bg-gray-900 ring-1 ring-black/5 ${photo.className}`}
 									key={photo.alt}
 								>
 									<img
@@ -67,7 +67,7 @@ export default function PhotographyTours() {
 									/>
 									<div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-white/10 opacity-80" />
 									{photo.alt === "Sparrow on a branch" ? (
-										<div className="absolute right-4 bottom-4 rounded-2xl border border-white/30 bg-primary/90 p-3 text-primary-foreground shadow-xl shadow-black/20 backdrop-blur-md sm:right-5 sm:bottom-5 sm:p-4">
+										<div className="absolute right-4 bottom-4 rounded-2xl border border-white/30 bg-primary p-3 text-primary-foreground shadow-xl shadow-black/20 backdrop-blur-md sm:right-5 sm:bottom-5 sm:p-4">
 											<IconCamera className="h-6 w-6 sm:h-7 sm:w-7" />
 										</div>
 									) : null}

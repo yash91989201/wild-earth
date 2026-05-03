@@ -170,14 +170,6 @@ export default function Footer() {
 					<div className="text-white/30 text-xs uppercase tracking-[0.2em]">
 						&copy; 2024 WildEarth Expeditions. All Rights Reserved.
 					</div>
-					<div className="flex items-center gap-6">
-						<span className="text-white/50 text-xs uppercase tracking-widest">
-							PayU
-						</span>
-						<span className="text-white/50 text-xs uppercase tracking-widest">
-							Razorpay
-						</span>
-					</div>
 				</div>
 			</div>
 		</footer>
