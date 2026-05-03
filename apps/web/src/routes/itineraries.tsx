@@ -8,7 +8,7 @@ export const Route = createFileRoute("/itineraries")({
 
 function RouteComponent() {
 	return (
-		<main className="flex-grow bg-[#f5f1ed]">
+		<main className="flex-grow bg-secondary">
 			<ItinerariesHero />
 			<ItinerariesList />
 		</main>

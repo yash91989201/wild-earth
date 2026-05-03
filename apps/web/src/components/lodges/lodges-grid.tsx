@@ -34,7 +34,7 @@ const lodges: Lodge[] = [
 
 export default function LodgesGrid() {
 	return (
-		<section className="bg-white px-6 pb-24">
+		<section className="bg-background px-6 pb-24">
 			<div className="mx-auto max-w-7xl">
 				<motion.div
 					className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3"

@@ -9,13 +9,9 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TadobaRouteImport } from './routes/tadoba'
-import { Route as RanthamboreRouteImport } from './routes/ranthambore'
 import { Route as PhotographyRouteImport } from './routes/photography'
 import { Route as LodgesRouteImport } from './routes/lodges'
-import { Route as KazirangaRouteImport } from './routes/kaziranga'
 import { Route as ItinerariesRouteImport } from './routes/itineraries'
-import { Route as CorbettRouteImport } from './routes/corbett'
 import { Route as ConservationRouteImport } from './routes/conservation'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
@@ -27,16 +23,6 @@ import { Route as DestinationsKanhaRouteImport } from './routes/destinations/kan
 import { Route as DestinationsCorbettRouteImport } from './routes/destinations/corbett'
 import { Route as DestinationsBandhavgarhRouteImport } from './routes/destinations/bandhavgarh'
 
-const TadobaRoute = TadobaRouteImport.update({
-  id: '/tadoba',
-  path: '/tadoba',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RanthamboreRoute = RanthamboreRouteImport.update({
-  id: '/ranthambore',
-  path: '/ranthambore',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const PhotographyRoute = PhotographyRouteImport.update({
   id: '/photography',
   path: '/photography',
@@ -47,19 +33,9 @@ const LodgesRoute = LodgesRouteImport.update({
   path: '/lodges',
   getParentRoute: () => rootRouteImport,
 } as any)
-const KazirangaRoute = KazirangaRouteImport.update({
-  id: '/kaziranga',
-  path: '/kaziranga',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ItinerariesRoute = ItinerariesRouteImport.update({
   id: '/itineraries',
   path: '/itineraries',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CorbettRoute = CorbettRouteImport.update({
-  id: '/corbett',
-  path: '/corbett',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ConservationRoute = ConservationRouteImport.update({
@@ -117,13 +93,9 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/conservation': typeof ConservationRoute
-  '/corbett': typeof CorbettRoute
   '/itineraries': typeof ItinerariesRoute
-  '/kaziranga': typeof KazirangaRoute
   '/lodges': typeof LodgesRoute
   '/photography': typeof PhotographyRoute
-  '/ranthambore': typeof RanthamboreRoute
-  '/tadoba': typeof TadobaRoute
   '/destinations/bandhavgarh': typeof DestinationsBandhavgarhRoute
   '/destinations/corbett': typeof DestinationsCorbettRoute
   '/destinations/kanha': typeof DestinationsKanhaRoute
@@ -136,13 +108,9 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/conservation': typeof ConservationRoute
-  '/corbett': typeof CorbettRoute
   '/itineraries': typeof ItinerariesRoute
-  '/kaziranga': typeof KazirangaRoute
   '/lodges': typeof LodgesRoute
   '/photography': typeof PhotographyRoute
-  '/ranthambore': typeof RanthamboreRoute
-  '/tadoba': typeof TadobaRoute
   '/destinations/bandhavgarh': typeof DestinationsBandhavgarhRoute
   '/destinations/corbett': typeof DestinationsCorbettRoute
   '/destinations/kanha': typeof DestinationsKanhaRoute
@@ -156,13 +124,9 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/conservation': typeof ConservationRoute
-  '/corbett': typeof CorbettRoute
   '/itineraries': typeof ItinerariesRoute
-  '/kaziranga': typeof KazirangaRoute
   '/lodges': typeof LodgesRoute
   '/photography': typeof PhotographyRoute
-  '/ranthambore': typeof RanthamboreRoute
-  '/tadoba': typeof TadobaRoute
   '/destinations/bandhavgarh': typeof DestinationsBandhavgarhRoute
   '/destinations/corbett': typeof DestinationsCorbettRoute
   '/destinations/kanha': typeof DestinationsKanhaRoute
@@ -177,13 +141,9 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/conservation'
-    | '/corbett'
     | '/itineraries'
-    | '/kaziranga'
     | '/lodges'
     | '/photography'
-    | '/ranthambore'
-    | '/tadoba'
     | '/destinations/bandhavgarh'
     | '/destinations/corbett'
     | '/destinations/kanha'
@@ -196,13 +156,9 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/conservation'
-    | '/corbett'
     | '/itineraries'
-    | '/kaziranga'
     | '/lodges'
     | '/photography'
-    | '/ranthambore'
-    | '/tadoba'
     | '/destinations/bandhavgarh'
     | '/destinations/corbett'
     | '/destinations/kanha'
@@ -215,13 +171,9 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/conservation'
-    | '/corbett'
     | '/itineraries'
-    | '/kaziranga'
     | '/lodges'
     | '/photography'
-    | '/ranthambore'
-    | '/tadoba'
     | '/destinations/bandhavgarh'
     | '/destinations/corbett'
     | '/destinations/kanha'
@@ -235,13 +187,9 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ConservationRoute: typeof ConservationRoute
-  CorbettRoute: typeof CorbettRoute
   ItinerariesRoute: typeof ItinerariesRoute
-  KazirangaRoute: typeof KazirangaRoute
   LodgesRoute: typeof LodgesRoute
   PhotographyRoute: typeof PhotographyRoute
-  RanthamboreRoute: typeof RanthamboreRoute
-  TadobaRoute: typeof TadobaRoute
   DestinationsBandhavgarhRoute: typeof DestinationsBandhavgarhRoute
   DestinationsCorbettRoute: typeof DestinationsCorbettRoute
   DestinationsKanhaRoute: typeof DestinationsKanhaRoute
@@ -253,20 +201,6 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/tadoba': {
-      id: '/tadoba'
-      path: '/tadoba'
-      fullPath: '/tadoba'
-      preLoaderRoute: typeof TadobaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/ranthambore': {
-      id: '/ranthambore'
-      path: '/ranthambore'
-      fullPath: '/ranthambore'
-      preLoaderRoute: typeof RanthamboreRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/photography': {
       id: '/photography'
       path: '/photography'
@@ -281,25 +215,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LodgesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/kaziranga': {
-      id: '/kaziranga'
-      path: '/kaziranga'
-      fullPath: '/kaziranga'
-      preLoaderRoute: typeof KazirangaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/itineraries': {
       id: '/itineraries'
       path: '/itineraries'
       fullPath: '/itineraries'
       preLoaderRoute: typeof ItinerariesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/corbett': {
-      id: '/corbett'
-      path: '/corbett'
-      fullPath: '/corbett'
-      preLoaderRoute: typeof CorbettRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/conservation': {
@@ -379,13 +299,9 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ConservationRoute: ConservationRoute,
-  CorbettRoute: CorbettRoute,
   ItinerariesRoute: ItinerariesRoute,
-  KazirangaRoute: KazirangaRoute,
   LodgesRoute: LodgesRoute,
   PhotographyRoute: PhotographyRoute,
-  RanthamboreRoute: RanthamboreRoute,
-  TadobaRoute: TadobaRoute,
   DestinationsBandhavgarhRoute: DestinationsBandhavgarhRoute,
   DestinationsCorbettRoute: DestinationsCorbettRoute,
   DestinationsKanhaRoute: DestinationsKanhaRoute,

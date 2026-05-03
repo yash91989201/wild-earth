@@ -9,7 +9,7 @@ export const Route = createFileRoute("/photography")({
 
 function RouteComponent() {
 	return (
-		<main className="flex-grow bg-white">
+		<main className="flex-grow bg-background">
 			<PhotographyHero />
 			<PhotoEdge />
 			<PhotoPackages />

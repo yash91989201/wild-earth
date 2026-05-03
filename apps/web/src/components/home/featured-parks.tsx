@@ -17,7 +17,7 @@ const parks = [
 		image:
 			"https://images.unsplash.com/photo-1500964757637-c85e8a162699?q=80&w=1964&auto=format&fit=crop",
 		tags: ["Best: Oct - Jun", "Bengal Tiger"],
-		link: "/ranthambore",
+		link: "/destinations/ranthambore",
 	},
 	{
 		name: "Jim Corbett",
@@ -25,7 +25,7 @@ const parks = [
 		image:
 			"https://images.unsplash.com/photo-1549366021-9f761d450615?q=80&w=2070&auto=format&fit=crop",
 		tags: ["Best: Nov - Jun", "Asian Elephant"],
-		link: "/corbett",
+		link: "/destinations/corbett",
 	},
 	{
 		name: "Kaziranga",
@@ -33,7 +33,7 @@ const parks = [
 		image:
 			"https://images.unsplash.com/photo-1535591273668-578e31182c4f?q=80&w=2072&auto=format&fit=crop",
 		tags: ["Best: Nov - Apr", "One-horned Rhino"],
-		link: "/kaziranga",
+		link: "/destinations/kaziranga",
 	},
 	{
 		name: "Tadoba",
@@ -41,7 +41,7 @@ const parks = [
 		image:
 			"https://images.unsplash.com/photo-1456926631375-92c8ce872def?q=80&w=2070&auto=format&fit=crop",
 		tags: ["Best: Oct - Jun", "Leopard & Tiger"],
-		link: "/tadoba",
+		link: "/destinations/tadoba",
 	},
 ];
 

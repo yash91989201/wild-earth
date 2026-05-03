@@ -22,14 +22,14 @@ export default function LodgeCard({ lodge }: { lodge: Lodge }) {
 					width={600}
 				/>
 			</div>
-			<h3 className="mb-2 font-bold font-serif text-2xl text-[#1f4d2b]">
+			<h3 className="mb-2 font-bold font-serif text-2xl text-primary">
 				{lodge.name}
 			</h3>
-			<p className="mb-4 font-bold text-[#d4af6a] text-sm uppercase tracking-widest">
+			<p className="mb-4 font-bold text-accent text-sm uppercase tracking-widest">
 				{lodge.location}
 			</p>
-			<p className="mb-4 line-clamp-3 text-gray-600">{lodge.description}</p>
-			<span className="flex items-center gap-2 font-bold text-sm transition-colors group-hover:text-[#d4af6a]">
+			<p className="mb-4 line-clamp-3 text-muted-foreground">{lodge.description}</p>
+			<span className="flex items-center gap-2 font-bold text-sm transition-colors group-hover:text-accent">
 				Explore Lodge
 				<IconArrowRight className="h-4 w-4" />
 			</span>

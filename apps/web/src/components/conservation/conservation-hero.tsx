@@ -14,7 +14,7 @@ export default function ConservationHero() {
 			<div className="absolute inset-0 bg-black/50" />
 			<div className="relative z-10 mx-auto max-w-4xl px-6 text-center text-white">
 				<motion.span
-					className="mb-4 block font-bold text-[#d4af6a] text-sm uppercase tracking-[0.2em]"
+					className="mb-4 block font-bold text-accent text-sm uppercase tracking-[0.2em]"
 					initial="hidden"
 					variants={fadeUp}
 					viewport={viewportOnce}

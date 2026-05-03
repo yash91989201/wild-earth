@@ -8,7 +8,7 @@ export const Route = createFileRoute("/destinations/")({
 
 function RouteComponent() {
 	return (
-		<main className="flex-grow bg-white">
+		<main className="flex-grow bg-background">
 			<ParksHero />
 			<ParksGrid />
 		</main>

@@ -71,7 +71,7 @@ export const Route = createFileRoute("/destinations/kaziranga")({
 
 function RouteComponent() {
 	return (
-		<main className="flex-grow bg-white">
+		<main className="flex-grow bg-background">
 			{/* Hero */}
 			<section className="relative flex h-[70vh] items-center justify-center overflow-hidden">
 				<div className="absolute inset-0 z-0">
@@ -89,7 +89,7 @@ function RouteComponent() {
 					viewport={viewportOnce}
 					whileInView="visible"
 				>
-					<span className="mb-4 block font-bold text-[#d4af6a] text-sm uppercase tracking-[0.2em]">
+					<span className="mb-4 block font-bold text-accent text-sm uppercase tracking-[0.2em]">
 						Assam, India
 					</span>
 					<h1 className="font-bold font-serif text-5xl leading-tight md:text-7xl">
@@ -110,20 +110,20 @@ function RouteComponent() {
 						viewport={viewportOnce}
 						whileInView="visible"
 					>
-						<span className="mb-4 block font-bold text-[#d4af6a] text-sm uppercase tracking-[0.2em]">
+						<span className="mb-4 block font-bold text-accent text-sm uppercase tracking-[0.2em]">
 							About the Park
 						</span>
-						<h2 className="mb-6 font-bold font-serif text-3xl text-[#1f4d2b] md:text-4xl">
+						<h2 className="mb-6 font-bold font-serif text-3xl text-primary md:text-4xl">
 							The Wetlands of the East
 						</h2>
-						<p className="text-gray-600 leading-relaxed">
+						<p className="text-muted-foreground leading-relaxed">
 							Kaziranga National Park is a massive expanse of tall elephant
 							grass, marshland, and dense tropical moist broadleaf forests,
 							crisscrossed by four major rivers, including the mighty
 							Brahmaputra. Recognized as a UNESCO World Heritage Site, it's a
 							profound conservation success story.
 						</p>
-						<p className="mt-4 text-gray-600 leading-relaxed">
+						<p className="mt-4 text-muted-foreground leading-relaxed">
 							It hosts two-thirds of the world's great one-horned rhinoceroses.
 							The park also boasts the highest density of tigers among protected
 							areas in the world and is home to large breeding populations of
@@ -140,13 +140,13 @@ function RouteComponent() {
 					>
 						{keyFacts.map((fact) => (
 							<motion.div
-								className="rounded-lg bg-[#f5f1ed] p-6"
+								className="rounded-lg bg-secondary p-6"
 								key={fact.label}
 								variants={staggerItem}
 							>
-								<fact.icon className="mb-4 h-8 w-8 text-[#d4af6a]" />
-								<p className="mb-1 text-gray-500 text-sm">{fact.label}</p>
-								<p className="font-semibold text-[#1a1a1a]">{fact.value}</p>
+								<fact.icon className="mb-4 h-8 w-8 text-accent" />
+								<p className="mb-1 text-muted-foreground text-sm">{fact.label}</p>
+								<p className="font-semibold text-foreground">{fact.value}</p>
 							</motion.div>
 						))}
 					</motion.div>
@@ -154,7 +154,7 @@ function RouteComponent() {
 			</section>
 
 			{/* Wildlife */}
-			<section className="bg-[#f5f1ed] px-6 py-24">
+			<section className="bg-secondary px-6 py-24">
 				<div className="mx-auto max-w-7xl">
 					<motion.div
 						className="mb-16 max-w-3xl"
@@ -163,10 +163,10 @@ function RouteComponent() {
 						viewport={viewportOnce}
 						whileInView="visible"
 					>
-						<span className="mb-4 block font-bold text-[#d4af6a] text-sm uppercase tracking-[0.2em]">
+						<span className="mb-4 block font-bold text-accent text-sm uppercase tracking-[0.2em]">
 							Wildlife
 						</span>
-						<h2 className="font-bold font-serif text-3xl text-[#1f4d2b] md:text-4xl">
+						<h2 className="font-bold font-serif text-3xl text-primary md:text-4xl">
 							What You May Encounter
 						</h2>
 					</motion.div>
@@ -180,14 +180,14 @@ function RouteComponent() {
 					>
 						{wildlife.map((animal) => (
 							<motion.div
-								className="rounded-lg bg-white p-8"
+								className="rounded-lg bg-background p-8"
 								key={animal.name}
 								variants={staggerItem}
 							>
-								<h3 className="mb-3 font-bold font-serif text-[#1f4d2b] text-xl">
+								<h3 className="mb-3 font-bold font-serif text-primary text-xl">
 									{animal.name}
 								</h3>
-								<p className="text-gray-600 leading-relaxed">{animal.desc}</p>
+								<p className="text-muted-foreground leading-relaxed">{animal.desc}</p>
 							</motion.div>
 						))}
 					</motion.div>
@@ -204,19 +204,19 @@ function RouteComponent() {
 							viewport={viewportOnce}
 							whileInView="visible"
 						>
-							<span className="mb-4 block font-bold text-[#d4af6a] text-sm uppercase tracking-[0.2em]">
+							<span className="mb-4 block font-bold text-accent text-sm uppercase tracking-[0.2em]">
 								Safari Zones
 							</span>
-							<h2 className="mb-6 font-bold font-serif text-3xl text-[#1f4d2b] md:text-4xl">
+							<h2 className="mb-6 font-bold font-serif text-3xl text-primary md:text-4xl">
 								Navigate the Landscape
 							</h2>
 							<div className="space-y-8">
 								{zones.map((zone) => (
 									<div key={zone.name}>
-										<h3 className="mb-2 font-bold text-[#1a1a1a] text-lg">
+										<h3 className="mb-2 font-bold text-foreground text-lg">
 											{zone.name}
 										</h3>
-										<p className="text-gray-600 leading-relaxed">{zone.desc}</p>
+										<p className="text-muted-foreground leading-relaxed">{zone.desc}</p>
 									</div>
 								))}
 							</div>
@@ -248,7 +248,7 @@ function RouteComponent() {
 			</section>
 
 			{/* Best Time */}
-			<section className="bg-[#1f4d2b] px-6 py-24 text-white">
+			<section className="bg-primary px-6 py-24 text-primary-foreground">
 				<div className="mx-auto max-w-4xl text-center">
 					<motion.div
 						initial="hidden"
@@ -256,13 +256,13 @@ function RouteComponent() {
 						viewport={viewportOnce}
 						whileInView="visible"
 					>
-						<span className="mb-4 block font-bold text-[#d4af6a] text-sm uppercase tracking-[0.2em]">
+						<span className="mb-4 block font-bold text-accent text-sm uppercase tracking-[0.2em]">
 							Plan Your Visit
 						</span>
 						<h2 className="mb-6 font-bold font-serif text-3xl md:text-4xl">
 							Best Time to Visit
 						</h2>
-						<p className="mx-auto mb-10 max-w-2xl text-white/80 leading-relaxed">
+						<p className="mx-auto mb-10 max-w-2xl text-primary-foreground/80 leading-relaxed">
 							November to April is the ideal window for visiting Kaziranga. The
 							winter months offer pleasant weather and lush green landscapes.
 							The park remains closed during the monsoon season from May to
@@ -270,23 +270,23 @@ function RouteComponent() {
 						</p>
 						<div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
 							<div className="rounded-lg border border-white/20 p-6">
-								<p className="mb-2 text-gray-300 text-sm">Winter</p>
+								<p className="mb-2 text-primary-foreground/60 text-sm">Winter</p>
 								<p className="font-bold text-lg">Nov – Feb</p>
-								<p className="mt-2 text-gray-400 text-sm">
+								<p className="mt-2 text-primary-foreground/50 text-sm">
 									Pleasant weather, lush greens
 								</p>
 							</div>
-							<div className="rounded-lg border border-[#d4af6a] bg-[#d4af6a]/10 p-6">
-								<p className="mb-2 text-[#d4af6a] text-sm">Spring</p>
+							<div className="rounded-lg border border-accent bg-accent/10 p-6">
+								<p className="mb-2 text-accent text-sm">Spring</p>
 								<p className="font-bold text-lg">Mar – Apr</p>
-								<p className="mt-2 text-gray-300 text-sm">
+								<p className="mt-2 text-primary-foreground/60 text-sm">
 									Best for wildlife viewing
 								</p>
 							</div>
 							<div className="rounded-lg border border-white/20 p-6">
-								<p className="mb-2 text-gray-300 text-sm">Monsoon</p>
+								<p className="mb-2 text-primary-foreground/60 text-sm">Monsoon</p>
 								<p className="font-bold text-lg">May – Oct</p>
-								<p className="mt-2 text-gray-400 text-sm">Park closed</p>
+								<p className="mt-2 text-primary-foreground/50 text-sm">Park closed</p>
 							</div>
 						</div>
 					</motion.div>
@@ -302,15 +302,15 @@ function RouteComponent() {
 						viewport={viewportOnce}
 						whileInView="visible"
 					>
-						<h2 className="mb-6 font-bold font-serif text-3xl text-[#1f4d2b] md:text-4xl">
+						<h2 className="mb-6 font-bold font-serif text-3xl text-primary md:text-4xl">
 							Ready to Meet the Rhinos?
 						</h2>
-						<p className="mx-auto mb-10 max-w-2xl text-gray-600 leading-relaxed">
+						<p className="mx-auto mb-10 max-w-2xl text-muted-foreground leading-relaxed">
 							Let us craft a bespoke Kaziranga safari experience for you —
 							complete with expert naturalists, zone-optimized game drives, and
 							stays at the finest lodges.
 						</p>
-						<Button className="bg-[#1f4d2b] px-8 py-6 font-semibold text-lg text-white hover:bg-[#163b21]">
+						<Button className="bg-primary px-8 py-6 font-semibold text-lg text-primary-foreground hover:bg-primary/90">
 							Enquire Now
 						</Button>
 					</motion.div>

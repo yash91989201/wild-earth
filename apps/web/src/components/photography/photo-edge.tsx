@@ -30,7 +30,7 @@ const features = [
 
 export default function PhotoEdge() {
 	return (
-		<section className="bg-[#1f4d2b] px-6 py-24 text-white">
+		<section className="bg-primary px-6 py-24 text-primary-foreground">
 			<div className="mx-auto max-w-7xl">
 				<motion.div
 					className="mb-16 text-center"
@@ -42,7 +42,7 @@ export default function PhotoEdge() {
 					<h2 className="mb-6 font-bold font-serif text-4xl md:text-5xl">
 						The WildEarth Photo Edge
 					</h2>
-					<p className="mx-auto max-w-2xl text-lg text-white/70">
+					<p className="mx-auto max-w-2xl text-lg text-primary-foreground/70">
 						We don&apos;t just take you to the animals; we place you in the best
 						position to capture them.
 					</p>
@@ -57,13 +57,13 @@ export default function PhotoEdge() {
 				>
 					{features.map((feature) => (
 						<motion.div
-							className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm"
+							className="rounded-3xl border border-primary-foreground/10 bg-primary-foreground/5 p-8 backdrop-blur-sm"
 							key={feature.title}
 							variants={staggerItem}
 						>
-							<feature.icon className="mb-6 h-10 w-10 text-[#d4af6a]" />
+							<feature.icon className="mb-6 h-10 w-10 text-accent" />
 							<h3 className="mb-4 font-bold text-2xl">{feature.title}</h3>
-							<p className="text-white/60 leading-relaxed">
+							<p className="text-primary-foreground/60 leading-relaxed">
 								{feature.description}
 							</p>
 						</motion.div>

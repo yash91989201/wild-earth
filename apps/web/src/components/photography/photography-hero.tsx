@@ -14,7 +14,7 @@ export default function PhotographyHero() {
 			<div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
 			<div className="relative z-10 mx-auto max-w-4xl px-6 text-center text-white">
 				<motion.span
-					className="mb-4 block font-bold text-[#d4af6a] text-sm uppercase tracking-[0.2em]"
+					className="mb-4 block font-bold text-accent text-sm uppercase tracking-[0.2em]"
 					initial="hidden"
 					variants={fadeUp}
 					viewport={viewportOnce}

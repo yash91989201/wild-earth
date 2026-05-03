@@ -16,7 +16,7 @@ export interface Park {
 export default function ParkCard({ park }: { park: Park }) {
 	return (
 		<motion.div
-			className="group relative h-[600px] overflow-hidden rounded-[40px] bg-gray-900 shadow-2xl"
+			className="group relative h-[600px] overflow-hidden rounded-[40px] bg-card shadow-2xl"
 			variants={staggerItem}
 		>
 			<img
@@ -28,7 +28,7 @@ export default function ParkCard({ park }: { park: Park }) {
 			/>
 			<div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
 			<div className="absolute inset-0 flex flex-col justify-end p-10">
-				<div className="mb-4 font-bold text-[#d4af6a] uppercase tracking-[0.2em]">
+				<div className="mb-4 font-bold text-accent uppercase tracking-[0.2em]">
 					{park.location}
 				</div>
 				<h2 className="mb-6 font-bold font-serif text-5xl text-white">
@@ -46,7 +46,7 @@ export default function ParkCard({ park }: { park: Park }) {
 					</span>
 				</div>
 				<Link
-					className="inline-flex w-max items-center justify-center gap-2 rounded-xl bg-[#d4af6a] px-8 py-4 font-bold text-[#1f4d2b] text-lg transition-all hover:bg-[#c49b59]"
+					className="inline-flex w-max items-center justify-center gap-2 rounded-xl bg-accent px-8 py-4 font-bold text-accent-foreground text-lg transition-all hover:bg-brand-gold-strong"
 					to={park.link}
 				>
 					Explore {park.name.split(" ")[0]}

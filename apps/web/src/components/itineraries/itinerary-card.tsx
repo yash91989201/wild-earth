@@ -55,24 +55,24 @@ export default function ItineraryCard({ itinerary }: { itinerary: Itinerary }) {
 	const contentBlock = (
 		<div className="flex flex-col justify-center p-12 lg:p-16">
 			<div className="mb-6 flex flex-wrap items-center gap-4">
-				<span className="rounded-full bg-[#1f4d2b]/10 px-4 py-1 font-bold text-[#1f4d2b] text-xs uppercase tracking-widest">
+				<span className="rounded-full bg-primary/10 px-4 py-1 font-bold text-primary text-xs uppercase tracking-widest">
 					{itinerary.duration}
 				</span>
-				<span className="flex items-center gap-1 text-gray-500 text-sm">
+				<span className="flex items-center gap-1 text-muted-foreground text-sm">
 					<IconMapPin className="h-4 w-4" />
 					{itinerary.route}
 				</span>
 			</div>
-			<h2 className="mb-4 font-bold font-serif text-3xl text-[#1f4d2b] lg:text-4xl">
+			<h2 className="mb-4 font-bold font-serif text-3xl text-primary lg:text-4xl">
 				{itinerary.title}
 			</h2>
-			<p className="mb-8 text-gray-600 leading-relaxed">
+			<p className="mb-8 text-muted-foreground leading-relaxed">
 				{itinerary.description}
 			</p>
 
 			<Tabs className="gap-6" defaultValue="overview">
 				<TabsList
-					className="w-full justify-start gap-6 border-gray-200 border-b p-0"
+					className="w-full justify-start gap-6 border-border border-b p-0"
 					variant="line"
 				>
 					{tabs.map((tab) => (
@@ -94,9 +94,9 @@ export default function ItineraryCard({ itinerary }: { itinerary: Itinerary }) {
 							key="overview"
 							transition={{ duration: 0.3 }}
 						>
-							<p className="text-gray-600 text-sm">{itinerary.overview}</p>
+							<p className="text-muted-foreground text-sm">{itinerary.overview}</p>
 							<Link
-								className="group mt-6 inline-flex items-center gap-2 font-bold text-[#d4af6a] text-sm uppercase tracking-widest"
+								className="group mt-6 inline-flex items-center gap-2 font-bold text-accent text-sm uppercase tracking-widest"
 								hash="booking-form"
 								to="/"
 							>
@@ -120,15 +120,15 @@ export default function ItineraryCard({ itinerary }: { itinerary: Itinerary }) {
 								}
 							>
 								{itinerary.days.map((day) => (
-									<AccordionItem
-										className="border-gray-100 bg-transparent data-open:bg-transparent"
+											<AccordionItem
+												className="border-border bg-transparent data-open:bg-transparent"
 										key={day.title}
 										value={day.title}
 									>
 										<AccordionTrigger className="px-0 py-3 font-bold text-foreground hover:no-underline">
 											{day.title}
 										</AccordionTrigger>
-										<AccordionContent className="px-0 pb-3 text-gray-600">
+												<AccordionContent className="px-0 pb-3 text-muted-foreground">
 											{day.description}
 										</AccordionContent>
 									</AccordionItem>
@@ -145,7 +145,7 @@ export default function ItineraryCard({ itinerary }: { itinerary: Itinerary }) {
 								key="includes"
 								transition={{ duration: 0.3 }}
 							>
-								<ul className="list-disc space-y-2 pl-5 text-gray-600 text-sm">
+								<ul className="list-disc space-y-2 pl-5 text-muted-foreground text-sm">
 									{itinerary.includes.map((item) => (
 										<li key={item}>{item}</li>
 									))}

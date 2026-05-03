@@ -36,11 +36,11 @@ export default function ConservationPillars() {
 				>
 					{pillars.map((pillar) => (
 						<motion.div key={pillar.title} variants={staggerItem}>
-							<pillar.icon className="mb-6 h-12 w-12 text-[#d4af6a]" />
-							<h3 className="mb-4 font-bold font-serif text-2xl text-[#1f4d2b]">
+							<pillar.icon className="mb-6 h-12 w-12 text-accent" />
+							<h3 className="mb-4 font-bold font-serif text-2xl text-primary">
 								{pillar.title}
 							</h3>
-							<p className="text-gray-600 leading-relaxed">
+							<p className="text-muted-foreground leading-relaxed">
 								{pillar.description}
 							</p>
 						</motion.div>

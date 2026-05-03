@@ -87,7 +87,7 @@ function PackageMeta({
 }) {
 	return (
 		<div className="flex items-center gap-2 text-sm">
-			<Icon className="h-4 w-4 text-[#d4af6a]" />
+			<Icon className="h-4 w-4 text-accent" />
 			<span className="font-bold">{label}:</span>
 			<span>{value}</span>
 		</div>
@@ -104,53 +104,53 @@ function PackageCard({ pkg }: { pkg: PhotoPackage }) {
 				src={pkg.image}
 				width={800}
 			/>
-			{pkg.featured && (
-				<div className="absolute top-6 left-6 rounded-full bg-[#1f4d2b] px-4 py-2 font-bold text-[#d4af6a] text-xs uppercase tracking-widest">
-					Flagship Tour
-				</div>
-			)}
+					{pkg.featured && (
+						<div className="absolute top-6 left-6 rounded-full bg-primary px-4 py-2 font-bold text-accent text-xs uppercase tracking-widest">
+							Flagship Tour
+						</div>
+					)}
 		</div>
 	);
 
 	const contentBlock = (
 		<div className="flex flex-col justify-center p-10 lg:p-16">
-			<div className="mb-2 font-bold text-[#d4af6a] text-sm uppercase tracking-[0.2em]">
+					<div className="mb-2 font-bold text-accent text-sm uppercase tracking-[0.2em]">
 				{pkg.location}
 			</div>
-			<h3 className="mb-4 font-bold font-serif text-4xl text-[#1f4d2b]">
+					<h3 className="mb-4 font-bold font-serif text-4xl text-primary">
 				{pkg.title}
 			</h3>
-			<p className="mb-8 text-gray-600 text-lg leading-relaxed">
+					<p className="mb-8 text-muted-foreground text-lg leading-relaxed">
 				{pkg.description}
 			</p>
-			<div className="mb-8 grid grid-cols-2 gap-x-8 gap-y-4 text-sm">
-				<PackageMeta icon={IconClock} label="Duration" value={pkg.duration} />
-				<PackageMeta icon={IconChartBar} label="Level" value={pkg.level} />
-				<PackageMeta icon={IconCar} label="Drives" value={pkg.drives} />
-				<PackageMeta
-					icon={IconUsers}
-					label="Group Size"
-					value={pkg.groupSize}
-				/>
+					<div className="mb-8 grid grid-cols-2 gap-x-8 gap-y-4 text-sm">
+						<PackageMeta icon={IconClock} label="Duration" value={pkg.duration} />
+						<PackageMeta icon={IconChartBar} label="Level" value={pkg.level} />
+						<PackageMeta icon={IconCar} label="Drives" value={pkg.drives} />
+						<PackageMeta
+							icon={IconUsers}
+							label="Group Size"
+							value={pkg.groupSize}
+						/>
+					</div>
+					<Link
+						className={`inline-flex w-max items-center justify-center gap-2 rounded-xl px-8 py-4 font-bold transition-all ${
+							pkg.variant === "primary"
+								? "bg-accent text-accent-foreground hover:bg-brand-gold-strong"
+								: "border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+						}`}
+						hash="booking-form"
+						to="/"
+					>
+						Enquire Availability
+						<IconArrowRight className="h-5 w-5" />
+					</Link>
 			</div>
-			<Link
-				className={`inline-flex w-max items-center justify-center gap-2 rounded-xl px-8 py-4 font-bold transition-all ${
-					pkg.variant === "primary"
-						? "bg-[#d4af6a] text-[#1f4d2b] hover:bg-[#c49b59]"
-						: "border-2 border-[#1f4d2b] text-[#1f4d2b] hover:bg-[#1f4d2b] hover:text-white"
-				}`}
-				hash="booking-form"
-				to="/"
-			>
-				Enquire Availability
-				<IconArrowRight className="h-5 w-5" />
-			</Link>
-		</div>
-	);
+		);
 
 	return (
 		<motion.div
-			className="flex flex-col overflow-hidden rounded-[40px] bg-white shadow-xl lg:flex-row"
+			className="flex flex-col overflow-hidden rounded-[40px] bg-card shadow-xl lg:flex-row"
 			variants={staggerItem}
 		>
 			{pkg.reverse ? (
@@ -170,7 +170,7 @@ function PackageCard({ pkg }: { pkg: PhotoPackage }) {
 
 export default function PhotoPackages() {
 	return (
-		<section className="bg-[#f5f1ed] px-6 py-24">
+		<section className="bg-secondary px-6 py-24">
 			<div className="mx-auto max-w-7xl">
 				<motion.div
 					className="mb-20 text-center"
@@ -179,10 +179,10 @@ export default function PhotoPackages() {
 					viewport={viewportOnce}
 					whileInView="visible"
 				>
-					<h2 className="mb-6 font-bold font-serif text-4xl text-[#1f4d2b] md:text-5xl">
+					<h2 className="mb-6 font-bold font-serif text-4xl text-primary md:text-5xl">
 						Curated Photo Expeditions
 					</h2>
-					<p className="mx-auto max-w-2xl text-gray-600 text-lg">
+					<p className="mx-auto max-w-2xl text-muted-foreground text-lg">
 						Choose from our specialized itineraries targeting different
 						terrains, lighting conditions, and species.
 					</p>
