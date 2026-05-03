@@ -22,6 +22,7 @@ import type { BookingFormType } from "@/lib/types/booking";
 const parkItems: SelectItemData[] = [
 	{ label: "Ranthambore", value: "ranthambore" },
 	{ label: "Jim Corbett", value: "corbett" },
+	{ label: "Dhikala", value: "dhikala" },
 	{ label: "Kaziranga", value: "kaziranga" },
 	{ label: "Tadoba", value: "tadoba" },
 	{ label: "Pench", value: "pench" },
