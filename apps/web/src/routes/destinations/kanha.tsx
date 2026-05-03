@@ -6,7 +6,7 @@ import {
 } from "@tabler/icons-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Button } from "@wild-earth/ui/components/button";
-import { motion } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 import {
 	fadeUp,
 	staggerContainer,
@@ -78,15 +78,19 @@ export const Route = createFileRoute("/destinations/kanha")({
 });
 
 function RouteComponent() {
+	const { scrollY } = useScroll();
+	const y = useTransform(scrollY, [0, 800], [0, 280]);
+
 	return (
 		<main className="flex-grow bg-background">
 			{/* Hero */}
 			<section className="relative flex h-[70vh] items-center justify-center overflow-hidden">
 				<div className="absolute inset-0 z-0">
-					<img
+					<motion.img
 						alt="Kanha forest landscape"
-						className="absolute inset-0 h-full w-full scale-[1.15] object-cover"
+						className="absolute inset-0 h-full w-full object-cover will-change-transform"
 						src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2070&auto=format&fit=crop"
+						style={{ y, scale: 1.15 }}
 					/>
 					<div className="absolute inset-0 bg-black/50" />
 				</div>

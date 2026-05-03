@@ -1,14 +1,18 @@
-import { motion } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 import { fadeUp, viewportOnce } from "@/lib/animations";
 
 export default function ConservationHero() {
+	const { scrollY } = useScroll();
+	const y = useTransform(scrollY, [0, 800], [0, 280]);
+
 	return (
 		<section className="relative flex h-[80vh] items-center justify-center overflow-hidden">
-			<img
+			<motion.img
 				alt="Elephants in wild"
-				className="absolute inset-0 h-full w-full scale-[1.15] object-cover"
+				className="absolute inset-0 h-full w-full object-cover will-change-transform"
 				height={1080}
 				src="https://images.unsplash.com/photo-1549366021-9f761d450615?q=80&w=2070&auto=format&fit=crop"
+				style={{ y, scale: 1.15 }}
 				width={1920}
 			/>
 			<div className="absolute inset-0 bg-black/50" />
