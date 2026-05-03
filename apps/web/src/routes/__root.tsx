@@ -10,6 +10,7 @@ import { TooltipProvider } from "@wild-earth/ui/components/tooltip";
 import Footer from "@/components/footer";
 import BackToTop from "@/components/home/back-to-top";
 import WhatsAppFloat from "@/components/home/whatsapp-float";
+import { SmoothScrollProvider } from "@/providers/smooth-scroll";
 import appCss from "@/styles/index.css?url";
 import type { orpc } from "@/utils/orpc";
 import Header from "../components/header";
@@ -64,7 +65,7 @@ function ShellComponent({ children }: { children: React.ReactNode }) {
 
 function RootDocument() {
 	return (
-		<>
+		<SmoothScrollProvider>
 			<Header />
 			<Outlet />
 			<Footer />
@@ -72,6 +73,6 @@ function RootDocument() {
 			<BackToTop />
 			<Toaster richColors />
 			<Scripts />
-		</>
+		</SmoothScrollProvider>
 	);
 }

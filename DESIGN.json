@@ -1,0 +1,177 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-05-03T00:00:00.000Z",
+  "title": "Design System: WildEarth",
+  "extensions": {
+    "colorMeta": {
+      "reserve-forest": {
+        "role": "primary",
+        "displayName": "Reserve Forest",
+        "canonical": "oklch(0.387 0.088 150.434)",
+        "tonalRamp": [
+          "oklch(0.18 0.05 150.434)",
+          "oklch(0.28 0.07 150.434)",
+          "oklch(0.387 0.088 150.434)",
+          "oklch(0.50 0.075 150.434)",
+          "oklch(0.62 0.055 150.434)",
+          "oklch(0.74 0.035 150.434)",
+          "oklch(0.86 0.018 150.434)",
+          "oklch(0.95 0.009 150.434)"
+        ]
+      },
+      "ranger-ochre": {
+        "role": "secondary",
+        "displayName": "Ranger Ochre",
+        "canonical": "oklch(0.807 0.108 85.99)",
+        "tonalRamp": [
+          "oklch(0.22 0.055 85.99)",
+          "oklch(0.34 0.075 85.99)",
+          "oklch(0.48 0.095 85.99)",
+          "oklch(0.62 0.112 85.99)",
+          "oklch(0.807 0.108 85.99)",
+          "oklch(0.86 0.07 85.99)",
+          "oklch(0.92 0.035 85.99)",
+          "oklch(0.96 0.018 85.99)"
+        ]
+      },
+      "parchment-sand": {
+        "role": "neutral",
+        "displayName": "Parchment Sand",
+        "canonical": "oklch(0.968 0.009 84.573)",
+        "tonalRamp": [
+          "oklch(0.20 0.018 84.573)",
+          "oklch(0.34 0.02 84.573)",
+          "oklch(0.48 0.018 84.573)",
+          "oklch(0.62 0.016 84.573)",
+          "oklch(0.76 0.014 84.573)",
+          "oklch(0.88 0.012 84.573)",
+          "oklch(0.968 0.009 84.573)",
+          "oklch(0.985 0.006 84.573)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero headlines and decisive destination moments."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Clear planning copy, form help, and itinerary explanation."
+      }
+    },
+    "shadows": [
+      {
+        "name": "card-lift",
+        "value": "shadow-md with ring-1 ring-foreground/5",
+        "purpose": "Separate cards only when tone and spacing are not enough."
+      },
+      {
+        "name": "premium-panel-lift",
+        "value": "shadow-2xl",
+        "purpose": "Booking form panel and decisive conversion surfaces."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out-expo",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Entrances and state changes on opacity and transform."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Reserve Forest pill CTA for booking and high-intent actions.",
+      "html": "<button class=\"ds-btn-primary\">Plan My Safari</button>",
+      "css": ".ds-btn-primary { background: oklch(0.387 0.088 150.434); color: oklch(0.985 0.003 106.448); padding: 16px 40px; border: 0; border-radius: 9999px; font-family: Satoshi, Source Sans 3, sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; transition: background-color 180ms ease, transform 180ms ease, box-shadow 180ms ease; } .ds-btn-primary:hover { background: oklch(0.327 0.075 151.394); transform: translateY(-2px); box-shadow: 0 10px 24px rgba(31, 77, 43, 0.18); } .ds-btn-primary:focus-visible { outline: 3px solid oklch(0.761 0.126 82.231 / 0.35); outline-offset: 2px; }"
+    },
+    {
+      "name": "Safari Input",
+      "kind": "input",
+      "refersTo": "input-default",
+      "description": "Soft pill input for booking forms.",
+      "html": "<label class=\"ds-field\"><span>Travel Dates</span><input class=\"ds-input\" placeholder=\"Select dates\" /></label>",
+      "css": ".ds-field { display: grid; gap: 8px; color: oklch(0.231 0.024 139.956); font-family: Satoshi, Source Sans 3, sans-serif; font-size: 14px; font-weight: 700; } .ds-input { height: 36px; border: 1px solid transparent; border-radius: 9999px; background: oklch(0.959 0.007 151.888 / 0.5); color: oklch(0.231 0.024 139.956); padding: 4px 12px; font: inherit; font-weight: 400; outline: none; transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease; } .ds-input:focus-visible { border-color: oklch(0.761 0.126 82.231); box-shadow: 0 0 0 3px oklch(0.761 0.126 82.231 / 0.3); }"
+    },
+    {
+      "name": "Destination Card",
+      "kind": "card",
+      "refersTo": "card-default",
+      "description": "Large-radius image card for parks, lodges, and itinerary modules.",
+      "html": "<article class=\"ds-card\"><div class=\"ds-card-media\"></div><div class=\"ds-card-body\"><p class=\"ds-card-label\">National Park</p><h3>Ranthambore</h3><p>Field-led safari planning with lodge, permit, and drive guidance.</p></div></article>",
+      "css": ".ds-card { overflow: hidden; border-radius: 40px; background: oklch(1 0 0); color: oklch(0.231 0.024 139.956); box-shadow: 0 10px 24px rgba(31, 77, 43, 0.08); font-family: Satoshi, Source Sans 3, sans-serif; } .ds-card-media { height: 220px; background: linear-gradient(135deg, oklch(0.387 0.088 150.434), oklch(0.807 0.108 85.99)); } .ds-card-body { padding: 24px; } .ds-card-label { margin: 0 0 8px; color: oklch(0.548 0.073 72.649); font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; } .ds-card h3 { margin: 0 0 10px; color: oklch(0.387 0.088 150.434); font-family: Gambetta, Georgia, serif; font-size: 28px; line-height: 1.15; } .ds-card p:last-child { margin: 0; color: oklch(0.486 0.027 258.371); line-height: 1.6; }"
+    },
+    {
+      "name": "Transparent Hero Nav",
+      "kind": "nav",
+      "refersTo": "navigation-hero",
+      "description": "Fixed navigation over imagery, shifting to readable warm surface after scroll.",
+      "html": "<nav class=\"ds-nav\"><strong>WildEarth</strong><a>Destinations</a><a>Itineraries</a><a>Photography</a><button>Plan My Safari</button></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 28px; min-height: 80px; padding: 0 24px; border-bottom: 1px solid rgba(255,255,255,0.18); background: oklch(0.387 0.088 150.434); color: oklch(0.985 0.003 106.448); font-family: Satoshi, Source Sans 3, sans-serif; } .ds-nav strong { margin-right: auto; font-family: Gambetta, Georgia, serif; font-size: 24px; } .ds-nav a { color: inherit; font-size: 14px; font-weight: 600; text-decoration: none; } .ds-nav a:hover { color: oklch(0.807 0.108 85.99); } .ds-nav button { border: 0; border-radius: 9999px; background: oklch(0.807 0.108 85.99); color: oklch(0.231 0.024 139.956); padding: 12px 20px; font-weight: 800; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Field Lodge Ledger",
+    "overview": "WildEarth should feel like the planning desk inside a remote safari lodge: field notes, permit confidence, warm hospitality, and a calm operator who knows the terrain. The system is brand-first, but every flourish must earn trust or aid discovery. The visual language uses restrained natural materials: reserve green, ranger ochre, parchment sand, and grounded typography.",
+    "keyCharacteristics": [
+      "Grounded, premium, and field-aware.",
+      "Image-led, but never stock-vacation generic.",
+      "Soft utility components with clear focus states.",
+      "Quiet discovery paths that lead naturally to inquiry."
+    ],
+    "rules": [
+      {
+        "name": "The Ochre Rarity Rule",
+        "body": "Ranger Ochre is a signal, not a wash. Use it for labels, icons, and focus cues, not for large decorative blocks.",
+        "section": "colors"
+      },
+      {
+        "name": "The No Pure Neutral Rule",
+        "body": "Avoid pure black and pure white in new UI. Neutrals must stay slightly warm or green-tinted.",
+        "section": "colors"
+      },
+      {
+        "name": "The Field Note Hierarchy Rule",
+        "body": "Use serif type for voice and place, sans type for action and clarity. Do not blur those roles.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat First Rule",
+        "body": "If a surface can be separated by spacing, background tone, or image composition, do that before adding shadow.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do use real wildlife, lodge, terrain, or park imagery when a surface is destination-led.",
+      "Do lead with specific operational proof: direct teams, permits, response expectations, and park knowledge.",
+      "Do use Reserve Forest for decisive actions and Ranger Ochre for rare signals.",
+      "Do respect WCAG AA contrast, visible focus, reduced motion, and multilingual-ready copy structure.",
+      "Do keep motion on opacity and transform with cubic-bezier(0.16, 1, 0.3, 1)."
+    ],
+    "donts": [
+      "Don't create generic travel agency design: deal-heavy packages, vague superlatives, stock vacation polish, or quote-trap forms.",
+      "Don't create overdone luxury resort design: gold excess, perfume-ad drama, or visuals detached from terrain and wildlife.",
+      "Don't use adventure-bro positioning: conquest language, extreme-sports urgency, or loud adrenaline-first visuals.",
+      "Don't use NGO campaign tone: guilt-forward conservation messaging that overwhelms the travel job.",
+      "Don't use colored side-stripe borders, gradient text, decorative glassmorphism, nested card stacks, or identical icon-card grids."
+    ]
+  }
+}
