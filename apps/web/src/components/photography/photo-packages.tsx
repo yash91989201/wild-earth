@@ -6,6 +6,7 @@ import {
 	IconUsers,
 } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
+import { buttonVariants } from "@wild-earth/ui/components/button";
 import { motion } from "motion/react";
 import {
 	fadeUp,
@@ -104,11 +105,6 @@ function PackageCard({ pkg }: { pkg: PhotoPackage }) {
 				src={pkg.image}
 				width={800}
 			/>
-					{pkg.featured && (
-						<div className="absolute top-6 left-6 rounded-full bg-primary px-4 py-2 font-bold text-accent text-xs uppercase tracking-widest">
-							Flagship Tour
-						</div>
-					)}
 		</div>
 	);
 
@@ -134,11 +130,11 @@ function PackageCard({ pkg }: { pkg: PhotoPackage }) {
 						/>
 					</div>
 					<Link
-						className={`inline-flex w-max items-center justify-center gap-2 rounded-xl px-8 py-4 font-bold transition-all ${
-							pkg.variant === "primary"
-								? "bg-accent text-accent-foreground hover:bg-brand-gold-strong"
-								: "border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-						}`}
+						className={buttonVariants({
+							variant: "secondary",
+							size: "lg",
+							className: "w-fit",
+						})}
 						hash="booking-form"
 						to="/"
 					>

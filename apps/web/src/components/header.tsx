@@ -1,5 +1,11 @@
-import { IconMapPin, IconMenu, IconTent, IconX } from "@tabler/icons-react";
-import { Link, useLocation } from "@tanstack/react-router";
+import {
+	IconBrandWhatsapp,
+	IconMapPin,
+	IconMenu,
+	IconTent,
+	IconX,
+} from "@tabler/icons-react";
+import { Link, linkOptions, useRouterState } from "@tanstack/react-router";
 import { Button, buttonVariants } from "@wild-earth/ui/components/button";
 import {
 	NavigationMenu,
@@ -11,51 +17,44 @@ import {
 } from "@wild-earth/ui/components/navigation-menu";
 import { cn } from "@wild-earth/ui/lib/utils";
 import { AnimatePresence, motion } from "motion/react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
-const destinationParks = [
-	{ name: "Ranthambore", to: "/destinations/ranthambore" },
-	{ name: "Jim Corbett", to: "/destinations/corbett" },
-	{ name: "Kaziranga", to: "/destinations/kaziranga" },
-	{ name: "Tadoba", to: "/destinations/tadoba" },
-	{ name: "Kanha", to: "/destinations/kanha" },
-	{ name: "Bandhavgarh", to: "/destinations/bandhavgarh" },
-];
+const destinationParks = linkOptions([
+	{ label: "Ranthambore", to: "/destinations/ranthambore" },
+	{ label: "Jim Corbett", to: "/destinations/corbett" },
+	{ label: "Kaziranga", to: "/destinations/kaziranga" },
+	{ label: "Tadoba", to: "/destinations/tadoba" },
+	{ label: "Kanha", to: "/destinations/kanha" },
+	{ label: "Bandhavgarh", to: "/destinations/bandhavgarh" },
+]);
 
-const navLinks = [
+const navLinks = linkOptions([
 	{ label: "Itineraries", to: "/itineraries" },
 	{ label: "Lodges", to: "/lodges" },
 	{ label: "Photography", to: "/photography" },
 	{ label: "Impact", to: "/conservation" },
-];
+]);
 
 const easeOutExpo: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
-function WhatsAppIcon({ className }: { className?: string }) {
-	return (
-		<svg
-			aria-hidden="true"
-			className={className}
-			fill="currentColor"
-			viewBox="0 0 24 24"
-		>
-			<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-		</svg>
-	);
-}
-
 function NavLink({
 	children,
+	isActive,
 	isTransparent,
 	to,
 }: {
 	children: React.ReactNode;
+	isActive?: boolean;
 	isTransparent: boolean;
 	to: string;
 }) {
 	return (
 		<Link
-			className={`font-medium text-sm transition-colors hover:text-accent ${isTransparent ? "text-white/90" : "text-foreground"}`}
+			className={cn(
+				"font-medium text-sm transition-colors hover:text-accent",
+				isTransparent ? "text-white/90" : "text-foreground",
+				isActive && "text-accent"
+			)}
 			to={to}
 		>
 			{children}
@@ -63,34 +62,12 @@ function NavLink({
 	);
 }
 
-const routesWithImageHero = [
-	"/",
-	"/photography",
-	"/conservation",
-	"/itineraries",
-	"/lodges",
-	"/destinations/",
-	"/about",
-];
-
-function usePageHasImageHero() {
-	const location = useLocation();
-	return useMemo(() => {
-		const pathname = location.pathname;
-		if (routesWithImageHero.includes(pathname)) return true;
-		if (
-			pathname.startsWith("/destinations/") &&
-			pathname !== "/destinations/"
-		)
-			return true;
-		return false;
-	}, [location.pathname]);
-}
-
 export default function Header() {
 	const [scrolled, setScrolled] = useState(false);
 	const [menuOpen, setMenuOpen] = useState(false);
-	const pageHasImageHero = usePageHasImageHero();
+	const router = useRouterState();
+	const pathname = router.location.pathname;
+	const isTransparent = !(scrolled || menuOpen);
 
 	useEffect(() => {
 		const onScroll = () => setScrolled(window.scrollY > 80);
@@ -106,21 +83,30 @@ export default function Header() {
 		};
 	}, [menuOpen]);
 
-	const isTransparent = pageHasImageHero && !(scrolled || menuOpen);
-
 	return (
 		<>
 			<nav
-				className={`fixed top-0 right-0 left-0 z-40 border-b transition-all duration-300 ${isTransparent ? "border-transparent bg-transparent backdrop-blur-none" : "border-border bg-background/92 backdrop-blur-xl"}`}
+				className={cn(
+					"fixed top-0 right-0 left-0 z-40 border-b transition-all duration-300",
+					isTransparent
+						? "border-transparent bg-transparent backdrop-blur-none"
+						: "border-border bg-background/92 backdrop-blur-xl"
+				)}
 			>
 				<div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
 					<Link className="flex items-center gap-2" to="/">
 						<IconTent
-							className={`text-3xl transition-colors ${isTransparent ? "text-accent" : "text-primary"}`}
+							className={cn(
+								"text-3xl transition-colors",
+								isTransparent ? "text-accent" : "text-primary"
+							)}
 							strokeWidth={1.5}
 						/>
 						<span
-							className={`font-bold font-serif text-2xl tracking-tight transition-colors ${isTransparent ? "text-white" : "text-primary"}`}
+							className={cn(
+								"font-bold font-serif text-2xl tracking-tight transition-colors",
+								isTransparent ? "text-white" : "text-primary"
+							)}
 						>
 							WildEarth
 						</span>
@@ -131,7 +117,12 @@ export default function Header() {
 							<NavigationMenuList>
 								<NavigationMenuItem>
 									<NavigationMenuTrigger
-										className={`font-medium text-sm transition-colors hover:text-accent ${isTransparent ? "text-white/90 data-open:text-white data-popup-open:text-white" : "text-foreground"}`}
+										className={cn(
+											"font-medium text-sm transition-colors hover:text-accent",
+											isTransparent
+												? "text-white/90 data-open:text-white data-popup-open:text-white"
+												: "text-foreground"
+										)}
 									>
 										Destinations
 									</NavigationMenuTrigger>
@@ -145,16 +136,19 @@ export default function Header() {
 													Explore India's finest wildlife reserves
 												</p>
 											</div>
-										{destinationParks.map((park) => (
-											<NavigationMenuLink
-												className="flex items-center gap-2"
-												key={park.to}
-												render={<Link to={park.to} />}
-											>
-												<IconMapPin className="h-4 w-4 text-accent" />
-												<span>{park.name}</span>
-											</NavigationMenuLink>
-										))}
+											{destinationParks.map((park) => (
+													<NavigationMenuLink
+														className={cn(
+															"flex items-center gap-2",
+															pathname === park.to && "text-accent font-semibold"
+														)}
+														key={park.to}
+														render={<Link to={park.to} />}
+													>
+														<IconMapPin className="h-4 w-4 text-accent" />
+														<span>{park.label}</span>
+													</NavigationMenuLink>
+												))}
 										</div>
 									</NavigationMenuContent>
 								</NavigationMenuItem>
@@ -162,7 +156,12 @@ export default function Header() {
 						</NavigationMenu>
 
 						{navLinks.map((link) => (
-							<NavLink isTransparent={isTransparent} key={link.to} to={link.to}>
+							<NavLink
+								isActive={pathname === link.to}
+								isTransparent={isTransparent}
+								key={link.to}
+								to={link.to}
+							>
 								{link.label}
 							</NavLink>
 						))}
@@ -170,12 +169,17 @@ export default function Header() {
 
 					<div className="flex items-center gap-4">
 						<a
-							className={`hidden items-center gap-2 rounded-full border px-4 py-2 font-semibold text-sm transition-all sm:flex ${isTransparent ? "border-white/20 bg-white/10 text-white hover:bg-white/20" : "border-primary/10 bg-primary/5 text-primary hover:bg-primary/10"}`}
+							className={cn(
+								"hidden items-center gap-2 rounded-full border px-4 py-2 font-semibold text-sm transition-all sm:flex",
+								isTransparent
+									? "border-white/20 bg-white/10 text-white hover:bg-white/20"
+									: "border-primary/10 bg-primary/5 text-primary hover:bg-primary/10"
+							)}
 							href="https://wa.me/919876543210"
 							rel="noopener noreferrer"
 							target="_blank"
 						>
-							<WhatsAppIcon className="h-5 w-5" />
+							<IconBrandWhatsapp className="h-5 w-5" stroke={2} />
 							+91 98765 43210
 						</a>
 						<Link
@@ -195,7 +199,10 @@ export default function Header() {
 								<IconX className="h-6 w-6 text-white" />
 							) : (
 								<IconMenu
-									className={`h-6 w-6 transition-colors ${isTransparent ? "text-white" : "text-foreground"}`}
+									className={cn(
+										"h-6 w-6 transition-colors",
+										isTransparent ? "text-white" : "text-foreground"
+									)}
 								/>
 							)}
 						</Button>
@@ -215,8 +222,15 @@ export default function Header() {
 						<div className="flex h-full flex-col">
 							{/* Header */}
 							<div className="flex items-center justify-between px-6 py-5">
-								<Link className="flex items-center gap-2" to="/" onClick={() => setMenuOpen(false)}>
-									<IconTent className="text-3xl text-primary" strokeWidth={1.5} />
+								<Link
+									className="flex items-center gap-2"
+									onClick={() => setMenuOpen(false)}
+									to="/"
+								>
+									<IconTent
+										className="text-3xl text-primary"
+										strokeWidth={1.5}
+									/>
 									<span className="font-bold font-serif text-2xl tracking-tight text-primary">
 										WildEarth
 									</span>
@@ -238,7 +252,11 @@ export default function Header() {
 									<motion.div
 										animate={{ opacity: 1, y: 0 }}
 										initial={{ opacity: 0, y: 20 }}
-										transition={{ delay: 0.1, duration: 0.4, ease: easeOutExpo }}
+										transition={{
+											delay: 0.1,
+											duration: 0.4,
+											ease: easeOutExpo,
+										}}
 									>
 										<p className="mb-4 font-bold text-muted-foreground text-xs uppercase tracking-[0.2em]">
 											Destinations
@@ -246,9 +264,9 @@ export default function Header() {
 										<div className="space-y-2">
 											{destinationParks.map((park, i) => (
 												<motion.div
-													key={park.to}
 													animate={{ opacity: 1, x: 0 }}
 													initial={{ opacity: 0, x: -20 }}
+													key={park.to}
 													transition={{
 														delay: 0.15 + i * 0.05,
 														duration: 0.3,
@@ -256,13 +274,18 @@ export default function Header() {
 													}}
 												>
 													<Link
-														className="flex items-center gap-3 rounded-2xl p-4 transition-colors hover:bg-muted"
+														className={cn(
+															"flex items-center gap-3 rounded-2xl p-4 transition-colors",
+															pathname === park.to
+																? "bg-accent text-white"
+																: "hover:bg-muted"
+														)}
 														onClick={() => setMenuOpen(false)}
 														to={park.to}
 													>
 														<IconMapPin className="h-5 w-5 text-accent" />
 														<span className="font-bold font-serif text-lg text-foreground">
-															{park.name}
+															{park.label}
 														</span>
 													</Link>
 												</motion.div>
@@ -276,7 +299,11 @@ export default function Header() {
 									<motion.div
 										animate={{ opacity: 1, y: 0 }}
 										initial={{ opacity: 0, y: 20 }}
-										transition={{ delay: 0.3, duration: 0.4, ease: easeOutExpo }}
+										transition={{
+											delay: 0.3,
+											duration: 0.4,
+											ease: easeOutExpo,
+										}}
 									>
 										<p className="mb-4 font-bold text-muted-foreground text-xs uppercase tracking-[0.2em]">
 											Experience
@@ -284,9 +311,9 @@ export default function Header() {
 										<div className="space-y-2">
 											{navLinks.map((link, i) => (
 												<motion.div
-													key={link.to}
 													animate={{ opacity: 1, x: 0 }}
 													initial={{ opacity: 0, x: -20 }}
+													key={link.to}
 													transition={{
 														delay: 0.35 + i * 0.05,
 														duration: 0.3,
@@ -294,7 +321,12 @@ export default function Header() {
 													}}
 												>
 													<Link
-														className="block rounded-2xl p-4 font-bold font-serif text-2xl text-foreground transition-colors hover:bg-muted"
+														className={cn(
+															"block rounded-2xl p-4 font-bold font-serif text-2xl transition-colors",
+															pathname === link.to
+																? "bg-accent text-white"
+																: "text-foreground hover:bg-muted"
+														)}
 														onClick={() => setMenuOpen(false)}
 														to={link.to}
 													>
@@ -307,10 +339,14 @@ export default function Header() {
 
 									{/* CTA */}
 									<motion.div
-										className="mt-8"
 										animate={{ opacity: 1, y: 0 }}
+										className="mt-8"
 										initial={{ opacity: 0, y: 20 }}
-										transition={{ delay: 0.5, duration: 0.4, ease: easeOutExpo }}
+										transition={{
+											delay: 0.5,
+											duration: 0.4,
+											ease: easeOutExpo,
+										}}
 									>
 										<Link
 											className={cn(
@@ -327,20 +363,23 @@ export default function Header() {
 
 									{/* Contact */}
 									<motion.div
-										className="mt-6 flex justify-center"
 										animate={{ opacity: 1 }}
+										className="mt-6 flex justify-center"
 										initial={{ opacity: 0 }}
 										transition={{ delay: 0.6, duration: 0.4 }}
 									>
-											<a
-												className="flex w-full items-center justify-center gap-2 rounded-full border border-border px-6 py-3 font-semibold text-sm text-foreground transition-colors hover:bg-muted"
-												href="https://wa.me/919876543210"
-												rel="noopener noreferrer"
-												target="_blank"
-											>
-												<WhatsAppIcon className="h-5 w-5 text-green-600" />
-												+91 98765 43210
-											</a>
+										<a
+											className="flex w-full items-center justify-center gap-2 rounded-full border border-border px-6 py-3 font-semibold text-sm text-foreground transition-colors hover:bg-muted"
+											href="https://wa.me/919876543210"
+											rel="noopener noreferrer"
+											target="_blank"
+										>
+											<IconBrandWhatsapp
+												className="h-5 w-5 text-green-600"
+												stroke={2}
+											/>
+											+91 98765 43210
+										</a>
 									</motion.div>
 								</div>
 							</div>

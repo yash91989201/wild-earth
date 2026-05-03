@@ -6,6 +6,7 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@wild-earth/ui/components/accordion";
+import { badgeVariants } from "@wild-earth/ui/components/badge";
 import { buttonVariants } from "@wild-earth/ui/components/button";
 import { Card } from "@wild-earth/ui/components/card";
 import {
@@ -57,9 +58,9 @@ export default function ItineraryCard({ itinerary }: { itinerary: Itinerary }) {
 	const contentBlock = (
 		<div className="flex flex-col justify-center p-12 lg:p-16">
 			<div className="mb-6 flex flex-wrap items-center gap-4">
-				<span className="rounded-full bg-primary/10 px-4 py-1 font-bold text-primary text-xs uppercase tracking-widest">
-					{itinerary.duration}
-				</span>
+			<span className={badgeVariants({ variant: "secondary" })}>
+				{itinerary.duration}
+			</span>
 				<span className="flex items-center gap-1 text-muted-foreground text-sm">
 					<IconMapPin className="h-4 w-4" />
 					{itinerary.route}

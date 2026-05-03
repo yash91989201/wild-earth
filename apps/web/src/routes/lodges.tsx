@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import LodgesGrid from "@/components/lodges/lodges-grid";
+import DestinationLodgesSection from "@/components/destinations/destination-lodges-section";
 import LodgesHero from "@/components/lodges/lodges-hero";
 
 export const Route = createFileRoute("/lodges")({
@@ -8,9 +8,9 @@ export const Route = createFileRoute("/lodges")({
 
 function RouteComponent() {
 	return (
-		<main className="flex-grow bg-background">
+		<main className="grow bg-background">
 			<LodgesHero />
-			<LodgesGrid />
+			<DestinationLodgesSection />
 		</main>
 	);
 }
