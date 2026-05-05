@@ -28,6 +28,8 @@ const parkItems: SelectItemData[] = [
 	{ label: "Pench", value: "pench" },
 ];
 
+const WHATSAPP_NUMBER = "919876543210";
+
 const formOpts = formOptions({
 	defaultValues: {
 		park: "",
@@ -38,6 +40,26 @@ const formOpts = formOptions({
 	} satisfies BookingFormType as BookingFormType,
 });
 
+function buildWhatsAppMessage(values: BookingFormType): string {
+	const parkLabel =
+		parkItems.find((p) => p.value === values.park)?.label || values.park;
+	const parts = [
+		"Hello WildEarth! I'm interested in a safari booking.",
+		"",
+		`*National Park:* ${parkLabel}`,
+		`*Travel Dates:* ${values.dates}`,
+		`*Group Size:* ${values.groupSize}`,
+		`*Email:* ${values.email}`,
+	];
+
+	if (values.interests) {
+		parts.push(`*Special Interests:* ${values.interests}`);
+	}
+
+	parts.push("", "Please share a custom proposal.");
+	return parts.join("\n");
+}
+
 export default function BookingSection() {
 	const [submitted, setSubmitted] = useState(false);
 
@@ -47,9 +69,12 @@ export default function BookingSection() {
 			onSubmitAsync: BookingFormSchema,
 		},
 		onSubmit: async ({ value }) => {
-			// Simulate API call
 			await new Promise((resolve) => setTimeout(resolve, 1500));
-			console.log("Booking request:", value);
+
+			const message = buildWhatsAppMessage(value);
+			const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+			window.open(url, "_blank");
+
 			setSubmitted(true);
 			setTimeout(() => {
 				setSubmitted(false);

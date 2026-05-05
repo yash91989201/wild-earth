@@ -5,7 +5,7 @@ import {
 	IconTent,
 	IconX,
 } from "@tabler/icons-react";
-import { Link, linkOptions, useRouterState } from "@tanstack/react-router";
+import { Link, linkOptions, useNavigate, useRouterState } from "@tanstack/react-router";
 import { Button, buttonVariants } from "@wild-earth/ui/components/button";
 import {
 	NavigationMenu,
@@ -66,6 +66,7 @@ export default function Header() {
 	const [scrolled, setScrolled] = useState(false);
 	const [menuOpen, setMenuOpen] = useState(false);
 	const router = useRouterState();
+	const navigate = useNavigate();
 	const pathname = router.location.pathname;
 	const isTransparent = !(scrolled || menuOpen);
 
@@ -116,16 +117,17 @@ export default function Header() {
 						<NavigationMenu>
 							<NavigationMenuList>
 								<NavigationMenuItem>
-									<NavigationMenuTrigger
-										className={cn(
-											"font-medium text-sm transition-colors hover:text-accent",
-											isTransparent
-												? "text-white/90 data-open:text-white data-popup-open:text-white"
-												: "text-foreground"
-										)}
-									>
-										Destinations
-									</NavigationMenuTrigger>
+								<NavigationMenuTrigger
+									className={cn(
+										"font-medium text-sm transition-colors hover:text-accent",
+										isTransparent
+											? "text-white/90 data-open:text-white data-popup-open:text-white"
+											: "text-foreground"
+									)}
+									onClick={() => navigate({ to: "/destinations" })}
+								>
+									Destinations
+								</NavigationMenuTrigger>
 									<NavigationMenuContent>
 										<div className="grid w-[400px] gap-3 p-4">
 											<div className="mb-2 px-3">
