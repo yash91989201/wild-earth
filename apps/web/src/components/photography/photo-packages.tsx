@@ -110,39 +110,39 @@ function PackageCard({ pkg }: { pkg: PhotoPackage }) {
 
 	const contentBlock = (
 		<div className="flex flex-col justify-center p-10 lg:p-16">
-					<div className="mb-2 font-bold text-accent text-sm uppercase tracking-[0.2em]">
+			<div className="mb-2 font-bold text-accent text-sm uppercase tracking-[0.2em]">
 				{pkg.location}
 			</div>
-					<h3 className="mb-4 font-bold font-serif text-4xl text-primary">
+			<h3 className="mb-4 font-bold font-serif text-4xl text-primary">
 				{pkg.title}
 			</h3>
-					<p className="mb-8 text-muted-foreground text-lg leading-relaxed">
+			<p className="mb-8 text-muted-foreground text-lg leading-relaxed">
 				{pkg.description}
 			</p>
-					<div className="mb-8 grid grid-cols-2 gap-x-8 gap-y-4 text-sm">
-						<PackageMeta icon={IconClock} label="Duration" value={pkg.duration} />
-						<PackageMeta icon={IconChartBar} label="Level" value={pkg.level} />
-						<PackageMeta icon={IconCar} label="Drives" value={pkg.drives} />
-						<PackageMeta
-							icon={IconUsers}
-							label="Group Size"
-							value={pkg.groupSize}
-						/>
-					</div>
-					<Link
-						className={buttonVariants({
-							variant: "secondary",
-							size: "lg",
-							className: "w-fit",
-						})}
-						hash="booking-form"
-						to="/"
-					>
-						Enquire Availability
-						<IconArrowRight className="h-5 w-5" />
-					</Link>
+			<div className="mb-8 grid grid-cols-2 gap-x-8 gap-y-4 text-sm">
+				<PackageMeta icon={IconClock} label="Duration" value={pkg.duration} />
+				<PackageMeta icon={IconChartBar} label="Level" value={pkg.level} />
+				<PackageMeta icon={IconCar} label="Drives" value={pkg.drives} />
+				<PackageMeta
+					icon={IconUsers}
+					label="Group Size"
+					value={pkg.groupSize}
+				/>
 			</div>
-		);
+			<Link
+				className={buttonVariants({
+					variant: "secondary",
+					size: "lg",
+					className: "w-fit",
+				})}
+				hash="booking-form"
+				to="/"
+			>
+				Enquire Availability
+				<IconArrowRight className="h-5 w-5" />
+			</Link>
+		</div>
+	);
 
 	return (
 		<motion.div

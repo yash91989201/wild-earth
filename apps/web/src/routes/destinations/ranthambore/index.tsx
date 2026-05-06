@@ -72,7 +72,7 @@ const gallery = [
 	"/assets/ranthambore/03.jpg",
 ];
 
-export const Route = createFileRoute("/destinations/ranthambore")({
+export const Route = createFileRoute("/destinations/ranthambore/")({
 	component: RouteComponent,
 });
 

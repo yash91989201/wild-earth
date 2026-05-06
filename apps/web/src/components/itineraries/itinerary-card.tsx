@@ -58,9 +58,9 @@ export default function ItineraryCard({ itinerary }: { itinerary: Itinerary }) {
 	const contentBlock = (
 		<div className="flex flex-col justify-center p-12 lg:p-16">
 			<div className="mb-6 flex flex-wrap items-center gap-4">
-			<span className={badgeVariants({ variant: "secondary" })}>
-				{itinerary.duration}
-			</span>
+				<span className={badgeVariants({ variant: "secondary" })}>
+					{itinerary.duration}
+				</span>
 				<span className="flex items-center gap-1 text-muted-foreground text-sm">
 					<IconMapPin className="h-4 w-4" />
 					{itinerary.route}

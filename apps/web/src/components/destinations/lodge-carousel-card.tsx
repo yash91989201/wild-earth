@@ -2,11 +2,11 @@ import { motion } from "motion/react";
 import { staggerItem } from "@/lib/animations";
 
 export interface Lodge {
-	name: string;
-	location: string;
+	category: "luxury" | "premium" | "experiential";
 	description: string;
 	image: string;
-	category: "luxury" | "premium" | "experiential";
+	location: string;
+	name: string;
 }
 
 interface LodgeCarouselCardProps {
@@ -23,8 +23,8 @@ export default function LodgeCarouselCard({ lodge }: LodgeCarouselCardProps) {
 			<div className="relative mb-5 overflow-hidden rounded-[40px] aspect-[4/3]">
 				<img
 					alt={lodge.name}
-					src={lodge.image}
 					className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+					src={lodge.image}
 				/>
 				<div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300" />
 			</div>

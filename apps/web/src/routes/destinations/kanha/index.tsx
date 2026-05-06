@@ -15,57 +15,65 @@ import {
 } from "@/lib/animations";
 
 const keyFacts = [
-	{ icon: IconMapPin, label: "Location", value: "Maharashtra, India" },
-	{ icon: IconRuler, label: "Area", value: "1,727 sq km" },
-	{ icon: IconCalendar, label: "Established", value: "1955 (Tiger Reserve)" },
-	{ icon: IconTree, label: "Famous For", value: "Tigers, Sloth Bears" },
+	{
+		icon: IconMapPin,
+		label: "Location",
+		value: "Mandla & Balaghat, Madhya Pradesh",
+	},
+	{ icon: IconRuler, label: "Area", value: "2,005 sq km" },
+	{
+		icon: IconCalendar,
+		label: "Established",
+		value: "1955 (Tiger Reserve 1973)",
+	},
+	{ icon: IconTree, label: "Zones", value: "4 Safari Zones" },
 ];
 
 const wildlife = [
 	{
-		name: "Tigers of Tadoba",
-		desc: "Famous for frequent sightings, the tigers here often cool off in the lakes during hot summers, offering incredible photographic opportunities.",
+		name: "Bengal Tiger",
+		desc: "Kanha's sal forests and open meadows offer some of India's most scenic tiger sightings, often against a backdrop of golden grass.",
 	},
 	{
-		name: "Sloth Bear",
-		desc: "Tadoba is one of the best places in India to spot the elusive, shaggy-coated sloth bear rummaging through the undergrowth.",
-	},
-	{
-		name: "Marsh Crocodile",
-		desc: "The serene Tadoba lake is home to a thriving population of mugger crocodiles, often seen basking on the banks.",
+		name: "Hard-ground Barasingha",
+		desc: "Kanha is the sole home of this subspecies — saved from the brink of extinction, now numbering over 800 individuals.",
 	},
 	{
 		name: "Indian Leopard",
-		desc: "A stealthy predator frequently spotted in the hilly terrain and dense teak forests of the reserve.",
+		desc: "Frequently spotted in the bamboo belts and along the Banjar river, especially during the early morning hours.",
 	},
 	{
 		name: "Wild Dog (Dhole)",
-		desc: "Highly social predators, packs of wild dogs are often seen hunting in the park's open meadows and forest edges.",
+		desc: "Kanha harbours one of India's most stable dhole populations; their coordinated hunts across meadows are unforgettable.",
 	},
 	{
-		name: "Bamboo Thickets",
-		desc: "The park's landscape is famously characterized by dense bamboo groves intermixed with teak, creating a unique habitat.",
+		name: "Gaur (Indian Bison)",
+		desc: "Massive dark herds move between the sal forests and grassy clearings, most active at dawn and dusk.",
+	},
+	{
+		name: "Indian Python",
+		desc: "These powerful constrictors are often found near water bodies and in the park's warmer, rocky terrain.",
 	},
 ];
 
 const zones = [
 	{
-		name: "Moharli Zone",
-		desc: "The oldest and most popular zone with excellent tiger sightings. Its open meadows and waterholes make it ideal for photography.",
+		name: "Kanha & Kisli",
+		desc: "The core zones feature the park's most iconic meadows — Babathenga, Shravan, and the breeding ground of the hard-ground Barasingha. Kanha zone also leads to Bamni Dadar, the legendary Sunset Point.",
 	},
 	{
-		name: "Kolsa Zone",
-		desc: "Known for sloth bears and wild dogs, this zone features dense forests and is less crowded for a more intimate experience.",
+		name: "Mukki & Sarhi",
+		desc: "Mukki offers a quieter, more remote experience with excellent gaur and tiger sightings, while Sarhi's hilly terrain and mixed forests are a birder's delight.",
 	},
 ];
 
 const gallery = [
+	"https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2070&auto=format&fit=crop",
 	"https://images.unsplash.com/photo-1500964757637-c85e8a162699?q=80&w=1964&auto=format&fit=crop",
-	"https://images.unsplash.com/photo-1549480017-d76466a4b7e8?q=80&w=2070&auto=format&fit=crop",
-	"https://images.unsplash.com/photo-1474511320723-9a56873867b5?q=80&w=2072&auto=format&fit=crop",
+	"https://images.unsplash.com/photo-1549366021-9f761d450615?q=80&w=2070&auto=format&fit=crop",
 ];
 
-export const Route = createFileRoute("/destinations/tadoba")({
+export const Route = createFileRoute("/destinations/kanha/")({
 	component: RouteComponent,
 });
 
@@ -79,9 +87,9 @@ function RouteComponent() {
 			<section className="relative flex h-[70vh] items-center justify-center overflow-hidden">
 				<div className="absolute inset-0 z-0">
 					<motion.img
-						alt="Tadoba Andhari Tiger Reserve"
+						alt="Kanha forest landscape"
 						className="absolute inset-0 h-full w-full object-cover will-change-transform"
-						src="https://images.unsplash.com/photo-1500964757637-c85e8a162699?q=80&w=1964&auto=format&fit=crop"
+						src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2070&auto=format&fit=crop"
 						style={{ y, scale: 1.15 }}
 					/>
 					<div className="absolute inset-0 bg-black/50" />
@@ -94,10 +102,10 @@ function RouteComponent() {
 					whileInView="visible"
 				>
 					<span className="mb-4 block font-bold text-accent text-sm uppercase tracking-[0.2em]">
-						Maharashtra, India
+						Madhya Pradesh, India
 					</span>
 					<h1 className="font-bold font-serif text-5xl leading-tight md:text-7xl">
-						Tadoba
+						Kanha
 						<br />
 						National Park
 					</h1>
@@ -118,20 +126,17 @@ function RouteComponent() {
 							About the Park
 						</span>
 						<h2 className="mb-6 font-bold font-serif text-3xl text-primary md:text-4xl">
-							The Jewel of Vidarbha
+							The Jungle Book Come to Life
 						</h2>
 						<p className="text-muted-foreground leading-relaxed">
-							Tadoba Andhari Tiger Reserve is a pristine and unique ecosystem
-							situated in the Chandrapur district of Maharashtra. It is the
-							state's oldest and largest national park, famously known as the
-							"Jewel of Vidarbha".
-						</p>
-						<p className="mt-4 text-muted-foreground leading-relaxed">
-							The name 'Tadoba' comes from a local deity, Taru, and the park is
-							celebrated for its incredible tiger sightings. Its landscape
-							features thick forests of teak and bamboo, alongside scenic lakes
-							and rivers, supporting a high density of predators including
-							tigers, leopards, and wild dogs.
+							Kanha National Park is the very landscape that inspired Rudyard
+							Kipling&apos;s The Jungle Book. A pristine mosaic of lush sal
+							forests, bamboo groves, and expansive grassy meadows known as
+							maidans, it is one of India&apos;s largest and most meticulously
+							managed tiger reserves. Kanha is also the sole sanctuary of the
+							hard-ground Barasingha, brought back from near-extinction through
+							one of conservation&apos;s greatest success stories. To safari
+							here is to walk into a living storybook.
 						</p>
 					</motion.div>
 
@@ -149,7 +154,9 @@ function RouteComponent() {
 								variants={staggerItem}
 							>
 								<fact.icon className="mb-4 h-8 w-8 text-accent" />
-								<p className="mb-1 text-muted-foreground text-sm">{fact.label}</p>
+								<p className="mb-1 text-muted-foreground text-sm">
+									{fact.label}
+								</p>
 								<p className="font-semibold text-foreground">{fact.value}</p>
 							</motion.div>
 						))}
@@ -191,7 +198,9 @@ function RouteComponent() {
 								<h3 className="mb-3 font-bold font-serif text-primary text-xl">
 									{animal.name}
 								</h3>
-								<p className="text-muted-foreground leading-relaxed">{animal.desc}</p>
+								<p className="text-muted-foreground leading-relaxed">
+									{animal.desc}
+								</p>
 							</motion.div>
 						))}
 					</motion.div>
@@ -220,7 +229,9 @@ function RouteComponent() {
 										<h3 className="mb-2 font-bold text-foreground text-lg">
 											{zone.name}
 										</h3>
-										<p className="text-muted-foreground leading-relaxed">{zone.desc}</p>
+										<p className="text-muted-foreground leading-relaxed">
+											{zone.desc}
+										</p>
 									</div>
 								))}
 							</div>
@@ -240,7 +251,7 @@ function RouteComponent() {
 									variants={staggerItem}
 								>
 									<img
-										alt={`Tadoba ${i + 1}`}
+										alt={`Kanha ${i + 1}`}
 										className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
 										src={src}
 									/>
@@ -267,30 +278,37 @@ function RouteComponent() {
 							Best Time to Visit
 						</h2>
 						<p className="mx-auto mb-10 max-w-2xl text-primary-foreground/80 leading-relaxed">
-							October to June is the ideal window for visiting Tadoba. The
-							summer months (March – June) offer the highest probability of
-							tiger sightings as animals gather around water sources. The park
-							remains closed during the monsoon season from July to September.
+							Kanha opens in mid-October and remains accessible until June. The
+							cool winter months offer comfortable weather and lush landscapes
+							after the monsoon. By April and May, the meadows turn golden and
+							wildlife concentrates around water sources, making for spectacular
+							sightings against dramatic light.
 						</p>
 						<div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
 							<div className="rounded-lg border border-white/20 p-6">
-								<p className="mb-2 text-primary-foreground/60 text-sm">Winter</p>
+								<p className="mb-2 text-primary-foreground/60 text-sm">
+									Winter
+								</p>
 								<p className="font-bold text-lg">Oct – Feb</p>
 								<p className="mt-2 text-primary-foreground/50 text-sm">
-									Pleasant weather, lush greens
+									Green meadows, pleasant days
 								</p>
 							</div>
 							<div className="rounded-lg border border-accent bg-accent/10 p-6">
 								<p className="mb-2 text-accent text-sm">Summer</p>
 								<p className="font-bold text-lg">Mar – Jun</p>
 								<p className="mt-2 text-primary-foreground/60 text-sm">
-									Peak tiger sightings
+									Golden grass, waterhole drama
 								</p>
 							</div>
 							<div className="rounded-lg border border-white/20 p-6">
-								<p className="mb-2 text-primary-foreground/60 text-sm">Monsoon</p>
+								<p className="mb-2 text-primary-foreground/60 text-sm">
+									Monsoon
+								</p>
 								<p className="font-bold text-lg">Jul – Sep</p>
-								<p className="mt-2 text-primary-foreground/50 text-sm">Core zones closed</p>
+								<p className="mt-2 text-primary-foreground/50 text-sm">
+									Park closed
+								</p>
 							</div>
 						</div>
 					</motion.div>
@@ -307,12 +325,13 @@ function RouteComponent() {
 						whileInView="visible"
 					>
 						<h2 className="mb-6 font-bold font-serif text-3xl text-primary md:text-4xl">
-							Ready to Track the Jewel?
+							Step Into the Jungle Book
 						</h2>
 						<p className="mx-auto mb-10 max-w-2xl text-muted-foreground leading-relaxed">
-							Let us craft a bespoke Tadoba safari experience for you — complete
-							with expert naturalists, zone-optimized game drives, and stays at
-							the finest lodges.
+							Let us curate your Kanha expedition — sunrise safaris across
+							golden meadows, tiger tracking with expert naturalists, and
+							evenings at Bamni Dadar watching the sun set over Kipling's
+							forest.
 						</p>
 						<Button className="bg-primary px-8 py-6 font-semibold text-lg text-primary-foreground hover:bg-primary/90">
 							Enquire Now

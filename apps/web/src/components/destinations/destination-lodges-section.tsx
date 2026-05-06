@@ -1,23 +1,20 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { motion } from "motion/react";
+import {
+	Carousel,
+	type CarouselApi,
+	CarouselContent,
+	CarouselItem,
+	CarouselNext,
+	CarouselPrevious,
+} from "@wild-earth/ui/components/carousel";
 import {
 	Tabs,
 	TabsContent,
 	TabsList,
 	TabsTrigger,
 } from "@wild-earth/ui/components/tabs";
-import {
-	Carousel,
-	CarouselContent,
-	CarouselItem,
-	CarouselNext,
-	CarouselPrevious,
-	type CarouselApi,
-} from "@wild-earth/ui/components/carousel";
-import {
-	fadeUp,
-	viewportOnce,
-} from "@/lib/animations";
+import { motion } from "motion/react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { fadeUp, viewportOnce } from "@/lib/animations";
 import LodgeCarouselCard, { type Lodge } from "./lodge-carousel-card";
 
 // ── Placeholder images ──────────────────────────────────────────────
@@ -153,7 +150,9 @@ export default function DestinationLodgesSection() {
 
 	// Autoplay
 	useEffect(() => {
-		if (!carouselApi || filteredLodges.length <= 1) return;
+		if (!carouselApi || filteredLodges.length <= 1) {
+			return;
+		}
 
 		const interval = setInterval(() => {
 			carouselApi.scrollNext();
@@ -180,18 +179,17 @@ export default function DestinationLodgesSection() {
 						Ranthambore Lodges
 					</h2>
 					<p className="text-muted-foreground text-sm leading-relaxed sm:text-base">
-						We partner with the finest lodges and camps around
-						Ranthambore — from ultra-luxury tented suites to authentic
-						bush experiences. Every stay is hand-picked for location,
-						service, and safari access.
+						We partner with the finest lodges and camps around Ranthambore —
+						from ultra-luxury tented suites to authentic bush experiences. Every
+						stay is hand-picked for location, service, and safari access.
 					</p>
 				</motion.div>
 
 				{/* Tabs + Carousel */}
 				<Tabs
-					value={activeTab}
-					onValueChange={handleTabChange}
 					className="w-full"
+					onValueChange={handleTabChange}
+					value={activeTab}
 				>
 					{/* Tab List — filled container, accent active tab */}
 					<motion.div
@@ -203,9 +201,9 @@ export default function DestinationLodgesSection() {
 						<TabsList className="mb-8 sm:mb-10 inline-flex rounded-full bg-muted p-1 max-w-full overflow-x-auto">
 							{categories.map((cat) => (
 								<TabsTrigger
+									className="rounded-full px-3 py-1.5 text-xs font-semibold transition-all duration-200 sm:px-5 sm:py-2 sm:text-sm data-active:bg-accent data-active:text-accent-foreground hover:text-foreground whitespace-nowrap"
 									key={cat.id}
 									value={cat.id}
-									className="rounded-full px-3 py-1.5 text-xs font-semibold transition-all duration-200 sm:px-5 sm:py-2 sm:text-sm data-active:bg-accent data-active:text-accent-foreground hover:text-foreground whitespace-nowrap"
 								>
 									{cat.label}
 									<span className="ml-1 text-[10px] opacity-70 sm:ml-1.5 sm:text-xs">
@@ -218,20 +216,20 @@ export default function DestinationLodgesSection() {
 
 					{/* Tab Panels */}
 					{categories.map((cat) => (
-						<TabsContent key={cat.id} value={cat.id} className="mt-0">
+						<TabsContent className="mt-0" key={cat.id} value={cat.id}>
 							<Carousel
-								setApi={setCarouselApi}
+								className="w-full"
 								opts={{
 									align: "start",
 									loop: filteredLodges.length > 1,
 								}}
-								className="w-full"
+								setApi={setCarouselApi}
 							>
 								<CarouselContent className="-ml-3 sm:-ml-4">
 									{filteredLodges.map((lodge) => (
 										<CarouselItem
-											key={lodge.name}
 											className="pl-3 basis-full sm:pl-4 md:basis-1/2"
+											key={lodge.name}
 										>
 											<LodgeCarouselCard lodge={lodge} />
 										</CarouselItem>

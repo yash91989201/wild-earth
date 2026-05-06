@@ -1,11 +1,20 @@
 import {
 	IconBrandWhatsapp,
+	IconCamera,
+	IconChevronRight,
+	IconLeaf,
 	IconMapPin,
 	IconMenu,
+	IconRoute,
 	IconTent,
 	IconX,
 } from "@tabler/icons-react";
-import { Link, linkOptions, useNavigate, useRouterState } from "@tanstack/react-router";
+import {
+	Link,
+	linkOptions,
+	useNavigate,
+	useRouterState,
+} from "@tanstack/react-router";
 import { Button, buttonVariants } from "@wild-earth/ui/components/button";
 import {
 	NavigationMenu,
@@ -15,6 +24,7 @@ import {
 	NavigationMenuList,
 	NavigationMenuTrigger,
 } from "@wild-earth/ui/components/navigation-menu";
+import { Separator } from "@wild-earth/ui/components/separator";
 import { cn } from "@wild-earth/ui/lib/utils";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
@@ -30,10 +40,60 @@ const destinationParks = linkOptions([
 
 const navLinks = linkOptions([
 	{ label: "Itineraries", to: "/itineraries" },
-	{ label: "Lodges", to: "/lodges" },
 	{ label: "Photography", to: "/photography" },
 	{ label: "Impact", to: "/conservation" },
 ]);
+
+const lodgesByDestination = [
+	{
+		destination: "Ranthambore",
+		to: "/destinations/ranthambore",
+		lodges: [
+			{
+				label: "Juna Mahal",
+				to: "/destinations/ranthambore/lodges/juna-mahal",
+			},
+		],
+	},
+	{
+		destination: "Jim Corbett",
+		to: "/destinations/corbett",
+		lodges: [
+			{ label: "Juna Mahal", to: "/destinations/corbett/lodges/juna-mahal" },
+		],
+	},
+	{
+		destination: "Kaziranga",
+		to: "/destinations/kaziranga",
+		lodges: [
+			{ label: "Juna Mahal", to: "/destinations/kaziranga/lodges/juna-mahal" },
+		],
+	},
+	{
+		destination: "Tadoba",
+		to: "/destinations/tadoba",
+		lodges: [
+			{ label: "Juna Mahal", to: "/destinations/tadoba/lodges/juna-mahal" },
+		],
+	},
+	{
+		destination: "Kanha",
+		to: "/destinations/kanha",
+		lodges: [
+			{ label: "Juna Mahal", to: "/destinations/kanha/lodges/juna-mahal" },
+		],
+	},
+	{
+		destination: "Bandhavgarh",
+		to: "/destinations/bandhavgarh",
+		lodges: [
+			{
+				label: "Juna Mahal",
+				to: "/destinations/bandhavgarh/lodges/juna-mahal",
+			},
+		],
+	},
+];
 
 const easeOutExpo: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
@@ -65,10 +125,19 @@ function NavLink({
 export default function Header() {
 	const [scrolled, setScrolled] = useState(false);
 	const [menuOpen, setMenuOpen] = useState(false);
+	const [hoveredDestination, setHoveredDestination] = useState(
+		lodgesByDestination[0]?.destination ?? ""
+	);
+	const [expandedMobileDestination, setExpandedMobileDestination] =
+		useState("");
 	const router = useRouterState();
 	const navigate = useNavigate();
 	const pathname = router.location.pathname;
 	const isTransparent = !(scrolled || menuOpen);
+	const hoveredLodgeDestination =
+		lodgesByDestination.find(
+			(park) => park.destination === hoveredDestination
+		) ?? lodgesByDestination[0];
 
 	useEffect(() => {
 		const onScroll = () => setScrolled(window.scrollY > 80);
@@ -117,19 +186,19 @@ export default function Header() {
 						<NavigationMenu>
 							<NavigationMenuList>
 								<NavigationMenuItem>
-								<NavigationMenuTrigger
-									className={cn(
-										"font-medium text-sm transition-colors hover:text-accent",
-										isTransparent
-											? "text-white/90 data-open:text-white data-popup-open:text-white"
-											: "text-foreground"
-									)}
-									onClick={() => navigate({ to: "/destinations" })}
-								>
-									Destinations
-								</NavigationMenuTrigger>
+									<NavigationMenuTrigger
+										className={cn(
+											"font-medium text-sm transition-colors hover:text-accent",
+											isTransparent
+												? "text-white/90 data-open:text-white data-popup-open:text-white"
+												: "text-foreground"
+										)}
+										onClick={() => navigate({ to: "/destinations" })}
+									>
+										Destinations
+									</NavigationMenuTrigger>
 									<NavigationMenuContent>
-										<div className="grid w-[400px] gap-3 p-4">
+										<div className="grid w-[399px] gap-3 p-4">
 											<div className="mb-2 px-3">
 												<p className="font-bold font-serif text-primary text-lg">
 													National Parks
@@ -139,18 +208,82 @@ export default function Header() {
 												</p>
 											</div>
 											{destinationParks.map((park) => (
-													<NavigationMenuLink
-														className={cn(
-															"flex items-center gap-2",
-															pathname === park.to && "text-accent font-semibold"
-														)}
-														key={park.to}
-														render={<Link to={park.to} />}
-													>
-														<IconMapPin className="h-4 w-4 text-accent" />
-														<span>{park.label}</span>
-													</NavigationMenuLink>
-												))}
+												<NavigationMenuLink
+													className={cn(
+														"flex items-center gap-2",
+														pathname === park.to && "text-accent font-semibold"
+													)}
+													key={park.to}
+													render={<Link to={park.to} />}
+												>
+													<IconMapPin className="h-4 w-4 text-accent" />
+													<span>{park.label}</span>
+												</NavigationMenuLink>
+											))}
+										</div>
+									</NavigationMenuContent>
+								</NavigationMenuItem>
+								<NavigationMenuItem>
+									<NavigationMenuTrigger
+										className={cn(
+											"font-medium text-sm transition-colors hover:text-accent",
+											isTransparent
+												? "text-white/90 data-open:text-white data-popup-open:text-white"
+												: "text-foreground"
+										)}
+										onClick={() => navigate({ to: "/lodges" })}
+									>
+										Lodges
+									</NavigationMenuTrigger>
+									<NavigationMenuContent>
+										<div className="w-[480px] gap-3 p-4">
+											<div className="mb-2 px-3">
+												<p className="font-bold font-serif text-primary text-lg">
+													Safari Lodges
+												</p>
+												<p className="text-muted-foreground text-sm">
+													Hand-picked stays at India's finest wildlife reserves
+												</p>
+											</div>
+											<div className="grid grid-cols-2 gap-3">
+												<div className="space-y-1">
+													{lodgesByDestination.map((park) => (
+														<NavigationMenuLink
+															className={cn(
+																"flex items-center gap-2",
+																hoveredDestination === park.destination
+																	? "text-accent font-semibold"
+																	: ""
+															)}
+															key={park.to}
+															onMouseEnter={() =>
+																setHoveredDestination(park.destination)
+															}
+															render={<Link to={park.to} />}
+														>
+															<IconMapPin className="h-4 w-4 text-accent" />
+															<span>{park.destination}</span>
+														</NavigationMenuLink>
+													))}
+												</div>
+												<div className="space-y-1 border-border border-l pl-4">
+													<p className="mb-2 px-3 font-bold font-serif text-primary text-sm">
+														Lodges in {hoveredLodgeDestination.destination}
+													</p>
+													{hoveredLodgeDestination.lodges.map((lodge) => (
+														<NavigationMenuLink
+															className={cn(
+																pathname === lodge.to &&
+																	"text-accent font-semibold"
+															)}
+															key={lodge.to}
+															render={<Link to={lodge.to} />}
+														>
+															{lodge.label}
+														</NavigationMenuLink>
+													))}
+												</div>
+											</div>
 										</div>
 									</NavigationMenuContent>
 								</NavigationMenuItem>
@@ -249,107 +382,162 @@ export default function Header() {
 
 							{/* Scrollable Content */}
 							<div className="flex-1 overflow-y-auto px-6 pb-8">
-								<div className="mx-auto max-w-md">
-									{/* Destinations Section */}
-									<motion.div
-										animate={{ opacity: 1, y: 0 }}
-										initial={{ opacity: 0, y: 20 }}
-										transition={{
-											delay: 0.1,
-											duration: 0.4,
-											ease: easeOutExpo,
-										}}
-									>
-										<p className="mb-4 font-bold text-muted-foreground text-xs uppercase tracking-[0.2em]">
-											Destinations
-										</p>
-										<div className="space-y-2">
-											{destinationParks.map((park, i) => (
-												<motion.div
-													animate={{ opacity: 1, x: 0 }}
-													initial={{ opacity: 0, x: -20 }}
-													key={park.to}
-													transition={{
-														delay: 0.15 + i * 0.05,
-														duration: 0.3,
-														ease: easeOutExpo,
-													}}
-												>
-													<Link
-														className={cn(
-															"flex items-center gap-3 rounded-2xl p-4 transition-colors",
-															pathname === park.to
-																? "bg-accent text-white"
-																: "hover:bg-muted"
+								<motion.div
+									animate={{ opacity: 1, y: 0 }}
+									className="mx-auto max-w-md"
+									initial={{ opacity: 0, y: 20 }}
+									transition={{
+										delay: 0.1,
+										duration: 0.4,
+										ease: easeOutExpo,
+									}}
+								>
+									{/* Destinations & Lodges — merged */}
+									<p className="mb-3 mt-0 font-bold text-muted-foreground text-xs uppercase tracking-[0.2em]">
+										Destinations
+									</p>
+									<div className="space-y-1">
+										{lodgesByDestination.map((park) => {
+											const isExpanded =
+												expandedMobileDestination === park.destination;
+											const isParkActive = pathname === park.to;
+											return (
+												<div key={park.to}>
+													<div className="flex items-center justify-between py-3">
+														<Link
+															className={cn(
+																"flex items-center gap-3 transition-colors",
+																isParkActive || isExpanded
+																	? "text-accent"
+																	: "text-foreground hover:text-accent"
+															)}
+															onClick={() => setMenuOpen(false)}
+															to={park.to}
+														>
+															<IconMapPin className="h-5 w-5 text-accent" />
+															<span className="font-serif text-xl">
+																{park.destination}
+															</span>
+														</Link>
+														<Button
+															className="h-auto p-2"
+															onClick={() =>
+																setExpandedMobileDestination((v) =>
+																	v === park.destination ? "" : park.destination
+																)
+															}
+															variant="ghost"
+														>
+															<IconChevronRight
+																className={cn(
+																	"h-5 w-5 transition-transform",
+																	isExpanded && "rotate-90"
+																)}
+															/>
+														</Button>
+													</div>
+													<AnimatePresence initial={false}>
+														{isExpanded && (
+															<motion.div
+																animate={{ height: "auto", opacity: 1 }}
+																className="ml-8 overflow-hidden"
+																exit={{ height: 0, opacity: 0 }}
+																initial={{ height: 0, opacity: 0 }}
+																transition={{
+																	duration: 0.3,
+																	ease: easeOutExpo,
+																}}
+															>
+																<Link
+																	className="flex items-center gap-2 py-2 text-sm transition-colors hover:text-accent"
+																	onClick={() => setMenuOpen(false)}
+																	to={park.to}
+																>
+																	<IconMapPin className="h-4 w-4 text-accent" />
+																	<span
+																		className={cn(
+																			pathname === park.to &&
+																				"font-semibold text-accent",
+																			"text-muted-foreground"
+																		)}
+																	>
+																		Explore Park
+																	</span>
+																</Link>
+																{park.lodges.map((lodge) => (
+																	<Link
+																		className={cn(
+																			"flex items-center gap-2 py-2 text-sm transition-colors",
+																			pathname === lodge.to
+																				? "font-semibold text-accent"
+																				: "text-muted-foreground hover:text-accent"
+																		)}
+																		key={lodge.to}
+																		onClick={() => setMenuOpen(false)}
+																		to={lodge.to}
+																	>
+																		<IconTent
+																			className="h-4 w-4 text-accent"
+																			strokeWidth={1.5}
+																		/>
+																		{lodge.label}
+																	</Link>
+																))}
+															</motion.div>
 														)}
-														onClick={() => setMenuOpen(false)}
-														to={park.to}
-													>
-														<IconMapPin className="h-5 w-5 text-accent" />
-														<span className="font-bold font-serif text-lg text-foreground">
-															{park.label}
-														</span>
-													</Link>
-												</motion.div>
-											))}
-										</div>
-									</motion.div>
+													</AnimatePresence>
+												</div>
+											);
+										})}
+									</div>
 
-									<div className="my-6 h-px bg-border" />
+									<Separator className="my-3" />
 
-									{/* Main Nav Section */}
-									<motion.div
-										animate={{ opacity: 1, y: 0 }}
-										initial={{ opacity: 0, y: 20 }}
-										transition={{
-											delay: 0.3,
-											duration: 0.4,
-											ease: easeOutExpo,
-										}}
-									>
-										<p className="mb-4 font-bold text-muted-foreground text-xs uppercase tracking-[0.2em]">
-											Experience
-										</p>
-										<div className="space-y-2">
-											{navLinks.map((link, i) => (
-												<motion.div
-													animate={{ opacity: 1, x: 0 }}
-													initial={{ opacity: 0, x: -20 }}
-													key={link.to}
-													transition={{
-														delay: 0.35 + i * 0.05,
-														duration: 0.3,
-														ease: easeOutExpo,
-													}}
-												>
-													<Link
-														className={cn(
-															"block rounded-2xl p-4 font-bold font-serif text-2xl transition-colors",
-															pathname === link.to
-																? "bg-accent text-white"
-																: "text-foreground hover:bg-muted"
-														)}
-														onClick={() => setMenuOpen(false)}
-														to={link.to}
-													>
-														{link.label}
-													</Link>
-												</motion.div>
-											))}
-										</div>
-									</motion.div>
+									{/* Experience Section */}
+									<div className="space-y-1">
+										<Link
+											className={cn(
+												"flex items-center gap-3 py-3 transition-colors",
+												pathname === "/itineraries"
+													? "text-accent"
+													: "text-foreground hover:text-accent"
+											)}
+											onClick={() => setMenuOpen(false)}
+											to="/itineraries"
+										>
+											<IconRoute className="h-5 w-5 text-accent" />
+											<span className="font-serif text-xl">Itineraries</span>
+										</Link>
+										<Link
+											className={cn(
+												"flex items-center gap-3 py-3 transition-colors",
+												pathname === "/photography"
+													? "text-accent"
+													: "text-foreground hover:text-accent"
+											)}
+											onClick={() => setMenuOpen(false)}
+											to="/photography"
+										>
+											<IconCamera className="h-5 w-5 text-accent" />
+											<span className="font-serif text-xl">Photography</span>
+										</Link>
+										<Link
+											className={cn(
+												"flex items-center gap-3 py-3 transition-colors",
+												pathname === "/conservation"
+													? "text-accent"
+													: "text-foreground hover:text-accent"
+											)}
+											onClick={() => setMenuOpen(false)}
+											to="/conservation"
+										>
+											<IconLeaf className="h-5 w-5 text-accent" />
+											<span className="font-serif text-xl">Conservation</span>
+										</Link>
+									</div>
 
-									{/* CTA */}
-									<motion.div
-										animate={{ opacity: 1, y: 0 }}
-										className="mt-8"
-										initial={{ opacity: 0, y: 20 }}
-										transition={{
-											delay: 0.5,
-											duration: 0.4,
-											ease: easeOutExpo,
-										}}
-									>
+									{/* CTA Section */}
+									<div className="mt-10">
 										<Link
 											className={cn(
 												buttonVariants({ size: "lg" }),
@@ -361,17 +549,8 @@ export default function Header() {
 										>
 											Plan My Safari
 										</Link>
-									</motion.div>
-
-									{/* Contact */}
-									<motion.div
-										animate={{ opacity: 1 }}
-										className="mt-6 flex justify-center"
-										initial={{ opacity: 0 }}
-										transition={{ delay: 0.6, duration: 0.4 }}
-									>
 										<a
-											className="flex w-full items-center justify-center gap-2 rounded-full border border-border px-6 py-3 font-semibold text-sm text-foreground transition-colors hover:bg-muted"
+											className="mt-4 flex w-full items-center justify-center gap-2 rounded-full border border-border px-6 py-3 font-semibold text-sm text-foreground transition-colors hover:bg-muted"
 											href="https://wa.me/919876543210"
 											rel="noopener noreferrer"
 											target="_blank"
@@ -382,8 +561,8 @@ export default function Header() {
 											/>
 											+91 98765 43210
 										</a>
-									</motion.div>
-								</div>
+									</div>
+								</motion.div>
 							</div>
 						</div>
 					</motion.div>

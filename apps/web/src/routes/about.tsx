@@ -14,7 +14,9 @@ function RouteComponent() {
 					<h2 className="mb-4 font-bold font-serif text-4xl text-primary">
 						Coming Soon
 					</h2>
-					<p className="text-muted-foreground">This page is under construction.</p>
+					<p className="text-muted-foreground">
+						This page is under construction.
+					</p>
 				</div>
 			</section>
 		</main>

@@ -69,7 +69,7 @@ const gallery = [
 	"https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2070&auto=format&fit=crop",
 ];
 
-export const Route = createFileRoute("/destinations/bandhavgarh")({
+export const Route = createFileRoute("/destinations/bandhavgarh/")({
 	component: RouteComponent,
 });
 
@@ -150,7 +150,9 @@ function RouteComponent() {
 								variants={staggerItem}
 							>
 								<fact.icon className="mb-4 h-8 w-8 text-accent" />
-								<p className="mb-1 text-muted-foreground text-sm">{fact.label}</p>
+								<p className="mb-1 text-muted-foreground text-sm">
+									{fact.label}
+								</p>
 								<p className="font-semibold text-foreground">{fact.value}</p>
 							</motion.div>
 						))}
@@ -192,7 +194,9 @@ function RouteComponent() {
 								<h3 className="mb-3 font-bold font-serif text-primary text-xl">
 									{animal.name}
 								</h3>
-								<p className="text-muted-foreground leading-relaxed">{animal.desc}</p>
+								<p className="text-muted-foreground leading-relaxed">
+									{animal.desc}
+								</p>
 							</motion.div>
 						))}
 					</motion.div>
@@ -221,7 +225,9 @@ function RouteComponent() {
 										<h3 className="mb-2 font-bold text-foreground text-lg">
 											{zone.name}
 										</h3>
-										<p className="text-muted-foreground leading-relaxed">{zone.desc}</p>
+										<p className="text-muted-foreground leading-relaxed">
+											{zone.desc}
+										</p>
 									</div>
 								))}
 							</div>
@@ -276,7 +282,9 @@ function RouteComponent() {
 						</p>
 						<div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
 							<div className="rounded-lg border border-white/20 p-6">
-								<p className="mb-2 text-primary-foreground/60 text-sm">Winter</p>
+								<p className="mb-2 text-primary-foreground/60 text-sm">
+									Winter
+								</p>
 								<p className="font-bold text-lg">Oct – Feb</p>
 								<p className="mt-2 text-primary-foreground/50 text-sm">
 									Misty mornings, fort treks
@@ -290,9 +298,13 @@ function RouteComponent() {
 								</p>
 							</div>
 							<div className="rounded-lg border border-white/20 p-6">
-								<p className="mb-2 text-primary-foreground/60 text-sm">Monsoon</p>
+								<p className="mb-2 text-primary-foreground/60 text-sm">
+									Monsoon
+								</p>
 								<p className="font-bold text-lg">Jul – Sep</p>
-								<p className="mt-2 text-primary-foreground/50 text-sm">Park closed</p>
+								<p className="mt-2 text-primary-foreground/50 text-sm">
+									Park closed
+								</p>
 							</div>
 						</div>
 					</motion.div>

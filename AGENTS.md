@@ -11,7 +11,8 @@ All rules are non-negotiable unless explicitly stated otherwise.
 2. [File Editing](#1-file-editing)
 3. [Codebase Exploration — `warp-grep`](#2-codebase-exploration--warp-grep)
 4. [Browser Automation — `agent-browser`](#3-browser-automation--agent-browser)
-5. [Context-Mode — Mandatory Routing Rules](#5-context-mode--mandatory-routing-rules)
+5. [UI Implementation Rules](#4-ui-implementation-rules)
+6. [Context-Mode — Mandatory Routing Rules](#5-context-mode--mandatory-routing-rules)
 
 ---
 
@@ -66,6 +67,39 @@ agent-browser fill @e2 "text"  # Fill an input by ref
 ```
 
 > **Important:** Re-snapshot after every page change before interacting with new elements.
+
+---
+
+## 4. UI Implementation Rules
+
+### 4.1 Conditional ClassNames — `cn` Utility
+
+**Rule:** Use `cn` (from `@workspace/ui/lib/utils`) for all conditional `className`. No ternary operators in `className`.
+
+❌ `className={`base ${isActive ? "text-primary" : "text-muted"}`}`
+✅ `className={cn("base", isActive && "text-primary", !isActive && "text-muted")}`
+
+---
+
+### 4.2 Component Sourcing — `packages/ui` First
+
+This project uses shadcn components, all located in the `packages/ui` package. Do not re-implement what already exists — use **context7** to look up available components when needed.
+
+---
+
+### 4.3 base-ui Primitives — Not Radix
+
+This project's `packages/ui` has shadcn components built on **base-ui**, not Radix. base-ui has different APIs — do not assume Radix patterns. Always look up current base-ui docs before using any primitive.
+
+Known difference: `asChild` not supported — use render prop instead.  
+❌ `<Slot asChild><button /></Slot>`  
+✅ `<Primitive render={<button />} />`
+
+---
+
+### 4.4 Tailwind Class Rules
+
+Prefer canonical Tailwind classes over arbitrary values where equivalent exists (`bg-linear-to-t` not `bg-gradient-to-t`, `aspect-4/5` not `aspect-[4/5]`, `w-30` not `w-[120px]`). Use Tailwind's spacing scale (1 unit = 4px) instead of arbitrary pixel values.
 
 ---
 
@@ -161,5 +195,3 @@ Use tools in this priority order:
 | `ctx stats` | Call the `stats` MCP tool and display full output verbatim |
 | `ctx doctor` | Call the `doctor` MCP tool, run returned shell command, display as checklist |
 | `ctx upgrade` | Call the `upgrade` MCP tool, run returned shell command, display as checklist |
-
-📖 [API Client Usage Guide](docs/technical/api-client-usage.md)

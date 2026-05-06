@@ -28,7 +28,9 @@ export default function LodgeCard({ lodge }: { lodge: Lodge }) {
 			<p className="mb-4 font-bold text-accent text-sm uppercase tracking-widest">
 				{lodge.location}
 			</p>
-			<p className="mb-4 line-clamp-3 text-muted-foreground">{lodge.description}</p>
+			<p className="mb-4 line-clamp-3 text-muted-foreground">
+				{lodge.description}
+			</p>
 			<span className="flex items-center gap-2 font-bold text-sm transition-colors group-hover:text-accent">
 				Explore Lodge
 				<IconArrowRight className="h-4 w-4" />

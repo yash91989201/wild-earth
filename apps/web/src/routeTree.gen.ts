@@ -16,12 +16,14 @@ import { Route as ConservationRouteImport } from './routes/conservation'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DestinationsIndexRouteImport } from './routes/destinations/index'
-import { Route as DestinationsTadobaRouteImport } from './routes/destinations/tadoba'
-import { Route as DestinationsRanthamboreRouteImport } from './routes/destinations/ranthambore'
-import { Route as DestinationsKazirangaRouteImport } from './routes/destinations/kaziranga'
-import { Route as DestinationsKanhaRouteImport } from './routes/destinations/kanha'
-import { Route as DestinationsCorbettRouteImport } from './routes/destinations/corbett'
-import { Route as DestinationsBandhavgarhRouteImport } from './routes/destinations/bandhavgarh'
+import { Route as DestinationsTadobaIndexRouteImport } from './routes/destinations/tadoba/index'
+import { Route as DestinationsRanthamboreIndexRouteImport } from './routes/destinations/ranthambore/index'
+import { Route as DestinationsKazirangaIndexRouteImport } from './routes/destinations/kaziranga/index'
+import { Route as DestinationsKanhaIndexRouteImport } from './routes/destinations/kanha/index'
+import { Route as DestinationsCorbettIndexRouteImport } from './routes/destinations/corbett/index'
+import { Route as DestinationsBandhavgarhIndexRouteImport } from './routes/destinations/bandhavgarh/index'
+import { Route as DestinationsRanthamboreLodgesIndexRouteImport } from './routes/destinations/ranthambore/lodges/index'
+import { Route as DestinationsRanthamboreLodgesJunaMahalRouteImport } from './routes/destinations/ranthambore/lodges/juna-mahal'
 
 const PhotographyRoute = PhotographyRouteImport.update({
   id: '/photography',
@@ -58,36 +60,52 @@ const DestinationsIndexRoute = DestinationsIndexRouteImport.update({
   path: '/destinations/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DestinationsTadobaRoute = DestinationsTadobaRouteImport.update({
-  id: '/destinations/tadoba',
-  path: '/destinations/tadoba',
+const DestinationsTadobaIndexRoute = DestinationsTadobaIndexRouteImport.update({
+  id: '/destinations/tadoba/',
+  path: '/destinations/tadoba/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DestinationsRanthamboreRoute = DestinationsRanthamboreRouteImport.update({
-  id: '/destinations/ranthambore',
-  path: '/destinations/ranthambore',
+const DestinationsRanthamboreIndexRoute =
+  DestinationsRanthamboreIndexRouteImport.update({
+    id: '/destinations/ranthambore/',
+    path: '/destinations/ranthambore/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DestinationsKazirangaIndexRoute =
+  DestinationsKazirangaIndexRouteImport.update({
+    id: '/destinations/kaziranga/',
+    path: '/destinations/kaziranga/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DestinationsKanhaIndexRoute = DestinationsKanhaIndexRouteImport.update({
+  id: '/destinations/kanha/',
+  path: '/destinations/kanha/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DestinationsKazirangaRoute = DestinationsKazirangaRouteImport.update({
-  id: '/destinations/kaziranga',
-  path: '/destinations/kaziranga',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DestinationsKanhaRoute = DestinationsKanhaRouteImport.update({
-  id: '/destinations/kanha',
-  path: '/destinations/kanha',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DestinationsCorbettRoute = DestinationsCorbettRouteImport.update({
-  id: '/destinations/corbett',
-  path: '/destinations/corbett',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DestinationsBandhavgarhRoute = DestinationsBandhavgarhRouteImport.update({
-  id: '/destinations/bandhavgarh',
-  path: '/destinations/bandhavgarh',
-  getParentRoute: () => rootRouteImport,
-} as any)
+const DestinationsCorbettIndexRoute =
+  DestinationsCorbettIndexRouteImport.update({
+    id: '/destinations/corbett/',
+    path: '/destinations/corbett/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DestinationsBandhavgarhIndexRoute =
+  DestinationsBandhavgarhIndexRouteImport.update({
+    id: '/destinations/bandhavgarh/',
+    path: '/destinations/bandhavgarh/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DestinationsRanthamboreLodgesIndexRoute =
+  DestinationsRanthamboreLodgesIndexRouteImport.update({
+    id: '/destinations/ranthambore/lodges/',
+    path: '/destinations/ranthambore/lodges/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DestinationsRanthamboreLodgesJunaMahalRoute =
+  DestinationsRanthamboreLodgesJunaMahalRouteImport.update({
+    id: '/destinations/ranthambore/lodges/juna-mahal',
+    path: '/destinations/ranthambore/lodges/juna-mahal',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -96,13 +114,15 @@ export interface FileRoutesByFullPath {
   '/itineraries': typeof ItinerariesRoute
   '/lodges': typeof LodgesRoute
   '/photography': typeof PhotographyRoute
-  '/destinations/bandhavgarh': typeof DestinationsBandhavgarhRoute
-  '/destinations/corbett': typeof DestinationsCorbettRoute
-  '/destinations/kanha': typeof DestinationsKanhaRoute
-  '/destinations/kaziranga': typeof DestinationsKazirangaRoute
-  '/destinations/ranthambore': typeof DestinationsRanthamboreRoute
-  '/destinations/tadoba': typeof DestinationsTadobaRoute
   '/destinations/': typeof DestinationsIndexRoute
+  '/destinations/bandhavgarh/': typeof DestinationsBandhavgarhIndexRoute
+  '/destinations/corbett/': typeof DestinationsCorbettIndexRoute
+  '/destinations/kanha/': typeof DestinationsKanhaIndexRoute
+  '/destinations/kaziranga/': typeof DestinationsKazirangaIndexRoute
+  '/destinations/ranthambore/': typeof DestinationsRanthamboreIndexRoute
+  '/destinations/tadoba/': typeof DestinationsTadobaIndexRoute
+  '/destinations/ranthambore/lodges/juna-mahal': typeof DestinationsRanthamboreLodgesJunaMahalRoute
+  '/destinations/ranthambore/lodges/': typeof DestinationsRanthamboreLodgesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -111,13 +131,15 @@ export interface FileRoutesByTo {
   '/itineraries': typeof ItinerariesRoute
   '/lodges': typeof LodgesRoute
   '/photography': typeof PhotographyRoute
-  '/destinations/bandhavgarh': typeof DestinationsBandhavgarhRoute
-  '/destinations/corbett': typeof DestinationsCorbettRoute
-  '/destinations/kanha': typeof DestinationsKanhaRoute
-  '/destinations/kaziranga': typeof DestinationsKazirangaRoute
-  '/destinations/ranthambore': typeof DestinationsRanthamboreRoute
-  '/destinations/tadoba': typeof DestinationsTadobaRoute
   '/destinations': typeof DestinationsIndexRoute
+  '/destinations/bandhavgarh': typeof DestinationsBandhavgarhIndexRoute
+  '/destinations/corbett': typeof DestinationsCorbettIndexRoute
+  '/destinations/kanha': typeof DestinationsKanhaIndexRoute
+  '/destinations/kaziranga': typeof DestinationsKazirangaIndexRoute
+  '/destinations/ranthambore': typeof DestinationsRanthamboreIndexRoute
+  '/destinations/tadoba': typeof DestinationsTadobaIndexRoute
+  '/destinations/ranthambore/lodges/juna-mahal': typeof DestinationsRanthamboreLodgesJunaMahalRoute
+  '/destinations/ranthambore/lodges': typeof DestinationsRanthamboreLodgesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -127,13 +149,15 @@ export interface FileRoutesById {
   '/itineraries': typeof ItinerariesRoute
   '/lodges': typeof LodgesRoute
   '/photography': typeof PhotographyRoute
-  '/destinations/bandhavgarh': typeof DestinationsBandhavgarhRoute
-  '/destinations/corbett': typeof DestinationsCorbettRoute
-  '/destinations/kanha': typeof DestinationsKanhaRoute
-  '/destinations/kaziranga': typeof DestinationsKazirangaRoute
-  '/destinations/ranthambore': typeof DestinationsRanthamboreRoute
-  '/destinations/tadoba': typeof DestinationsTadobaRoute
   '/destinations/': typeof DestinationsIndexRoute
+  '/destinations/bandhavgarh/': typeof DestinationsBandhavgarhIndexRoute
+  '/destinations/corbett/': typeof DestinationsCorbettIndexRoute
+  '/destinations/kanha/': typeof DestinationsKanhaIndexRoute
+  '/destinations/kaziranga/': typeof DestinationsKazirangaIndexRoute
+  '/destinations/ranthambore/': typeof DestinationsRanthamboreIndexRoute
+  '/destinations/tadoba/': typeof DestinationsTadobaIndexRoute
+  '/destinations/ranthambore/lodges/juna-mahal': typeof DestinationsRanthamboreLodgesJunaMahalRoute
+  '/destinations/ranthambore/lodges/': typeof DestinationsRanthamboreLodgesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -144,13 +168,15 @@ export interface FileRouteTypes {
     | '/itineraries'
     | '/lodges'
     | '/photography'
-    | '/destinations/bandhavgarh'
-    | '/destinations/corbett'
-    | '/destinations/kanha'
-    | '/destinations/kaziranga'
-    | '/destinations/ranthambore'
-    | '/destinations/tadoba'
     | '/destinations/'
+    | '/destinations/bandhavgarh/'
+    | '/destinations/corbett/'
+    | '/destinations/kanha/'
+    | '/destinations/kaziranga/'
+    | '/destinations/ranthambore/'
+    | '/destinations/tadoba/'
+    | '/destinations/ranthambore/lodges/juna-mahal'
+    | '/destinations/ranthambore/lodges/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -159,13 +185,15 @@ export interface FileRouteTypes {
     | '/itineraries'
     | '/lodges'
     | '/photography'
+    | '/destinations'
     | '/destinations/bandhavgarh'
     | '/destinations/corbett'
     | '/destinations/kanha'
     | '/destinations/kaziranga'
     | '/destinations/ranthambore'
     | '/destinations/tadoba'
-    | '/destinations'
+    | '/destinations/ranthambore/lodges/juna-mahal'
+    | '/destinations/ranthambore/lodges'
   id:
     | '__root__'
     | '/'
@@ -174,13 +202,15 @@ export interface FileRouteTypes {
     | '/itineraries'
     | '/lodges'
     | '/photography'
-    | '/destinations/bandhavgarh'
-    | '/destinations/corbett'
-    | '/destinations/kanha'
-    | '/destinations/kaziranga'
-    | '/destinations/ranthambore'
-    | '/destinations/tadoba'
     | '/destinations/'
+    | '/destinations/bandhavgarh/'
+    | '/destinations/corbett/'
+    | '/destinations/kanha/'
+    | '/destinations/kaziranga/'
+    | '/destinations/ranthambore/'
+    | '/destinations/tadoba/'
+    | '/destinations/ranthambore/lodges/juna-mahal'
+    | '/destinations/ranthambore/lodges/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -190,13 +220,15 @@ export interface RootRouteChildren {
   ItinerariesRoute: typeof ItinerariesRoute
   LodgesRoute: typeof LodgesRoute
   PhotographyRoute: typeof PhotographyRoute
-  DestinationsBandhavgarhRoute: typeof DestinationsBandhavgarhRoute
-  DestinationsCorbettRoute: typeof DestinationsCorbettRoute
-  DestinationsKanhaRoute: typeof DestinationsKanhaRoute
-  DestinationsKazirangaRoute: typeof DestinationsKazirangaRoute
-  DestinationsRanthamboreRoute: typeof DestinationsRanthamboreRoute
-  DestinationsTadobaRoute: typeof DestinationsTadobaRoute
   DestinationsIndexRoute: typeof DestinationsIndexRoute
+  DestinationsBandhavgarhIndexRoute: typeof DestinationsBandhavgarhIndexRoute
+  DestinationsCorbettIndexRoute: typeof DestinationsCorbettIndexRoute
+  DestinationsKanhaIndexRoute: typeof DestinationsKanhaIndexRoute
+  DestinationsKazirangaIndexRoute: typeof DestinationsKazirangaIndexRoute
+  DestinationsRanthamboreIndexRoute: typeof DestinationsRanthamboreIndexRoute
+  DestinationsTadobaIndexRoute: typeof DestinationsTadobaIndexRoute
+  DestinationsRanthamboreLodgesJunaMahalRoute: typeof DestinationsRanthamboreLodgesJunaMahalRoute
+  DestinationsRanthamboreLodgesIndexRoute: typeof DestinationsRanthamboreLodgesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -250,46 +282,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DestinationsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/destinations/tadoba': {
-      id: '/destinations/tadoba'
+    '/destinations/tadoba/': {
+      id: '/destinations/tadoba/'
       path: '/destinations/tadoba'
-      fullPath: '/destinations/tadoba'
-      preLoaderRoute: typeof DestinationsTadobaRouteImport
+      fullPath: '/destinations/tadoba/'
+      preLoaderRoute: typeof DestinationsTadobaIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/destinations/ranthambore': {
-      id: '/destinations/ranthambore'
+    '/destinations/ranthambore/': {
+      id: '/destinations/ranthambore/'
       path: '/destinations/ranthambore'
-      fullPath: '/destinations/ranthambore'
-      preLoaderRoute: typeof DestinationsRanthamboreRouteImport
+      fullPath: '/destinations/ranthambore/'
+      preLoaderRoute: typeof DestinationsRanthamboreIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/destinations/kaziranga': {
-      id: '/destinations/kaziranga'
+    '/destinations/kaziranga/': {
+      id: '/destinations/kaziranga/'
       path: '/destinations/kaziranga'
-      fullPath: '/destinations/kaziranga'
-      preLoaderRoute: typeof DestinationsKazirangaRouteImport
+      fullPath: '/destinations/kaziranga/'
+      preLoaderRoute: typeof DestinationsKazirangaIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/destinations/kanha': {
-      id: '/destinations/kanha'
+    '/destinations/kanha/': {
+      id: '/destinations/kanha/'
       path: '/destinations/kanha'
-      fullPath: '/destinations/kanha'
-      preLoaderRoute: typeof DestinationsKanhaRouteImport
+      fullPath: '/destinations/kanha/'
+      preLoaderRoute: typeof DestinationsKanhaIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/destinations/corbett': {
-      id: '/destinations/corbett'
+    '/destinations/corbett/': {
+      id: '/destinations/corbett/'
       path: '/destinations/corbett'
-      fullPath: '/destinations/corbett'
-      preLoaderRoute: typeof DestinationsCorbettRouteImport
+      fullPath: '/destinations/corbett/'
+      preLoaderRoute: typeof DestinationsCorbettIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/destinations/bandhavgarh': {
-      id: '/destinations/bandhavgarh'
+    '/destinations/bandhavgarh/': {
+      id: '/destinations/bandhavgarh/'
       path: '/destinations/bandhavgarh'
-      fullPath: '/destinations/bandhavgarh'
-      preLoaderRoute: typeof DestinationsBandhavgarhRouteImport
+      fullPath: '/destinations/bandhavgarh/'
+      preLoaderRoute: typeof DestinationsBandhavgarhIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/destinations/ranthambore/lodges/': {
+      id: '/destinations/ranthambore/lodges/'
+      path: '/destinations/ranthambore/lodges'
+      fullPath: '/destinations/ranthambore/lodges/'
+      preLoaderRoute: typeof DestinationsRanthamboreLodgesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/destinations/ranthambore/lodges/juna-mahal': {
+      id: '/destinations/ranthambore/lodges/juna-mahal'
+      path: '/destinations/ranthambore/lodges/juna-mahal'
+      fullPath: '/destinations/ranthambore/lodges/juna-mahal'
+      preLoaderRoute: typeof DestinationsRanthamboreLodgesJunaMahalRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -302,13 +348,17 @@ const rootRouteChildren: RootRouteChildren = {
   ItinerariesRoute: ItinerariesRoute,
   LodgesRoute: LodgesRoute,
   PhotographyRoute: PhotographyRoute,
-  DestinationsBandhavgarhRoute: DestinationsBandhavgarhRoute,
-  DestinationsCorbettRoute: DestinationsCorbettRoute,
-  DestinationsKanhaRoute: DestinationsKanhaRoute,
-  DestinationsKazirangaRoute: DestinationsKazirangaRoute,
-  DestinationsRanthamboreRoute: DestinationsRanthamboreRoute,
-  DestinationsTadobaRoute: DestinationsTadobaRoute,
   DestinationsIndexRoute: DestinationsIndexRoute,
+  DestinationsBandhavgarhIndexRoute: DestinationsBandhavgarhIndexRoute,
+  DestinationsCorbettIndexRoute: DestinationsCorbettIndexRoute,
+  DestinationsKanhaIndexRoute: DestinationsKanhaIndexRoute,
+  DestinationsKazirangaIndexRoute: DestinationsKazirangaIndexRoute,
+  DestinationsRanthamboreIndexRoute: DestinationsRanthamboreIndexRoute,
+  DestinationsTadobaIndexRoute: DestinationsTadobaIndexRoute,
+  DestinationsRanthamboreLodgesJunaMahalRoute:
+    DestinationsRanthamboreLodgesJunaMahalRoute,
+  DestinationsRanthamboreLodgesIndexRoute:
+    DestinationsRanthamboreLodgesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
