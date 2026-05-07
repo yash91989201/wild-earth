@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Button } from "@wild-earth/ui/components/button";
 import {
 	Carousel,
-	CarouselApi,
+	type CarouselApi,
 	CarouselContent,
 	CarouselItem,
 	CarouselNext,
@@ -130,12 +130,16 @@ function RoomGallery({
 	const [current, setCurrent] = useState(0);
 
 	const onSelect = useCallback(() => {
-		if (!api) return;
+		if (!api) {
+			return;
+		}
 		setCurrent(api.selectedScrollSnap());
 	}, [api]);
 
 	useEffect(() => {
-		if (!api) return;
+		if (!api) {
+			return;
+		}
 		onSelect();
 		api.on("select", onSelect);
 		return () => {
@@ -167,13 +171,9 @@ function RoomGallery({
 				opts={{ align: "start", loop: true }}
 				setApi={setApi}
 			>
-				<CarouselContent className="ml-0 h-full"
-				>
+				<CarouselContent className="ml-0 h-full">
 					{room.images.map((image, i) => (
-						<CarouselItem
-							key={i}
-							className="relative h-full pl-0"
-						>
+						<CarouselItem className="relative h-full pl-0" key={i}>
 							<motion.img
 								alt={`${room.name} - ${i + 1}`}
 								animate={{ opacity: 1, scale: 1 }}
@@ -196,11 +196,11 @@ function RoomGallery({
 						<div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
 							<AnimatePresence mode="wait">
 								<motion.div
-									key={current}
 									animate={{ opacity: 1, y: 0 }}
 									className="max-w-xl"
 									exit={{ opacity: 0, y: -10 }}
 									initial={{ opacity: 0, y: 10 }}
+									key={current}
 									transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
 								>
 									<p className="text-[10px] uppercase tracking-[0.2em] text-accent sm:text-xs">
@@ -250,6 +250,14 @@ function RouteComponent() {
 	return (
 		<main className="flex-grow bg-background">
 			<section className="relative flex h-[90vh] items-center justify-center overflow-hidden">
+				{/* Blurred backdrop masks low-res upscaling until a larger asset is available */}
+				<motion.img
+					alt=""
+					aria-hidden="true"
+					className="absolute inset-0 h-full w-full object-cover blur-2xl"
+					src="/assets/ranthambore/lodges/juna-mahal/image.jpg"
+					style={{ y, scale: 1.3 }}
+				/>
 				<motion.img
 					alt="Juna Mahal lodge"
 					className="absolute inset-0 h-full w-full object-cover"
@@ -444,21 +452,24 @@ function RouteComponent() {
 				</div>
 
 				<Dialog
-					open={!!selectedRoom}
 					onOpenChange={(open) => !open && setSelectedRoom(null)}
+					open={!!selectedRoom}
 				>
-				<DialogContent
-					showCloseButton={false}
-					overlayClassName="duration-500"
-					className="h-screen w-screen !max-w-none overflow-hidden rounded-none border-none bg-black p-0 !flex !flex-col !gap-0 duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] sm:h-[75vh] sm:w-[75vw] sm:rounded-[40px]"
-				>
-					<DialogTitle className="sr-only">
-						{displayRoomRef.current?.name ?? ""}
-					</DialogTitle>
-					{displayRoomRef.current && (
-						<RoomGallery room={displayRoomRef.current} onClose={() => setSelectedRoom(null)} />
-					)}
-				</DialogContent>
+					<DialogContent
+						className="h-screen w-screen !max-w-none overflow-hidden rounded-none border-none bg-black p-0 !flex !flex-col !gap-0 duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] sm:h-[75vh] sm:w-[75vw] sm:rounded-[40px]"
+						overlayClassName="duration-500"
+						showCloseButton={false}
+					>
+						<DialogTitle className="sr-only">
+							{displayRoomRef.current?.name ?? ""}
+						</DialogTitle>
+						{displayRoomRef.current && (
+							<RoomGallery
+								onClose={() => setSelectedRoom(null)}
+								room={displayRoomRef.current}
+							/>
+						)}
+					</DialogContent>
 				</Dialog>
 			</section>
 

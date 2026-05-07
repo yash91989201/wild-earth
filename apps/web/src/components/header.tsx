@@ -129,7 +129,7 @@ export default function Header() {
 		lodgesByDestination[0]?.destination ?? ""
 	);
 	const [expandedMobileDestination, setExpandedMobileDestination] =
-		useState("");
+		useState("destinations");
 	const router = useRouterState();
 	const navigate = useNavigate();
 	const pathname = router.location.pathname;
@@ -392,25 +392,45 @@ export default function Header() {
 										ease: easeOutExpo,
 									}}
 								>
-									{/* Destinations & Lodges — merged */}
-									<p className="mb-3 mt-0 font-bold text-muted-foreground text-xs uppercase tracking-[0.2em]">
-										Destinations
-									</p>
+									{/* Destinations Dropdown */}
 									<div className="space-y-1">
-										{lodgesByDestination.map((park) => {
-											const isExpanded =
-												expandedMobileDestination === park.destination;
-											const isParkActive = pathname === park.to;
-											return (
-												<div key={park.to}>
-													<div className="flex items-center justify-between py-3">
+										<div
+											className="flex items-center justify-between py-3 cursor-pointer"
+											onClick={() =>
+												setExpandedMobileDestination((v) =>
+													v === "destinations" ? "" : "destinations"
+												)
+											}
+										>
+											<span className="flex items-center gap-3 font-serif text-xl text-foreground">
+												<IconMapPin className="h-5 w-5 text-accent" />
+												Destination
+											</span>
+											<IconChevronRight
+												className={cn(
+													"h-5 w-5 text-muted-foreground transition-transform",
+													expandedMobileDestination === "destinations" && "rotate-90"
+												)}
+											/>
+										</div>
+										<AnimatePresence initial={false}>
+											{expandedMobileDestination === "destinations" && (
+												<motion.div
+													animate={{ height: "auto", opacity: 1 }}
+													className="overflow-hidden pl-8"
+													exit={{ height: 0, opacity: 0 }}
+													initial={{ height: 0, opacity: 0 }}
+													transition={{ duration: 0.3, ease: easeOutExpo }}
+												>
+													{lodgesByDestination.map((park) => (
 														<Link
 															className={cn(
-																"flex items-center gap-3 transition-colors",
-																isParkActive || isExpanded
+																"flex items-center gap-3 py-3 transition-colors",
+																pathname === park.to
 																	? "text-accent"
 																	: "text-foreground hover:text-accent"
 															)}
+															key={park.to}
 															onClick={() => setMenuOpen(false)}
 															to={park.to}
 														>
@@ -419,76 +439,63 @@ export default function Header() {
 																{park.destination}
 															</span>
 														</Link>
-														<Button
-															className="h-auto p-2"
-															onClick={() =>
-																setExpandedMobileDestination((v) =>
-																	v === park.destination ? "" : park.destination
-																)
-															}
-															variant="ghost"
+													))}
+												</motion.div>
+											)}
+										</AnimatePresence>
+									</div>
+
+									{/* Lodges Dropdown */}
+									<div className="space-y-1">
+										<div
+											className="flex items-center justify-between py-3 cursor-pointer"
+											onClick={() =>
+												setExpandedMobileDestination((v) =>
+													v === "lodges" ? "" : "lodges"
+												)
+											}
+										>
+											<span className="flex items-center gap-3 font-serif text-xl text-foreground">
+												<IconTent className="h-5 w-5 text-accent" strokeWidth={1.5} />
+												Lodge
+											</span>
+											<IconChevronRight
+												className={cn(
+													"h-5 w-5 text-muted-foreground transition-transform",
+													expandedMobileDestination === "lodges" && "rotate-90"
+												)}
+											/>
+										</div>
+										<AnimatePresence initial={false}>
+											{expandedMobileDestination === "lodges" && (
+												<motion.div
+													animate={{ height: "auto", opacity: 1 }}
+													className="overflow-hidden pl-8"
+													exit={{ height: 0, opacity: 0 }}
+													initial={{ height: 0, opacity: 0 }}
+													transition={{ duration: 0.3, ease: easeOutExpo }}
+												>
+													{lodgesByDestination.map((park) => (
+														<Link
+															className={cn(
+																"flex items-center gap-3 py-3 transition-colors",
+																pathname === `${park.to}/lodges`
+																	? "text-accent"
+																	: "text-foreground hover:text-accent"
+															)}
+															key={park.to}
+															onClick={() => setMenuOpen(false)}
+															to={`${park.to}/lodges`}
 														>
-															<IconChevronRight
-																className={cn(
-																	"h-5 w-5 transition-transform",
-																	isExpanded && "rotate-90"
-																)}
-															/>
-														</Button>
-													</div>
-													<AnimatePresence initial={false}>
-														{isExpanded && (
-															<motion.div
-																animate={{ height: "auto", opacity: 1 }}
-																className="ml-8 overflow-hidden"
-																exit={{ height: 0, opacity: 0 }}
-																initial={{ height: 0, opacity: 0 }}
-																transition={{
-																	duration: 0.3,
-																	ease: easeOutExpo,
-																}}
-															>
-																<Link
-																	className="flex items-center gap-2 py-2 text-sm transition-colors hover:text-accent"
-																	onClick={() => setMenuOpen(false)}
-																	to={park.to}
-																>
-																	<IconMapPin className="h-4 w-4 text-accent" />
-																	<span
-																		className={cn(
-																			pathname === park.to &&
-																				"font-semibold text-accent",
-																			"text-muted-foreground"
-																		)}
-																	>
-																		Explore Park
-																	</span>
-																</Link>
-																{park.lodges.map((lodge) => (
-																	<Link
-																		className={cn(
-																			"flex items-center gap-2 py-2 text-sm transition-colors",
-																			pathname === lodge.to
-																				? "font-semibold text-accent"
-																				: "text-muted-foreground hover:text-accent"
-																		)}
-																		key={lodge.to}
-																		onClick={() => setMenuOpen(false)}
-																		to={lodge.to}
-																	>
-																		<IconTent
-																			className="h-4 w-4 text-accent"
-																			strokeWidth={1.5}
-																		/>
-																		{lodge.label}
-																	</Link>
-																))}
-															</motion.div>
-														)}
-													</AnimatePresence>
-												</div>
-											);
-										})}
+															<IconTent className="h-5 w-5 text-accent" strokeWidth={1.5} />
+															<span className="font-serif text-xl">
+																{park.destination}
+															</span>
+														</Link>
+													))}
+												</motion.div>
+											)}
+										</AnimatePresence>
 									</div>
 
 									<Separator className="my-3" />
@@ -537,7 +544,7 @@ export default function Header() {
 									</div>
 
 									{/* CTA Section */}
-									<div className="mt-10">
+									<div className="sticky bottom-0 mt-10 bg-background pb-8">
 										<Link
 											className={cn(
 												buttonVariants({ size: "lg" }),
