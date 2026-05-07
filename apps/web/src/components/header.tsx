@@ -422,23 +422,33 @@ export default function Header() {
 													initial={{ height: 0, opacity: 0 }}
 													transition={{ duration: 0.3, ease: easeOutExpo }}
 												>
-													{lodgesByDestination.map((park) => (
-														<Link
-															className={cn(
-																"flex items-center gap-3 py-3 transition-colors",
-																pathname === park.to
-																	? "text-accent"
-																	: "text-foreground hover:text-accent"
-															)}
+													{lodgesByDestination.map((park, index) => (
+														<motion.div
 															key={park.to}
-															onClick={() => setMenuOpen(false)}
-															to={park.to}
+															initial={{ opacity: 0, x: -10 }}
+															animate={{ opacity: 1, x: 0 }}
+															transition={{
+																delay: index * 0.08,
+																duration: 0.3,
+																ease: [0.25, 0.1, 0.25, 1],
+															}}
 														>
-															<IconMapPin className="h-5 w-5 text-accent" />
-															<span className="font-serif text-xl">
-																{park.destination}
-															</span>
-														</Link>
+															<Link
+																className={cn(
+																	"flex items-center gap-3 py-3 transition-colors",
+																	pathname === park.to
+																		? "text-accent"
+																		: "text-foreground hover:text-accent"
+																)}
+																onClick={() => setMenuOpen(false)}
+																to={park.to}
+															>
+																<IconMapPin className="h-5 w-5 text-accent" />
+																<span className="font-serif text-xl">
+																	{park.destination}
+																</span>
+															</Link>
+														</motion.div>
 													))}
 												</motion.div>
 											)}
@@ -475,23 +485,33 @@ export default function Header() {
 													initial={{ height: 0, opacity: 0 }}
 													transition={{ duration: 0.3, ease: easeOutExpo }}
 												>
-													{lodgesByDestination.map((park) => (
-														<Link
-															className={cn(
-																"flex items-center gap-3 py-3 transition-colors",
-																pathname === `${park.to}/lodges`
-																	? "text-accent"
-																	: "text-foreground hover:text-accent"
-															)}
+													{lodgesByDestination.map((park, index) => (
+														<motion.div
 															key={park.to}
-															onClick={() => setMenuOpen(false)}
-															to={`${park.to}/lodges`}
+															initial={{ opacity: 0, x: -10 }}
+															animate={{ opacity: 1, x: 0 }}
+															transition={{
+																delay: index * 0.08,
+																duration: 0.3,
+																ease: [0.25, 0.1, 0.25, 1],
+															}}
 														>
-															<IconTent className="h-5 w-5 text-accent" strokeWidth={1.5} />
-															<span className="font-serif text-xl">
-																{park.destination}
-															</span>
-														</Link>
+															<Link
+																className={cn(
+																	"flex items-center gap-3 py-3 transition-colors",
+																	pathname === `${park.to}/lodges`
+																		? "text-accent"
+																		: "text-foreground hover:text-accent"
+																)}
+																onClick={() => setMenuOpen(false)}
+																to={`${park.to}/lodges`}
+															>
+																<IconTent className="h-5 w-5 text-accent" strokeWidth={1.5} />
+																<span className="font-serif text-xl">
+																	{park.destination}
+																</span>
+															</Link>
+														</motion.div>
 													))}
 												</motion.div>
 											)}
