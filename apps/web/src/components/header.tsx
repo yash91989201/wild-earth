@@ -505,16 +505,17 @@ export default function Header() {
 								>
 									{/* Destinations Dropdown */}
 									<div className="space-y-1">
-										<div
-											className="flex items-center justify-between py-3 cursor-pointer"
+										<Button
+											className="flex w-full items-center justify-between py-3 px-0 h-auto hover:bg-transparent"
 											onClick={() => {
 												setExpandedMobileDestination((v) =>
 													v === "destinations" ? "" : "destinations"
 												);
 												setExpandedMobileLodgeDestination("");
 											}}
+											variant="ghost"
 										>
-											<span className="flex items-center gap-3 font-serif text-xl text-foreground">
+											<span className="flex items-center gap-3 font-serif text-xl text-foreground font-normal">
 												<IconMapPin className="h-5 w-5 text-accent" />
 												Destination
 											</span>
@@ -525,7 +526,7 @@ export default function Header() {
 														"rotate-90"
 												)}
 											/>
-										</div>
+										</Button>
 										<AnimatePresence initial={false}>
 											{expandedMobileDestination === "destinations" && (
 												<motion.div
@@ -575,18 +576,18 @@ export default function Header() {
 												Lodges
 											</span>
 										</div>
-										<div className="space-y-2 pl-2">
+										<div className="space-y-3">
 											{lodgesByDestination.map((park) => (
 												<div
 													className="border-b border-border/50 pb-2 last:border-0 last:pb-0"
 													key={park.to}
 												>
-													<button
+													<Button
 														aria-expanded={
 															expandedMobileLodgeDestination ===
 															park.destination
 														}
-														className="flex w-full items-center justify-between py-2 text-left"
+														className="flex w-full items-center justify-between p-3 h-auto hover:bg-transparent font-normal"
 														onClick={() => {
 															if (
 																expandedMobileLodgeDestination ===
@@ -606,6 +607,7 @@ export default function Header() {
 																);
 															}
 														}}
+														variant="ghost"
 													>
 														<span
 															className={cn(
@@ -629,7 +631,7 @@ export default function Header() {
 																	park.destination && "rotate-90"
 															)}
 														/>
-													</button>
+													</Button>
 													<AnimatePresence initial={false}>
 														{expandedMobileLodgeDestination ===
 															park.destination && (
@@ -651,17 +653,16 @@ export default function Header() {
 																	>
 																		{"categories" in park && park.categories ? (
 																			park.categories.map((cat) => (
-																				<button
+																				<Button
 																					aria-selected={
 																						activeMobileLodgeCategory ===
 																						cat.category
 																					}
 																					className={cn(
-																						"rounded-full px-3 py-1 text-xs font-medium transition-colors border",
-																						activeMobileLodgeCategory ===
-																							cat.category
-																							? "bg-primary text-primary-foreground border-primary"
-																							: "bg-transparent text-muted-foreground border-border hover:border-primary/50"
+																						"rounded-full h-7 px-3 text-xs font-medium transition-colors",
+																						activeMobileLodgeCategory !==
+																							cat.category &&
+																							"text-muted-foreground border-border hover:border-primary/50 bg-transparent"
 																					)}
 																					key={cat.category}
 																					onClick={() =>
@@ -670,18 +671,27 @@ export default function Header() {
 																						)
 																					}
 																					role="tab"
+																					size="sm"
+																					variant={
+																						activeMobileLodgeCategory ===
+																						cat.category
+																							? "default"
+																							: "outline"
+																					}
 																				>
 																					{cat.category}
-																				</button>
+																				</Button>
 																			))
 																		) : (
-																			<button
+																			<Button
 																				aria-selected={true}
-																				className="rounded-full px-3 py-1 text-xs font-medium bg-primary text-primary-foreground border border-primary"
+																				className="rounded-full h-7 px-3 text-xs font-medium"
 																				role="tab"
+																				size="sm"
+																				variant="default"
 																			>
 																				Featured
-																			</button>
+																			</Button>
 																		)}
 																	</div>
 
