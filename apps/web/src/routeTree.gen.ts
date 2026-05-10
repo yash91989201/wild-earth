@@ -23,7 +23,17 @@ import { Route as DestinationsKanhaIndexRouteImport } from './routes/destination
 import { Route as DestinationsCorbettIndexRouteImport } from './routes/destinations/corbett/index'
 import { Route as DestinationsBandhavgarhIndexRouteImport } from './routes/destinations/bandhavgarh/index'
 import { Route as DestinationsRanthamboreLodgesIndexRouteImport } from './routes/destinations/ranthambore/lodges/index'
+import { Route as DestinationsRanthamboreLodgesTigressResortRouteImport } from './routes/destinations/ranthambore/lodges/tigress-resort'
+import { Route as DestinationsRanthamboreLodgesTajSawaiVilasRouteImport } from './routes/destinations/ranthambore/lodges/taj-sawai-vilas'
+import { Route as DestinationsRanthamboreLodgesSujahSherBaghRouteImport } from './routes/destinations/ranthambore/lodges/sujah-sher-bagh'
+import { Route as DestinationsRanthamboreLodgesSixSensesFortBarwaraRouteImport } from './routes/destinations/ranthambore/lodges/six-senses-fort-barwara'
+import { Route as DestinationsRanthamboreLodgesSawaiShivirRanthamboreRouteImport } from './routes/destinations/ranthambore/lodges/sawai-shivir-ranthambore'
+import { Route as DestinationsRanthamboreLodgesOberoiVanyaVilasRouteImport } from './routes/destinations/ranthambore/lodges/oberoi-vanya-vilas'
+import { Route as DestinationsRanthamboreLodgesNahargarhResortRouteImport } from './routes/destinations/ranthambore/lodges/nahargarh-resort'
+import { Route as DestinationsRanthamboreLodgesKiplingLodgeRouteImport } from './routes/destinations/ranthambore/lodges/kipling-lodge'
 import { Route as DestinationsRanthamboreLodgesJunaMahalRouteImport } from './routes/destinations/ranthambore/lodges/juna-mahal'
+import { Route as DestinationsRanthamboreLodgesAmanIKhasRouteImport } from './routes/destinations/ranthambore/lodges/aman-i-khas'
+import { Route as DestinationsRanthamboreLodgesAamaghatiResortRouteImport } from './routes/destinations/ranthambore/lodges/aamaghati-resort'
 
 const PhotographyRoute = PhotographyRouteImport.update({
   id: '/photography',
@@ -100,10 +110,70 @@ const DestinationsRanthamboreLodgesIndexRoute =
     path: '/destinations/ranthambore/lodges/',
     getParentRoute: () => rootRouteImport,
   } as any)
+const DestinationsRanthamboreLodgesTigressResortRoute =
+  DestinationsRanthamboreLodgesTigressResortRouteImport.update({
+    id: '/destinations/ranthambore/lodges/tigress-resort',
+    path: '/destinations/ranthambore/lodges/tigress-resort',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DestinationsRanthamboreLodgesTajSawaiVilasRoute =
+  DestinationsRanthamboreLodgesTajSawaiVilasRouteImport.update({
+    id: '/destinations/ranthambore/lodges/taj-sawai-vilas',
+    path: '/destinations/ranthambore/lodges/taj-sawai-vilas',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DestinationsRanthamboreLodgesSujahSherBaghRoute =
+  DestinationsRanthamboreLodgesSujahSherBaghRouteImport.update({
+    id: '/destinations/ranthambore/lodges/sujah-sher-bagh',
+    path: '/destinations/ranthambore/lodges/sujah-sher-bagh',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DestinationsRanthamboreLodgesSixSensesFortBarwaraRoute =
+  DestinationsRanthamboreLodgesSixSensesFortBarwaraRouteImport.update({
+    id: '/destinations/ranthambore/lodges/six-senses-fort-barwara',
+    path: '/destinations/ranthambore/lodges/six-senses-fort-barwara',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DestinationsRanthamboreLodgesSawaiShivirRanthamboreRoute =
+  DestinationsRanthamboreLodgesSawaiShivirRanthamboreRouteImport.update({
+    id: '/destinations/ranthambore/lodges/sawai-shivir-ranthambore',
+    path: '/destinations/ranthambore/lodges/sawai-shivir-ranthambore',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DestinationsRanthamboreLodgesOberoiVanyaVilasRoute =
+  DestinationsRanthamboreLodgesOberoiVanyaVilasRouteImport.update({
+    id: '/destinations/ranthambore/lodges/oberoi-vanya-vilas',
+    path: '/destinations/ranthambore/lodges/oberoi-vanya-vilas',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DestinationsRanthamboreLodgesNahargarhResortRoute =
+  DestinationsRanthamboreLodgesNahargarhResortRouteImport.update({
+    id: '/destinations/ranthambore/lodges/nahargarh-resort',
+    path: '/destinations/ranthambore/lodges/nahargarh-resort',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DestinationsRanthamboreLodgesKiplingLodgeRoute =
+  DestinationsRanthamboreLodgesKiplingLodgeRouteImport.update({
+    id: '/destinations/ranthambore/lodges/kipling-lodge',
+    path: '/destinations/ranthambore/lodges/kipling-lodge',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DestinationsRanthamboreLodgesJunaMahalRoute =
   DestinationsRanthamboreLodgesJunaMahalRouteImport.update({
     id: '/destinations/ranthambore/lodges/juna-mahal',
     path: '/destinations/ranthambore/lodges/juna-mahal',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DestinationsRanthamboreLodgesAmanIKhasRoute =
+  DestinationsRanthamboreLodgesAmanIKhasRouteImport.update({
+    id: '/destinations/ranthambore/lodges/aman-i-khas',
+    path: '/destinations/ranthambore/lodges/aman-i-khas',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DestinationsRanthamboreLodgesAamaghatiResortRoute =
+  DestinationsRanthamboreLodgesAamaghatiResortRouteImport.update({
+    id: '/destinations/ranthambore/lodges/aamaghati-resort',
+    path: '/destinations/ranthambore/lodges/aamaghati-resort',
     getParentRoute: () => rootRouteImport,
   } as any)
 
@@ -121,7 +191,17 @@ export interface FileRoutesByFullPath {
   '/destinations/kaziranga/': typeof DestinationsKazirangaIndexRoute
   '/destinations/ranthambore/': typeof DestinationsRanthamboreIndexRoute
   '/destinations/tadoba/': typeof DestinationsTadobaIndexRoute
+  '/destinations/ranthambore/lodges/aamaghati-resort': typeof DestinationsRanthamboreLodgesAamaghatiResortRoute
+  '/destinations/ranthambore/lodges/aman-i-khas': typeof DestinationsRanthamboreLodgesAmanIKhasRoute
   '/destinations/ranthambore/lodges/juna-mahal': typeof DestinationsRanthamboreLodgesJunaMahalRoute
+  '/destinations/ranthambore/lodges/kipling-lodge': typeof DestinationsRanthamboreLodgesKiplingLodgeRoute
+  '/destinations/ranthambore/lodges/nahargarh-resort': typeof DestinationsRanthamboreLodgesNahargarhResortRoute
+  '/destinations/ranthambore/lodges/oberoi-vanya-vilas': typeof DestinationsRanthamboreLodgesOberoiVanyaVilasRoute
+  '/destinations/ranthambore/lodges/sawai-shivir-ranthambore': typeof DestinationsRanthamboreLodgesSawaiShivirRanthamboreRoute
+  '/destinations/ranthambore/lodges/six-senses-fort-barwara': typeof DestinationsRanthamboreLodgesSixSensesFortBarwaraRoute
+  '/destinations/ranthambore/lodges/sujah-sher-bagh': typeof DestinationsRanthamboreLodgesSujahSherBaghRoute
+  '/destinations/ranthambore/lodges/taj-sawai-vilas': typeof DestinationsRanthamboreLodgesTajSawaiVilasRoute
+  '/destinations/ranthambore/lodges/tigress-resort': typeof DestinationsRanthamboreLodgesTigressResortRoute
   '/destinations/ranthambore/lodges/': typeof DestinationsRanthamboreLodgesIndexRoute
 }
 export interface FileRoutesByTo {
@@ -138,7 +218,17 @@ export interface FileRoutesByTo {
   '/destinations/kaziranga': typeof DestinationsKazirangaIndexRoute
   '/destinations/ranthambore': typeof DestinationsRanthamboreIndexRoute
   '/destinations/tadoba': typeof DestinationsTadobaIndexRoute
+  '/destinations/ranthambore/lodges/aamaghati-resort': typeof DestinationsRanthamboreLodgesAamaghatiResortRoute
+  '/destinations/ranthambore/lodges/aman-i-khas': typeof DestinationsRanthamboreLodgesAmanIKhasRoute
   '/destinations/ranthambore/lodges/juna-mahal': typeof DestinationsRanthamboreLodgesJunaMahalRoute
+  '/destinations/ranthambore/lodges/kipling-lodge': typeof DestinationsRanthamboreLodgesKiplingLodgeRoute
+  '/destinations/ranthambore/lodges/nahargarh-resort': typeof DestinationsRanthamboreLodgesNahargarhResortRoute
+  '/destinations/ranthambore/lodges/oberoi-vanya-vilas': typeof DestinationsRanthamboreLodgesOberoiVanyaVilasRoute
+  '/destinations/ranthambore/lodges/sawai-shivir-ranthambore': typeof DestinationsRanthamboreLodgesSawaiShivirRanthamboreRoute
+  '/destinations/ranthambore/lodges/six-senses-fort-barwara': typeof DestinationsRanthamboreLodgesSixSensesFortBarwaraRoute
+  '/destinations/ranthambore/lodges/sujah-sher-bagh': typeof DestinationsRanthamboreLodgesSujahSherBaghRoute
+  '/destinations/ranthambore/lodges/taj-sawai-vilas': typeof DestinationsRanthamboreLodgesTajSawaiVilasRoute
+  '/destinations/ranthambore/lodges/tigress-resort': typeof DestinationsRanthamboreLodgesTigressResortRoute
   '/destinations/ranthambore/lodges': typeof DestinationsRanthamboreLodgesIndexRoute
 }
 export interface FileRoutesById {
@@ -156,7 +246,17 @@ export interface FileRoutesById {
   '/destinations/kaziranga/': typeof DestinationsKazirangaIndexRoute
   '/destinations/ranthambore/': typeof DestinationsRanthamboreIndexRoute
   '/destinations/tadoba/': typeof DestinationsTadobaIndexRoute
+  '/destinations/ranthambore/lodges/aamaghati-resort': typeof DestinationsRanthamboreLodgesAamaghatiResortRoute
+  '/destinations/ranthambore/lodges/aman-i-khas': typeof DestinationsRanthamboreLodgesAmanIKhasRoute
   '/destinations/ranthambore/lodges/juna-mahal': typeof DestinationsRanthamboreLodgesJunaMahalRoute
+  '/destinations/ranthambore/lodges/kipling-lodge': typeof DestinationsRanthamboreLodgesKiplingLodgeRoute
+  '/destinations/ranthambore/lodges/nahargarh-resort': typeof DestinationsRanthamboreLodgesNahargarhResortRoute
+  '/destinations/ranthambore/lodges/oberoi-vanya-vilas': typeof DestinationsRanthamboreLodgesOberoiVanyaVilasRoute
+  '/destinations/ranthambore/lodges/sawai-shivir-ranthambore': typeof DestinationsRanthamboreLodgesSawaiShivirRanthamboreRoute
+  '/destinations/ranthambore/lodges/six-senses-fort-barwara': typeof DestinationsRanthamboreLodgesSixSensesFortBarwaraRoute
+  '/destinations/ranthambore/lodges/sujah-sher-bagh': typeof DestinationsRanthamboreLodgesSujahSherBaghRoute
+  '/destinations/ranthambore/lodges/taj-sawai-vilas': typeof DestinationsRanthamboreLodgesTajSawaiVilasRoute
+  '/destinations/ranthambore/lodges/tigress-resort': typeof DestinationsRanthamboreLodgesTigressResortRoute
   '/destinations/ranthambore/lodges/': typeof DestinationsRanthamboreLodgesIndexRoute
 }
 export interface FileRouteTypes {
@@ -175,7 +275,17 @@ export interface FileRouteTypes {
     | '/destinations/kaziranga/'
     | '/destinations/ranthambore/'
     | '/destinations/tadoba/'
+    | '/destinations/ranthambore/lodges/aamaghati-resort'
+    | '/destinations/ranthambore/lodges/aman-i-khas'
     | '/destinations/ranthambore/lodges/juna-mahal'
+    | '/destinations/ranthambore/lodges/kipling-lodge'
+    | '/destinations/ranthambore/lodges/nahargarh-resort'
+    | '/destinations/ranthambore/lodges/oberoi-vanya-vilas'
+    | '/destinations/ranthambore/lodges/sawai-shivir-ranthambore'
+    | '/destinations/ranthambore/lodges/six-senses-fort-barwara'
+    | '/destinations/ranthambore/lodges/sujah-sher-bagh'
+    | '/destinations/ranthambore/lodges/taj-sawai-vilas'
+    | '/destinations/ranthambore/lodges/tigress-resort'
     | '/destinations/ranthambore/lodges/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -192,7 +302,17 @@ export interface FileRouteTypes {
     | '/destinations/kaziranga'
     | '/destinations/ranthambore'
     | '/destinations/tadoba'
+    | '/destinations/ranthambore/lodges/aamaghati-resort'
+    | '/destinations/ranthambore/lodges/aman-i-khas'
     | '/destinations/ranthambore/lodges/juna-mahal'
+    | '/destinations/ranthambore/lodges/kipling-lodge'
+    | '/destinations/ranthambore/lodges/nahargarh-resort'
+    | '/destinations/ranthambore/lodges/oberoi-vanya-vilas'
+    | '/destinations/ranthambore/lodges/sawai-shivir-ranthambore'
+    | '/destinations/ranthambore/lodges/six-senses-fort-barwara'
+    | '/destinations/ranthambore/lodges/sujah-sher-bagh'
+    | '/destinations/ranthambore/lodges/taj-sawai-vilas'
+    | '/destinations/ranthambore/lodges/tigress-resort'
     | '/destinations/ranthambore/lodges'
   id:
     | '__root__'
@@ -209,7 +329,17 @@ export interface FileRouteTypes {
     | '/destinations/kaziranga/'
     | '/destinations/ranthambore/'
     | '/destinations/tadoba/'
+    | '/destinations/ranthambore/lodges/aamaghati-resort'
+    | '/destinations/ranthambore/lodges/aman-i-khas'
     | '/destinations/ranthambore/lodges/juna-mahal'
+    | '/destinations/ranthambore/lodges/kipling-lodge'
+    | '/destinations/ranthambore/lodges/nahargarh-resort'
+    | '/destinations/ranthambore/lodges/oberoi-vanya-vilas'
+    | '/destinations/ranthambore/lodges/sawai-shivir-ranthambore'
+    | '/destinations/ranthambore/lodges/six-senses-fort-barwara'
+    | '/destinations/ranthambore/lodges/sujah-sher-bagh'
+    | '/destinations/ranthambore/lodges/taj-sawai-vilas'
+    | '/destinations/ranthambore/lodges/tigress-resort'
     | '/destinations/ranthambore/lodges/'
   fileRoutesById: FileRoutesById
 }
@@ -227,7 +357,17 @@ export interface RootRouteChildren {
   DestinationsKazirangaIndexRoute: typeof DestinationsKazirangaIndexRoute
   DestinationsRanthamboreIndexRoute: typeof DestinationsRanthamboreIndexRoute
   DestinationsTadobaIndexRoute: typeof DestinationsTadobaIndexRoute
+  DestinationsRanthamboreLodgesAamaghatiResortRoute: typeof DestinationsRanthamboreLodgesAamaghatiResortRoute
+  DestinationsRanthamboreLodgesAmanIKhasRoute: typeof DestinationsRanthamboreLodgesAmanIKhasRoute
   DestinationsRanthamboreLodgesJunaMahalRoute: typeof DestinationsRanthamboreLodgesJunaMahalRoute
+  DestinationsRanthamboreLodgesKiplingLodgeRoute: typeof DestinationsRanthamboreLodgesKiplingLodgeRoute
+  DestinationsRanthamboreLodgesNahargarhResortRoute: typeof DestinationsRanthamboreLodgesNahargarhResortRoute
+  DestinationsRanthamboreLodgesOberoiVanyaVilasRoute: typeof DestinationsRanthamboreLodgesOberoiVanyaVilasRoute
+  DestinationsRanthamboreLodgesSawaiShivirRanthamboreRoute: typeof DestinationsRanthamboreLodgesSawaiShivirRanthamboreRoute
+  DestinationsRanthamboreLodgesSixSensesFortBarwaraRoute: typeof DestinationsRanthamboreLodgesSixSensesFortBarwaraRoute
+  DestinationsRanthamboreLodgesSujahSherBaghRoute: typeof DestinationsRanthamboreLodgesSujahSherBaghRoute
+  DestinationsRanthamboreLodgesTajSawaiVilasRoute: typeof DestinationsRanthamboreLodgesTajSawaiVilasRoute
+  DestinationsRanthamboreLodgesTigressResortRoute: typeof DestinationsRanthamboreLodgesTigressResortRoute
   DestinationsRanthamboreLodgesIndexRoute: typeof DestinationsRanthamboreLodgesIndexRoute
 }
 
@@ -331,11 +471,81 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DestinationsRanthamboreLodgesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/destinations/ranthambore/lodges/tigress-resort': {
+      id: '/destinations/ranthambore/lodges/tigress-resort'
+      path: '/destinations/ranthambore/lodges/tigress-resort'
+      fullPath: '/destinations/ranthambore/lodges/tigress-resort'
+      preLoaderRoute: typeof DestinationsRanthamboreLodgesTigressResortRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/destinations/ranthambore/lodges/taj-sawai-vilas': {
+      id: '/destinations/ranthambore/lodges/taj-sawai-vilas'
+      path: '/destinations/ranthambore/lodges/taj-sawai-vilas'
+      fullPath: '/destinations/ranthambore/lodges/taj-sawai-vilas'
+      preLoaderRoute: typeof DestinationsRanthamboreLodgesTajSawaiVilasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/destinations/ranthambore/lodges/sujah-sher-bagh': {
+      id: '/destinations/ranthambore/lodges/sujah-sher-bagh'
+      path: '/destinations/ranthambore/lodges/sujah-sher-bagh'
+      fullPath: '/destinations/ranthambore/lodges/sujah-sher-bagh'
+      preLoaderRoute: typeof DestinationsRanthamboreLodgesSujahSherBaghRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/destinations/ranthambore/lodges/six-senses-fort-barwara': {
+      id: '/destinations/ranthambore/lodges/six-senses-fort-barwara'
+      path: '/destinations/ranthambore/lodges/six-senses-fort-barwara'
+      fullPath: '/destinations/ranthambore/lodges/six-senses-fort-barwara'
+      preLoaderRoute: typeof DestinationsRanthamboreLodgesSixSensesFortBarwaraRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/destinations/ranthambore/lodges/sawai-shivir-ranthambore': {
+      id: '/destinations/ranthambore/lodges/sawai-shivir-ranthambore'
+      path: '/destinations/ranthambore/lodges/sawai-shivir-ranthambore'
+      fullPath: '/destinations/ranthambore/lodges/sawai-shivir-ranthambore'
+      preLoaderRoute: typeof DestinationsRanthamboreLodgesSawaiShivirRanthamboreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/destinations/ranthambore/lodges/oberoi-vanya-vilas': {
+      id: '/destinations/ranthambore/lodges/oberoi-vanya-vilas'
+      path: '/destinations/ranthambore/lodges/oberoi-vanya-vilas'
+      fullPath: '/destinations/ranthambore/lodges/oberoi-vanya-vilas'
+      preLoaderRoute: typeof DestinationsRanthamboreLodgesOberoiVanyaVilasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/destinations/ranthambore/lodges/nahargarh-resort': {
+      id: '/destinations/ranthambore/lodges/nahargarh-resort'
+      path: '/destinations/ranthambore/lodges/nahargarh-resort'
+      fullPath: '/destinations/ranthambore/lodges/nahargarh-resort'
+      preLoaderRoute: typeof DestinationsRanthamboreLodgesNahargarhResortRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/destinations/ranthambore/lodges/kipling-lodge': {
+      id: '/destinations/ranthambore/lodges/kipling-lodge'
+      path: '/destinations/ranthambore/lodges/kipling-lodge'
+      fullPath: '/destinations/ranthambore/lodges/kipling-lodge'
+      preLoaderRoute: typeof DestinationsRanthamboreLodgesKiplingLodgeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/destinations/ranthambore/lodges/juna-mahal': {
       id: '/destinations/ranthambore/lodges/juna-mahal'
       path: '/destinations/ranthambore/lodges/juna-mahal'
       fullPath: '/destinations/ranthambore/lodges/juna-mahal'
       preLoaderRoute: typeof DestinationsRanthamboreLodgesJunaMahalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/destinations/ranthambore/lodges/aman-i-khas': {
+      id: '/destinations/ranthambore/lodges/aman-i-khas'
+      path: '/destinations/ranthambore/lodges/aman-i-khas'
+      fullPath: '/destinations/ranthambore/lodges/aman-i-khas'
+      preLoaderRoute: typeof DestinationsRanthamboreLodgesAmanIKhasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/destinations/ranthambore/lodges/aamaghati-resort': {
+      id: '/destinations/ranthambore/lodges/aamaghati-resort'
+      path: '/destinations/ranthambore/lodges/aamaghati-resort'
+      fullPath: '/destinations/ranthambore/lodges/aamaghati-resort'
+      preLoaderRoute: typeof DestinationsRanthamboreLodgesAamaghatiResortRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -355,8 +565,28 @@ const rootRouteChildren: RootRouteChildren = {
   DestinationsKazirangaIndexRoute: DestinationsKazirangaIndexRoute,
   DestinationsRanthamboreIndexRoute: DestinationsRanthamboreIndexRoute,
   DestinationsTadobaIndexRoute: DestinationsTadobaIndexRoute,
+  DestinationsRanthamboreLodgesAamaghatiResortRoute:
+    DestinationsRanthamboreLodgesAamaghatiResortRoute,
+  DestinationsRanthamboreLodgesAmanIKhasRoute:
+    DestinationsRanthamboreLodgesAmanIKhasRoute,
   DestinationsRanthamboreLodgesJunaMahalRoute:
     DestinationsRanthamboreLodgesJunaMahalRoute,
+  DestinationsRanthamboreLodgesKiplingLodgeRoute:
+    DestinationsRanthamboreLodgesKiplingLodgeRoute,
+  DestinationsRanthamboreLodgesNahargarhResortRoute:
+    DestinationsRanthamboreLodgesNahargarhResortRoute,
+  DestinationsRanthamboreLodgesOberoiVanyaVilasRoute:
+    DestinationsRanthamboreLodgesOberoiVanyaVilasRoute,
+  DestinationsRanthamboreLodgesSawaiShivirRanthamboreRoute:
+    DestinationsRanthamboreLodgesSawaiShivirRanthamboreRoute,
+  DestinationsRanthamboreLodgesSixSensesFortBarwaraRoute:
+    DestinationsRanthamboreLodgesSixSensesFortBarwaraRoute,
+  DestinationsRanthamboreLodgesSujahSherBaghRoute:
+    DestinationsRanthamboreLodgesSujahSherBaghRoute,
+  DestinationsRanthamboreLodgesTajSawaiVilasRoute:
+    DestinationsRanthamboreLodgesTajSawaiVilasRoute,
+  DestinationsRanthamboreLodgesTigressResortRoute:
+    DestinationsRanthamboreLodgesTigressResortRoute,
   DestinationsRanthamboreLodgesIndexRoute:
     DestinationsRanthamboreLodgesIndexRoute,
 }
