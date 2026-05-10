@@ -117,34 +117,51 @@ const lodgesByDestination = [
 	{
 		destination: "Ranthambore",
 		to: "/destinations/ranthambore",
+		lodgesTo: "/destinations/ranthambore/lodges",
 		categories: ranthamboreLodges,
 	},
 	{
 		destination: "Jim Corbett",
 		to: "/destinations/corbett",
+		lodgesTo: "/destinations/corbett/lodges",
 		lodges: defaultLodges,
 	},
 	{
 		destination: "Kaziranga",
 		to: "/destinations/kaziranga",
+		lodgesTo: "/destinations/kaziranga/lodges",
 		lodges: defaultLodges,
 	},
 	{
 		destination: "Tadoba",
 		to: "/destinations/tadoba",
+		lodgesTo: "/destinations/tadoba/lodges",
 		lodges: defaultLodges,
 	},
 	{
 		destination: "Kanha",
 		to: "/destinations/kanha",
+		lodgesTo: "/destinations/kanha/lodges",
 		lodges: defaultLodges,
 	},
 	{
 		destination: "Bandhavgarh",
 		to: "/destinations/bandhavgarh",
+		lodgesTo: "/destinations/bandhavgarh/lodges",
 		lodges: defaultLodges,
 	},
 ];
+
+function getMobileLodgeLinks(lodges: LodgeLink[], lodgesTo: string) {
+	if (lodges.length <= 5) {
+		return lodges;
+	}
+
+	return [
+		...lodges.slice(0, 5),
+		{ label: "View all lodges", to: lodgesTo },
+	];
+}
 
 const easeOutExpo: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
@@ -353,7 +370,7 @@ export default function Header() {
 															onMouseEnter={() =>
 																setHoveredDestination(park.destination)
 															}
-															render={<Link to={park.to} />}
+															render={<Link to={park.lodgesTo} />}
 														>
 															<IconMapPin className="h-4 w-4 text-accent" />
 															<span>{park.destination}</span>
@@ -578,205 +595,221 @@ export default function Header() {
 										</div>
 										<div className="space-y-3">
 											{lodgesByDestination.map((park) => {
-												const isExpanded = expandedMobileLodgeDestination === park.destination;
+												const isExpanded =
+													expandedMobileLodgeDestination === park.destination;
 												return (
-												<div
-													className={cn(
-														"rounded-2xl transition-all duration-300",
-														isExpanded ? "bg-primary/5" : "bg-transparent"
-													)}
-													key={park.to}
-												>
-													<Button
-														aria-expanded={isExpanded}
+													<div
 														className={cn(
-															"flex w-full items-center justify-between p-3 h-auto hover:bg-transparent font-normal rounded-2xl",
-															isExpanded ? "text-accent" : "text-foreground"
+															"rounded-2xl transition-all duration-300",
+															isExpanded ? "bg-primary/5" : "bg-transparent"
 														)}
-														onClick={() => {
-															if (isExpanded) {
-																setExpandedMobileLodgeDestination("");
-															} else {
-																setExpandedMobileLodgeDestination(
-																	park.destination
-																);
-																setExpandedMobileDestination("");
-																setActiveMobileLodgeCategory(
-																	"categories" in park &&
-																		park.categories?.length
-																		? park.categories[0].category
-																		: "Featured"
-																);
-															}
-														}}
-														variant="ghost"
+														key={park.to}
 													>
-														<span
-															className="flex items-center gap-3 font-medium transition-colors"
-														>
-															<IconTent
-																className={cn("h-5 w-5", isExpanded ? "text-accent" : "text-muted-foreground")}
-																strokeWidth={1.5}
-															/>
-															{park.destination}
-														</span>
-														<IconChevronRight
+														<Button
+															aria-expanded={isExpanded}
 															className={cn(
-																"h-4 w-4 transition-transform duration-300",
-																isExpanded ? "rotate-90 text-accent" : "text-muted-foreground"
+																"flex w-full items-center justify-between p-3 h-auto hover:bg-transparent font-normal rounded-2xl",
+																isExpanded ? "text-accent" : "text-foreground"
 															)}
-														/>
-													</Button>
-													<AnimatePresence initial={false}>
-														{isExpanded && (
-															<motion.div
-																animate={{ height: "auto", opacity: 1 }}
-																className="overflow-hidden"
-																exit={{ height: 0, opacity: 0 }}
-																initial={{ height: 0, opacity: 0 }}
-																transition={{
-																	duration: 0.3,
-																	ease: easeOutExpo,
-																}}
-															>
-																<div className="px-3 pb-3 mt-1">
-																	<div className="rounded-xl bg-muted/30 p-3">
-																		{/* Tabs */}
-																		<div
-																			className="flex overflow-x-auto pb-2 -mx-1 px-1 gap-2 scrollbar-none"
-																			role="tablist"
-																		>
-																			{"categories" in park && park.categories ? (
-																				park.categories.map((cat) => (
-																					<Button
-																						aria-selected={
-																							activeMobileLodgeCategory ===
-																							cat.category
-																						}
-																						className={cn(
-																							"shrink-0 rounded-full h-7 px-3 text-xs font-medium transition-colors",
-																							activeMobileLodgeCategory !==
-																								cat.category &&
-																								"text-muted-foreground hover:bg-muted/80"
-																						)}
-																						key={cat.category}
-																						onClick={() =>
-																							setActiveMobileLodgeCategory(
+															onClick={() => {
+																if (isExpanded) {
+																	setExpandedMobileLodgeDestination("");
+																} else {
+																	setExpandedMobileLodgeDestination(
+																		park.destination
+																	);
+																	setExpandedMobileDestination("");
+																	setActiveMobileLodgeCategory(
+																		"categories" in park &&
+																			park.categories?.length
+																			? park.categories[0].category
+																			: "Featured"
+																	);
+																}
+															}}
+															variant="ghost"
+														>
+															<span className="flex items-center gap-3 font-medium transition-colors">
+																<IconTent
+																	className={cn(
+																		"h-5 w-5",
+																		isExpanded
+																			? "text-accent"
+																			: "text-muted-foreground"
+																	)}
+																	strokeWidth={1.5}
+																/>
+																{park.destination}
+															</span>
+															<IconChevronRight
+																className={cn(
+																	"h-4 w-4 transition-transform duration-300",
+																	isExpanded
+																		? "rotate-90 text-accent"
+																		: "text-muted-foreground"
+																)}
+															/>
+														</Button>
+														<AnimatePresence initial={false}>
+															{isExpanded && (
+																<motion.div
+																	animate={{ height: "auto", opacity: 1 }}
+																	className="overflow-hidden"
+																	exit={{ height: 0, opacity: 0 }}
+																	initial={{ height: 0, opacity: 0 }}
+																	transition={{
+																		duration: 0.3,
+																		ease: easeOutExpo,
+																	}}
+																>
+																	<div className="px-3 pb-3 mt-1">
+																		<div className="rounded-xl bg-muted/30 p-3">
+																			{/* Tabs */}
+																			<div
+																				className="flex overflow-x-auto pb-2 -mx-1 px-1 gap-2 scrollbar-none"
+																				role="tablist"
+																			>
+																				{"categories" in park &&
+																				park.categories ? (
+																					park.categories.map((cat) => (
+																						<Button
+																							aria-selected={
+																								activeMobileLodgeCategory ===
 																								cat.category
-																							)
-																						}
+																							}
+																							className={cn(
+																								"shrink-0 rounded-full h-7 px-3 text-xs font-medium transition-colors",
+																								activeMobileLodgeCategory !==
+																									cat.category &&
+																									"text-muted-foreground hover:bg-muted/80"
+																							)}
+																							key={cat.category}
+																							onClick={() =>
+																								setActiveMobileLodgeCategory(
+																									cat.category
+																								)
+																							}
+																							role="tab"
+																							size="sm"
+																							variant={
+																								activeMobileLodgeCategory ===
+																								cat.category
+																									? "default"
+																									: "ghost"
+																							}
+																						>
+																							{cat.category}
+																						</Button>
+																					))
+																				) : (
+																					<Button
+																						aria-selected={true}
+																						className="shrink-0 rounded-full h-7 px-3 text-xs font-medium"
 																						role="tab"
 																						size="sm"
-																						variant={
-																							activeMobileLodgeCategory ===
-																							cat.category
-																								? "default"
-																								: "ghost"
-																						}
+																						variant="default"
 																					>
-																						{cat.category}
+																						Featured
 																					</Button>
-																				))
-																			) : (
-																				<Button
-																					aria-selected={true}
-																					className="shrink-0 rounded-full h-7 px-3 text-xs font-medium"
-																					role="tab"
-																					size="sm"
-																					variant="default"
-																				>
-																					Featured
-																				</Button>
-																			)}
-																		</div>
+																				)}
+																			</div>
 
-																		{/* Tab Content */}
-																		<div className="pt-2">
-																			{"categories" in park && park.categories ? (
-																				park.categories
-																					.filter(
-																						(cat) =>
-																							cat.category ===
-																							activeMobileLodgeCategory
-																					)
-																					.map((cat) => (
-																						<motion.div
-																							animate={{ opacity: 1, y: 0 }}
-																							className="space-y-1"
-																							initial={{ opacity: 0, y: 5 }}
-																							key={cat.category}
-																							transition={{ duration: 0.2 }}
-																						>
-																							{cat.lodges.map((lodge) => (
-																								<Link
-																									className={cn(
-																										"group flex items-center justify-between rounded-lg p-2 transition-colors hover:bg-muted/80",
-																										pathname === lodge.to
-																											? "bg-primary/5 text-accent"
-																											: "text-foreground"
-																									)}
-																									key={lodge.to}
-																									onClick={() =>
-																										setMenuOpen(false)
-																									}
-																									to={lodge.to}
-																								>
-																									<span className="text-sm font-medium">
-																										{lodge.label}
-																									</span>
-																									<IconChevronRight
+																			{/* Tab Content */}
+																			<div className="pt-2">
+																				{"categories" in park &&
+																				park.categories ? (
+																					park.categories
+																						.filter(
+																							(cat) =>
+																								cat.category ===
+																								activeMobileLodgeCategory
+																						)
+																						.map((cat) => (
+																							<motion.div
+																								animate={{ opacity: 1, y: 0 }}
+																								className="space-y-1"
+																								initial={{ opacity: 0, y: 5 }}
+																								key={cat.category}
+																								transition={{ duration: 0.2 }}
+																							>
+																								{getMobileLodgeLinks(
+																									cat.lodges,
+																									park.lodgesTo
+																								).map((lodge) => (
+																									<Link
 																										className={cn(
-																											"h-4 w-4 transition-all",
+																											"group flex items-center justify-between rounded-lg p-2 transition-colors hover:bg-muted/80",
 																											pathname === lodge.to
-																												? "text-accent opacity-100"
-																												: "text-muted-foreground opacity-0 -translate-x-2 group-hover:translate-x-0 group-hover:opacity-100"
+																												? "bg-primary/5 text-accent"
+																												: "text-foreground"
 																										)}
-																									/>
-																								</Link>
-																							))}
-																						</motion.div>
-																					))
-																			) : (
-																				<motion.div
-																					animate={{ opacity: 1, y: 0 }}
-																					className="space-y-1"
-																					initial={{ opacity: 0, y: 5 }}
-																					transition={{ duration: 0.2 }}
-																				>
-																					{park.lodges?.map((lodge) => (
-																						<Link
-																							className={cn(
-																								"group flex items-center justify-between rounded-lg p-2 transition-colors hover:bg-muted/80",
-																								pathname === lodge.to
-																									? "bg-primary/5 text-accent"
-																									: "text-foreground"
-																							)}
-																							key={lodge.to}
-																							onClick={() => setMenuOpen(false)}
-																							to={lodge.to}
-																						>
-																							<span className="text-sm font-medium">
-																								{lodge.label}
-																							</span>
-																							<IconChevronRight
+																										key={lodge.to}
+																										onClick={() =>
+																											setMenuOpen(false)
+																										}
+																										to={lodge.to}
+																									>
+																										<span className="text-sm font-medium">
+																											{lodge.label}
+																										</span>
+																										<IconChevronRight
+																											className={cn(
+																												"h-4 w-4 transition-all",
+																												pathname === lodge.to
+																													? "text-accent opacity-100"
+																													: "text-muted-foreground opacity-0 -translate-x-2 group-hover:translate-x-0 group-hover:opacity-100"
+																											)}
+																										/>
+																									</Link>
+																								))}
+																							</motion.div>
+																						))
+																				) : (
+																					<motion.div
+																						animate={{ opacity: 1, y: 0 }}
+																						className="space-y-1"
+																						initial={{ opacity: 0, y: 5 }}
+																						transition={{ duration: 0.2 }}
+																					>
+																						{getMobileLodgeLinks(
+																							park.lodges ?? [],
+																							park.lodgesTo
+																						).map((lodge) => (
+																							<Link
 																								className={cn(
-																									"h-4 w-4 transition-all",
+																									"group flex items-center justify-between rounded-lg p-2 transition-colors hover:bg-muted/80",
 																									pathname === lodge.to
-																										? "text-accent opacity-100"
-																										: "text-muted-foreground opacity-0 -translate-x-2 group-hover:translate-x-0 group-hover:opacity-100"
+																										? "bg-primary/5 text-accent"
+																										: "text-foreground"
 																								)}
-																							/>
-																						</Link>
-																					))}
-																				</motion.div>
-																			)}
+																								key={lodge.to}
+																								onClick={() =>
+																									setMenuOpen(false)
+																								}
+																								to={lodge.to}
+																							>
+																								<span className="text-sm font-medium">
+																									{lodge.label}
+																								</span>
+																								<IconChevronRight
+																									className={cn(
+																										"h-4 w-4 transition-all",
+																										pathname === lodge.to
+																											? "text-accent opacity-100"
+																											: "text-muted-foreground opacity-0 -translate-x-2 group-hover:translate-x-0 group-hover:opacity-100"
+																									)}
+																								/>
+																							</Link>
+																						))}
+																					</motion.div>
+																				)}
+																			</div>
 																		</div>
 																	</div>
-																</div>
-															</motion.div>
-														)}
-													</AnimatePresence>
-												</div>
+																</motion.div>
+															)}
+														</AnimatePresence>
+													</div>
 												);
 											})}
 										</div>
