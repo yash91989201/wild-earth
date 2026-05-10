@@ -182,6 +182,10 @@ export default function Header() {
 	);
 	const [expandedMobileDestination, setExpandedMobileDestination] =
 		useState("destinations");
+	const [expandedMobileLodgeDestination, setExpandedMobileLodgeDestination] =
+		useState("");
+	const [activeMobileLodgeCategory, setActiveMobileLodgeCategory] =
+		useState("");
 	const router = useRouterState();
 	const navigate = useNavigate();
 	const pathname = router.location.pathname;
@@ -358,7 +362,7 @@ export default function Header() {
 												</div>
 												<div className="space-y-1 border-border border-l pl-4">
 													{"categories" in hoveredLodgeDestination
-														? hoveredLodgeDestination.categories.map((cat) => (
+														? hoveredLodgeDestination.categories?.map((cat) => (
 																<div className="mb-3" key={cat.category}>
 																	<p className="mb-1 px-3 font-bold font-serif text-primary text-sm">
 																		{cat.category}
@@ -377,7 +381,7 @@ export default function Header() {
 																	))}
 																</div>
 															))
-														: hoveredLodgeDestination.lodges.map((lodge) => (
+														: hoveredLodgeDestination.lodges?.map((lodge) => (
 																<NavigationMenuLink
 																	className={cn(
 																		pathname === lodge.to &&
@@ -463,7 +467,7 @@ export default function Header() {
 					>
 						<div className="flex h-full flex-col">
 							{/* Header */}
-							<div className="flex items-center justify-between px-6 py-5">
+							<div className="flex shrink-0 items-center justify-between px-6 py-5">
 								<Link
 									className="flex items-center gap-2"
 									onClick={() => setMenuOpen(false)}
@@ -503,11 +507,12 @@ export default function Header() {
 									<div className="space-y-1">
 										<div
 											className="flex items-center justify-between py-3 cursor-pointer"
-											onClick={() =>
+											onClick={() => {
 												setExpandedMobileDestination((v) =>
 													v === "destinations" ? "" : "destinations"
-												)
-											}
+												);
+												setExpandedMobileLodgeDestination("");
+											}}
 										>
 											<span className="flex items-center gap-3 font-serif text-xl text-foreground">
 												<IconMapPin className="h-5 w-5 text-accent" />
@@ -532,9 +537,9 @@ export default function Header() {
 												>
 													{lodgesByDestination.map((park, index) => (
 														<motion.div
-															key={park.to}
-															initial={{ opacity: 0, x: -10 }}
 															animate={{ opacity: 1, x: 0 }}
+															initial={{ opacity: 0, x: -10 }}
+															key={park.to}
 															transition={{
 																delay: index * 0.08,
 																duration: 0.3,
@@ -563,77 +568,195 @@ export default function Header() {
 										</AnimatePresence>
 									</div>
 
-									{/* Lodges Dropdown */}
-									<div className="space-y-1">
-										<div
-											className="flex items-center justify-between py-3 cursor-pointer"
-											onClick={() =>
-												setExpandedMobileDestination((v) =>
-													v === "lodges" ? "" : "lodges"
-												)
-											}
-										>
-											<span className="flex items-center gap-3 font-serif text-xl text-foreground">
-												<IconTent
-													className="h-5 w-5 text-accent"
-													strokeWidth={1.5}
-												/>
-												Lodge
+									{/* Lodges Section */}
+									<div className="space-y-2 pt-2">
+										<div className="pb-2">
+											<span className="font-bold font-serif text-lg text-primary">
+												Lodges
 											</span>
-											<IconChevronRight
-												className={cn(
-													"h-5 w-5 text-muted-foreground transition-transform",
-													expandedMobileDestination === "lodges" && "rotate-90"
-												)}
-											/>
 										</div>
-										<AnimatePresence initial={false}>
-											{expandedMobileDestination === "lodges" && (
-												<motion.div
-													animate={{ height: "auto", opacity: 1 }}
-													className="overflow-hidden pl-8"
-													exit={{ height: 0, opacity: 0 }}
-													initial={{ height: 0, opacity: 0 }}
-													transition={{ duration: 0.3, ease: easeOutExpo }}
+										<div className="space-y-2 pl-2">
+											{lodgesByDestination.map((park) => (
+												<div
+													className="border-b border-border/50 pb-2 last:border-0 last:pb-0"
+													key={park.to}
 												>
-													<div className="space-y-4">
-														{ranthamboreLodges.map((cat, catIndex) => (
+													<button
+														aria-expanded={
+															expandedMobileLodgeDestination ===
+															park.destination
+														}
+														className="flex w-full items-center justify-between py-2 text-left"
+														onClick={() => {
+															if (
+																expandedMobileLodgeDestination ===
+																park.destination
+															) {
+																setExpandedMobileLodgeDestination("");
+															} else {
+																setExpandedMobileLodgeDestination(
+																	park.destination
+																);
+																setExpandedMobileDestination("");
+																setActiveMobileLodgeCategory(
+																	"categories" in park &&
+																		park.categories?.length
+																		? park.categories[0].category
+																		: "Featured"
+																);
+															}
+														}}
+													>
+														<span
+															className={cn(
+																"flex items-center gap-3 font-medium transition-colors",
+																expandedMobileLodgeDestination ===
+																	park.destination
+																	? "text-accent"
+																	: "text-foreground"
+															)}
+														>
+															<IconTent
+																className="h-5 w-5 text-accent"
+																strokeWidth={1.5}
+															/>
+															{park.destination}
+														</span>
+														<IconChevronRight
+															className={cn(
+																"h-4 w-4 text-muted-foreground transition-transform",
+																expandedMobileLodgeDestination ===
+																	park.destination && "rotate-90"
+															)}
+														/>
+													</button>
+													<AnimatePresence initial={false}>
+														{expandedMobileLodgeDestination ===
+															park.destination && (
 															<motion.div
-																key={cat.category}
-																initial={{ opacity: 0, x: -10 }}
-																animate={{ opacity: 1, x: 0 }}
+																animate={{ height: "auto", opacity: 1 }}
+																className="overflow-hidden"
+																exit={{ height: 0, opacity: 0 }}
+																initial={{ height: 0, opacity: 0 }}
 																transition={{
-																	delay: catIndex * 0.08,
 																	duration: 0.3,
-																	ease: [0.25, 0.1, 0.25, 1],
+																	ease: easeOutExpo,
 																}}
 															>
-																<p className="mb-1 font-bold font-serif text-primary text-sm">
-																	{cat.category}
-																</p>
-																{cat.lodges.map((lodge) => (
-																	<Link
-																		className={cn(
-																			"flex items-center gap-2 py-2 pl-2 transition-colors",
-																			pathname === lodge.to
-																				? "text-accent"
-																				: "text-foreground hover:text-accent"
-																		)}
-																		key={lodge.to}
-																		onClick={() => setMenuOpen(false)}
-																		to={lodge.to}
+																<div className="mt-2 space-y-3 pb-2">
+																	{/* Tabs */}
+																	<div
+																		className="flex flex-wrap gap-2"
+																		role="tablist"
 																	>
-																		<span className="text-base">
-																			{lodge.label}
-																		</span>
-																	</Link>
-																))}
+																		{"categories" in park && park.categories ? (
+																			park.categories.map((cat) => (
+																				<button
+																					aria-selected={
+																						activeMobileLodgeCategory ===
+																						cat.category
+																					}
+																					className={cn(
+																						"rounded-full px-3 py-1 text-xs font-medium transition-colors border",
+																						activeMobileLodgeCategory ===
+																							cat.category
+																							? "bg-primary text-primary-foreground border-primary"
+																							: "bg-transparent text-muted-foreground border-border hover:border-primary/50"
+																					)}
+																					key={cat.category}
+																					onClick={() =>
+																						setActiveMobileLodgeCategory(
+																							cat.category
+																						)
+																					}
+																					role="tab"
+																				>
+																					{cat.category}
+																				</button>
+																			))
+																		) : (
+																			<button
+																				aria-selected={true}
+																				className="rounded-full px-3 py-1 text-xs font-medium bg-primary text-primary-foreground border border-primary"
+																				role="tab"
+																			>
+																				Featured
+																			</button>
+																		)}
+																	</div>
+
+																	{/* Tab Content */}
+																	<div className="pt-2">
+																		{"categories" in park && park.categories ? (
+																			park.categories
+																				.filter(
+																					(cat) =>
+																						cat.category ===
+																						activeMobileLodgeCategory
+																				)
+																				.map((cat) => (
+																					<motion.div
+																						animate={{ opacity: 1, y: 0 }}
+																						className="space-y-1"
+																						initial={{ opacity: 0, y: 5 }}
+																						key={cat.category}
+																						transition={{ duration: 0.2 }}
+																					>
+																						{cat.lodges.map((lodge) => (
+																							<Link
+																								className={cn(
+																									"flex items-center gap-2 py-1.5 transition-colors",
+																									pathname === lodge.to
+																										? "text-accent"
+																										: "text-foreground hover:text-accent"
+																								)}
+																								key={lodge.to}
+																								onClick={() =>
+																									setMenuOpen(false)
+																								}
+																								to={lodge.to}
+																							>
+																								<span className="text-sm">
+																									{lodge.label}
+																								</span>
+																							</Link>
+																						))}
+																					</motion.div>
+																				))
+																		) : (
+																			<motion.div
+																				animate={{ opacity: 1, y: 0 }}
+																				className="space-y-1"
+																				initial={{ opacity: 0, y: 5 }}
+																				transition={{ duration: 0.2 }}
+																			>
+																				{park.lodges?.map((lodge) => (
+																					<Link
+																						className={cn(
+																							"flex items-center gap-2 py-1.5 transition-colors",
+																							pathname === lodge.to
+																								? "text-accent"
+																								: "text-foreground hover:text-accent"
+																						)}
+																						key={lodge.to}
+																						onClick={() => setMenuOpen(false)}
+																						to={lodge.to}
+																					>
+																						<span className="text-sm">
+																							{lodge.label}
+																						</span>
+																					</Link>
+																				))}
+																			</motion.div>
+																		)}
+																	</div>
+																</div>
 															</motion.div>
-														))}
-													</div>
-												</motion.div>
-											)}
-										</AnimatePresence>
+														)}
+													</AnimatePresence>
+												</div>
+											))}
+										</div>
 									</div>
 
 									<Separator className="my-3" />
@@ -680,34 +803,34 @@ export default function Header() {
 											<span className="font-serif text-xl">Conservation</span>
 										</Link>
 									</div>
-
-									{/* CTA Section */}
-									<div className="sticky bottom-0 mt-10 bg-background pb-8">
-										<Link
-											className={cn(
-												buttonVariants({ size: "lg" }),
-												"w-full rounded-full py-6 font-bold text-base uppercase tracking-wide"
-											)}
-											hash="booking-form"
-											onClick={() => setMenuOpen(false)}
-											to="/"
-										>
-											Plan My Safari
-										</Link>
-										<a
-											className="mt-4 flex w-full items-center justify-center gap-2 rounded-full border border-border px-6 py-3 font-semibold text-sm text-foreground transition-colors hover:bg-muted"
-											href="https://wa.me/919876543210"
-											rel="noopener noreferrer"
-											target="_blank"
-										>
-											<IconBrandWhatsapp
-												className="h-5 w-5 text-green-600"
-												stroke={2}
-											/>
-											+91 98765 43210
-										</a>
-									</div>
 								</motion.div>
+							</div>
+
+							{/* CTA Section */}
+							<div className="shrink-0 border-t border-border/50 bg-background p-6 shadow-[0_-10px_20px_rgba(0,0,0,0.03)]">
+								<Link
+									className={cn(
+										buttonVariants({ size: "lg" }),
+										"w-full rounded-full py-6 font-bold text-base uppercase tracking-wide"
+									)}
+									hash="booking-form"
+									onClick={() => setMenuOpen(false)}
+									to="/"
+								>
+									Plan My Safari
+								</Link>
+								<a
+									className="mt-4 flex w-full items-center justify-center gap-2 rounded-full border border-border px-6 py-3 font-semibold text-sm text-foreground transition-colors hover:bg-muted"
+									href="https://wa.me/919876543210"
+									rel="noopener noreferrer"
+									target="_blank"
+								>
+									<IconBrandWhatsapp
+										className="h-5 w-5 text-green-600"
+										stroke={2}
+									/>
+									+91 98765 43210
+								</a>
 							</div>
 						</div>
 					</motion.div>
