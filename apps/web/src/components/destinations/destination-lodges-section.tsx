@@ -67,6 +67,14 @@ const lodges: Lodge[] = [
 			"Sprawling across acres of restored wilderness, this resort pairs palace-inspired suites with an infinity pool that seems to dissolve into the reserve forest beyond.",
 		image: lodgeImages[3],
 	},
+	{
+		name: "Aamaghati Resort",
+		location: "Ranthambore",
+		category: "luxury",
+		description:
+			"A sanctuary where traditional Rajasthani architecture meets contemporary luxury. Set amidst verdant landscapes with personalized service and thoughtfully designed spaces.",
+		image: "/assets/ranthambore/lodges/aamaghati-resort/gallery/01.jpg",
+	},
 	// Premium
 	{
 		name: "Taj Sawai Vilas",
@@ -128,7 +136,7 @@ const lodges: Lodge[] = [
 ];
 
 const categories = [
-	{ id: "luxury", label: "Luxury", count: 4 },
+	{ id: "luxury", label: "Luxury", count: 5 },
 	{ id: "premium", label: "Premium", count: 2 },
 	{ id: "experiential", label: "Experiential", count: 5 },
 ] as const;

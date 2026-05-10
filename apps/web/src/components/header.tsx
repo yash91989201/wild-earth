@@ -44,54 +44,72 @@ const navLinks = linkOptions([
 	{ label: "Impact", to: "/conservation" },
 ]);
 
+type LodgeLink = { label: string; to: string };
+type LodgeCategory = { category: string; lodges: LodgeLink[] };
+
+const ranthamboreLodges: LodgeCategory[] = [
+	{
+		category: "Luxury",
+		lodges: [
+			{ label: "Juna Mahal", to: "/destinations/ranthambore/lodges/juna-mahal" },
+			{ label: "Kipling Lodge", to: "/destinations/ranthambore/lodges/kipling-lodge" },
+			{ label: "Tigress Resort", to: "/destinations/ranthambore/lodges/tigress-resort" },
+			{ label: "Nahargarh Resort", to: "/destinations/ranthambore/lodges/nahargarh-resort" },
+			{ label: "Aamaghati Resort", to: "/destinations/ranthambore/lodges/aamaghati-resort" },
+		],
+	},
+	{
+		category: "Premium",
+		lodges: [
+			{ label: "Taj Sawai Vilas", to: "/destinations/ranthambore/lodges/taj-sawai-vilas" },
+		],
+	},
+	{
+		category: "Experiential",
+		lodges: [
+			{ label: "Aman-i-Khas", to: "/destinations/ranthambore/lodges/aman-i-khas" },
+			{ label: "Oberoi Vanya Vilas", to: "/destinations/ranthambore/lodges/oberoi-vanya-vilas" },
+			{ label: "Sawai Shivir", to: "/destinations/ranthambore/lodges/sawai-shivir-ranthambore" },
+			{ label: "Six Senses Fort Barwara", to: "/destinations/ranthambore/lodges/six-senses-fort-barwara" },
+			{ label: "Sujah Sher Bagh", to: "/destinations/ranthambore/lodges/sujah-sher-bagh" },
+		],
+	},
+];
+
+const defaultLodges: LodgeLink[] = [
+	{ label: "Juna Mahal", to: "/destinations/ranthambore/lodges/juna-mahal" },
+];
+
 const lodgesByDestination = [
 	{
 		destination: "Ranthambore",
 		to: "/destinations/ranthambore",
-		lodges: [
-			{
-				label: "Juna Mahal",
-				to: "/destinations/ranthambore/lodges/juna-mahal",
-			},
-		],
+		categories: ranthamboreLodges,
 	},
 	{
 		destination: "Jim Corbett",
 		to: "/destinations/corbett",
-		lodges: [
-			{ label: "Juna Mahal", to: "/destinations/corbett/lodges/juna-mahal" },
-		],
+		lodges: defaultLodges,
 	},
 	{
 		destination: "Kaziranga",
 		to: "/destinations/kaziranga",
-		lodges: [
-			{ label: "Juna Mahal", to: "/destinations/kaziranga/lodges/juna-mahal" },
-		],
+		lodges: defaultLodges,
 	},
 	{
 		destination: "Tadoba",
 		to: "/destinations/tadoba",
-		lodges: [
-			{ label: "Juna Mahal", to: "/destinations/tadoba/lodges/juna-mahal" },
-		],
+		lodges: defaultLodges,
 	},
 	{
 		destination: "Kanha",
 		to: "/destinations/kanha",
-		lodges: [
-			{ label: "Juna Mahal", to: "/destinations/kanha/lodges/juna-mahal" },
-		],
+		lodges: defaultLodges,
 	},
 	{
 		destination: "Bandhavgarh",
 		to: "/destinations/bandhavgarh",
-		lodges: [
-			{
-				label: "Juna Mahal",
-				to: "/destinations/bandhavgarh/lodges/juna-mahal",
-			},
-		],
+		lodges: defaultLodges,
 	},
 ];
 
@@ -267,21 +285,40 @@ export default function Header() {
 													))}
 												</div>
 												<div className="space-y-1 border-border border-l pl-4">
-													<p className="mb-2 px-3 font-bold font-serif text-primary text-sm">
-														Lodges in {hoveredLodgeDestination.destination}
-													</p>
-													{hoveredLodgeDestination.lodges.map((lodge) => (
-														<NavigationMenuLink
-															className={cn(
-																pathname === lodge.to &&
-																	"text-accent font-semibold"
-															)}
-															key={lodge.to}
-															render={<Link to={lodge.to} />}
-														>
-															{lodge.label}
-														</NavigationMenuLink>
-													))}
+													{"categories" in hoveredLodgeDestination ? (
+														hoveredLodgeDestination.categories.map((cat) => (
+															<div className="mb-3" key={cat.category}>
+																<p className="mb-1 px-3 font-bold font-serif text-primary text-sm">
+																	{cat.category}
+																</p>
+																{cat.lodges.map((lodge) => (
+																	<NavigationMenuLink
+																		className={cn(
+																			pathname === lodge.to &&
+																				"text-accent font-semibold"
+																		)}
+																		key={lodge.to}
+																		render={<Link to={lodge.to} />}
+																	>
+																		{lodge.label}
+																	</NavigationMenuLink>
+																))}
+																</div>
+														))
+													) : (
+														hoveredLodgeDestination.lodges.map((lodge) => (
+															<NavigationMenuLink
+																className={cn(
+																	pathname === lodge.to &&
+																		"text-accent font-semibold"
+																)}
+																key={lodge.to}
+																render={<Link to={lodge.to} />}
+															>
+																{lodge.label}
+															</NavigationMenuLink>
+														))
+													)}
 												</div>
 											</div>
 										</div>
@@ -485,34 +522,39 @@ export default function Header() {
 													initial={{ height: 0, opacity: 0 }}
 													transition={{ duration: 0.3, ease: easeOutExpo }}
 												>
-													{lodgesByDestination.map((park, index) => (
-														<motion.div
-															key={park.to}
-															initial={{ opacity: 0, x: -10 }}
-															animate={{ opacity: 1, x: 0 }}
-															transition={{
-																delay: index * 0.08,
-																duration: 0.3,
-																ease: [0.25, 0.1, 0.25, 1],
-															}}
-														>
-															<Link
-																className={cn(
-																	"flex items-center gap-3 py-3 transition-colors",
-																	pathname === `${park.to}/lodges`
-																		? "text-accent"
-																		: "text-foreground hover:text-accent"
-																)}
-																onClick={() => setMenuOpen(false)}
-																to={`${park.to}/lodges`}
+													<div className="space-y-4">
+														{ranthamboreLodges.map((cat, catIndex) => (
+															<motion.div
+																key={cat.category}
+																initial={{ opacity: 0, x: -10 }}
+																animate={{ opacity: 1, x: 0 }}
+																transition={{
+																	delay: catIndex * 0.08,
+																	duration: 0.3,
+																	ease: [0.25, 0.1, 0.25, 1],
+																}}
 															>
-																<IconTent className="h-5 w-5 text-accent" strokeWidth={1.5} />
-																<span className="font-serif text-xl">
-																	{park.destination}
-																</span>
-															</Link>
-														</motion.div>
-													))}
+																<p className="mb-1 font-bold font-serif text-primary text-sm">
+																	{cat.category}
+																</p>
+																{cat.lodges.map((lodge) => (
+																	<Link
+																		className={cn(
+																			"flex items-center gap-2 py-2 pl-2 transition-colors",
+																			pathname === lodge.to
+																				? "text-accent"
+																				: "text-foreground hover:text-accent"
+																		)}
+																		key={lodge.to}
+																		onClick={() => setMenuOpen(false)}
+																		to={lodge.to}
+																	>
+																		<span className="text-base">{lodge.label}</span>
+																	</Link>
+																))}
+															</motion.div>
+														))}
+													</div>
 												</motion.div>
 											)}
 										</AnimatePresence>
