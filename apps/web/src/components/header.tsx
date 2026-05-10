@@ -577,22 +577,24 @@ export default function Header() {
 											</span>
 										</div>
 										<div className="space-y-3">
-											{lodgesByDestination.map((park) => (
+											{lodgesByDestination.map((park) => {
+												const isExpanded = expandedMobileLodgeDestination === park.destination;
+												return (
 												<div
-													className="border-b border-border/50 pb-2 last:border-0 last:pb-0"
+													className={cn(
+														"rounded-2xl transition-all duration-300",
+														isExpanded ? "bg-primary/5" : "bg-transparent"
+													)}
 													key={park.to}
 												>
 													<Button
-														aria-expanded={
-															expandedMobileLodgeDestination ===
-															park.destination
-														}
-														className="flex w-full items-center justify-between p-3 h-auto hover:bg-transparent font-normal"
+														aria-expanded={isExpanded}
+														className={cn(
+															"flex w-full items-center justify-between p-3 h-auto hover:bg-transparent font-normal rounded-2xl",
+															isExpanded ? "text-accent" : "text-foreground"
+														)}
 														onClick={() => {
-															if (
-																expandedMobileLodgeDestination ===
-																park.destination
-															) {
+															if (isExpanded) {
 																setExpandedMobileLodgeDestination("");
 															} else {
 																setExpandedMobileLodgeDestination(
@@ -610,31 +612,23 @@ export default function Header() {
 														variant="ghost"
 													>
 														<span
-															className={cn(
-																"flex items-center gap-3 font-medium transition-colors",
-																expandedMobileLodgeDestination ===
-																	park.destination
-																	? "text-accent"
-																	: "text-foreground"
-															)}
+															className="flex items-center gap-3 font-medium transition-colors"
 														>
 															<IconTent
-																className="h-5 w-5 text-accent"
+																className={cn("h-5 w-5", isExpanded ? "text-accent" : "text-muted-foreground")}
 																strokeWidth={1.5}
 															/>
 															{park.destination}
 														</span>
 														<IconChevronRight
 															className={cn(
-																"h-4 w-4 text-muted-foreground transition-transform",
-																expandedMobileLodgeDestination ===
-																	park.destination && "rotate-90"
+																"h-4 w-4 transition-transform duration-300",
+																isExpanded ? "rotate-90 text-accent" : "text-muted-foreground"
 															)}
 														/>
 													</Button>
 													<AnimatePresence initial={false}>
-														{expandedMobileLodgeDestination ===
-															park.destination && (
+														{isExpanded && (
 															<motion.div
 																animate={{ height: "auto", opacity: 1 }}
 																className="overflow-hidden"
@@ -645,127 +639,146 @@ export default function Header() {
 																	ease: easeOutExpo,
 																}}
 															>
-																<div className="mt-2 space-y-3 pb-2">
-																	{/* Tabs */}
-																	<div
-																		className="flex flex-wrap gap-2"
-																		role="tablist"
-																	>
-																		{"categories" in park && park.categories ? (
-																			park.categories.map((cat) => (
-																				<Button
-																					aria-selected={
-																						activeMobileLodgeCategory ===
-																						cat.category
-																					}
-																					className={cn(
-																						"rounded-full h-7 px-3 text-xs font-medium transition-colors",
-																						activeMobileLodgeCategory !==
-																							cat.category &&
-																							"text-muted-foreground border-border hover:border-primary/50 bg-transparent"
-																					)}
-																					key={cat.category}
-																					onClick={() =>
-																						setActiveMobileLodgeCategory(
+																<div className="px-3 pb-3 mt-1">
+																	<div className="rounded-xl bg-muted/30 p-3">
+																		{/* Tabs */}
+																		<div
+																			className="flex overflow-x-auto pb-2 -mx-1 px-1 gap-2 scrollbar-none"
+																			role="tablist"
+																		>
+																			{"categories" in park && park.categories ? (
+																				park.categories.map((cat) => (
+																					<Button
+																						aria-selected={
+																							activeMobileLodgeCategory ===
 																							cat.category
-																						)
-																					}
+																						}
+																						className={cn(
+																							"shrink-0 rounded-full h-7 px-3 text-xs font-medium transition-colors",
+																							activeMobileLodgeCategory !==
+																								cat.category &&
+																								"text-muted-foreground hover:bg-muted/80"
+																						)}
+																						key={cat.category}
+																						onClick={() =>
+																							setActiveMobileLodgeCategory(
+																								cat.category
+																							)
+																						}
+																						role="tab"
+																						size="sm"
+																						variant={
+																							activeMobileLodgeCategory ===
+																							cat.category
+																								? "default"
+																								: "ghost"
+																						}
+																					>
+																						{cat.category}
+																					</Button>
+																				))
+																			) : (
+																				<Button
+																					aria-selected={true}
+																					className="shrink-0 rounded-full h-7 px-3 text-xs font-medium"
 																					role="tab"
 																					size="sm"
-																					variant={
-																						activeMobileLodgeCategory ===
-																						cat.category
-																							? "default"
-																							: "outline"
-																					}
+																					variant="default"
 																				>
-																					{cat.category}
+																					Featured
 																				</Button>
-																			))
-																		) : (
-																			<Button
-																				aria-selected={true}
-																				className="rounded-full h-7 px-3 text-xs font-medium"
-																				role="tab"
-																				size="sm"
-																				variant="default"
-																			>
-																				Featured
-																			</Button>
-																		)}
-																	</div>
+																			)}
+																		</div>
 
-																	{/* Tab Content */}
-																	<div className="pt-2">
-																		{"categories" in park && park.categories ? (
-																			park.categories
-																				.filter(
-																					(cat) =>
-																						cat.category ===
-																						activeMobileLodgeCategory
-																				)
-																				.map((cat) => (
-																					<motion.div
-																						animate={{ opacity: 1, y: 0 }}
-																						className="space-y-1"
-																						initial={{ opacity: 0, y: 5 }}
-																						key={cat.category}
-																						transition={{ duration: 0.2 }}
-																					>
-																						{cat.lodges.map((lodge) => (
-																							<Link
+																		{/* Tab Content */}
+																		<div className="pt-2">
+																			{"categories" in park && park.categories ? (
+																				park.categories
+																					.filter(
+																						(cat) =>
+																							cat.category ===
+																							activeMobileLodgeCategory
+																					)
+																					.map((cat) => (
+																						<motion.div
+																							animate={{ opacity: 1, y: 0 }}
+																							className="space-y-1"
+																							initial={{ opacity: 0, y: 5 }}
+																							key={cat.category}
+																							transition={{ duration: 0.2 }}
+																						>
+																							{cat.lodges.map((lodge) => (
+																								<Link
+																									className={cn(
+																										"group flex items-center justify-between rounded-lg p-2 transition-colors hover:bg-muted/80",
+																										pathname === lodge.to
+																											? "bg-primary/5 text-accent"
+																											: "text-foreground"
+																									)}
+																									key={lodge.to}
+																									onClick={() =>
+																										setMenuOpen(false)
+																									}
+																									to={lodge.to}
+																								>
+																									<span className="text-sm font-medium">
+																										{lodge.label}
+																									</span>
+																									<IconChevronRight
+																										className={cn(
+																											"h-4 w-4 transition-all",
+																											pathname === lodge.to
+																												? "text-accent opacity-100"
+																												: "text-muted-foreground opacity-0 -translate-x-2 group-hover:translate-x-0 group-hover:opacity-100"
+																										)}
+																									/>
+																								</Link>
+																							))}
+																						</motion.div>
+																					))
+																			) : (
+																				<motion.div
+																					animate={{ opacity: 1, y: 0 }}
+																					className="space-y-1"
+																					initial={{ opacity: 0, y: 5 }}
+																					transition={{ duration: 0.2 }}
+																				>
+																					{park.lodges?.map((lodge) => (
+																						<Link
+																							className={cn(
+																								"group flex items-center justify-between rounded-lg p-2 transition-colors hover:bg-muted/80",
+																								pathname === lodge.to
+																									? "bg-primary/5 text-accent"
+																									: "text-foreground"
+																							)}
+																							key={lodge.to}
+																							onClick={() => setMenuOpen(false)}
+																							to={lodge.to}
+																						>
+																							<span className="text-sm font-medium">
+																								{lodge.label}
+																							</span>
+																							<IconChevronRight
 																								className={cn(
-																									"flex items-center gap-2 py-1.5 transition-colors",
+																									"h-4 w-4 transition-all",
 																									pathname === lodge.to
-																										? "text-accent"
-																										: "text-foreground hover:text-accent"
+																										? "text-accent opacity-100"
+																										: "text-muted-foreground opacity-0 -translate-x-2 group-hover:translate-x-0 group-hover:opacity-100"
 																								)}
-																								key={lodge.to}
-																								onClick={() =>
-																									setMenuOpen(false)
-																								}
-																								to={lodge.to}
-																							>
-																								<span className="text-sm">
-																									{lodge.label}
-																								</span>
-																							</Link>
-																						))}
-																					</motion.div>
-																				))
-																		) : (
-																			<motion.div
-																				animate={{ opacity: 1, y: 0 }}
-																				className="space-y-1"
-																				initial={{ opacity: 0, y: 5 }}
-																				transition={{ duration: 0.2 }}
-																			>
-																				{park.lodges?.map((lodge) => (
-																					<Link
-																						className={cn(
-																							"flex items-center gap-2 py-1.5 transition-colors",
-																							pathname === lodge.to
-																								? "text-accent"
-																								: "text-foreground hover:text-accent"
-																						)}
-																						key={lodge.to}
-																						onClick={() => setMenuOpen(false)}
-																						to={lodge.to}
-																					>
-																						<span className="text-sm">
-																							{lodge.label}
-																						</span>
-																					</Link>
-																				))}
-																			</motion.div>
-																		)}
+																							/>
+																						</Link>
+																					))}
+																				</motion.div>
+																			)}
+																		</div>
 																	</div>
 																</div>
 															</motion.div>
 														)}
 													</AnimatePresence>
 												</div>
-											))}
+												);
+											})}
 										</div>
 									</div>
 
