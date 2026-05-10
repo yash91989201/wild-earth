@@ -51,27 +51,60 @@ const ranthamboreLodges: LodgeCategory[] = [
 	{
 		category: "Luxury",
 		lodges: [
-			{ label: "Juna Mahal", to: "/destinations/ranthambore/lodges/juna-mahal" },
-			{ label: "Kipling Lodge", to: "/destinations/ranthambore/lodges/kipling-lodge" },
-			{ label: "Tigress Resort", to: "/destinations/ranthambore/lodges/tigress-resort" },
-			{ label: "Nahargarh Resort", to: "/destinations/ranthambore/lodges/nahargarh-resort" },
-			{ label: "Aamaghati Resort", to: "/destinations/ranthambore/lodges/aamaghati-resort" },
+			{
+				label: "Juna Mahal",
+				to: "/destinations/ranthambore/lodges/juna-mahal",
+			},
+			{
+				label: "Kipling Lodge",
+				to: "/destinations/ranthambore/lodges/kipling-lodge",
+			},
+			{
+				label: "Tigress Resort",
+				to: "/destinations/ranthambore/lodges/tigress-resort",
+			},
+			{
+				label: "Nahargarh Resort",
+				to: "/destinations/ranthambore/lodges/nahargarh-resort",
+			},
+			{
+				label: "Aamaghati Resort",
+				to: "/destinations/ranthambore/lodges/aamaghati-resort",
+			},
 		],
 	},
 	{
 		category: "Premium",
 		lodges: [
-			{ label: "Taj Sawai Vilas", to: "/destinations/ranthambore/lodges/taj-sawai-vilas" },
+			{
+				label: "Taj Sawai Vilas",
+				to: "/destinations/ranthambore/lodges/taj-sawai-vilas",
+			},
 		],
 	},
 	{
 		category: "Experiential",
 		lodges: [
-			{ label: "Aman-i-Khas", to: "/destinations/ranthambore/lodges/aman-i-khas" },
-			{ label: "Oberoi Vanya Vilas", to: "/destinations/ranthambore/lodges/oberoi-vanya-vilas" },
-			{ label: "Sawai Shivir", to: "/destinations/ranthambore/lodges/sawai-shivir-ranthambore" },
-			{ label: "Six Senses Fort Barwara", to: "/destinations/ranthambore/lodges/six-senses-fort-barwara" },
-			{ label: "Sujah Sher Bagh", to: "/destinations/ranthambore/lodges/sujah-sher-bagh" },
+			{
+				label: "Aman-i-Khas",
+				to: "/destinations/ranthambore/lodges/aman-i-khas",
+			},
+			{
+				label: "Oberoi Vanya Vilas",
+				to: "/destinations/ranthambore/lodges/oberoi-vanya-vilas",
+			},
+			{
+				label: "Sawai Shivir",
+				to: "/destinations/ranthambore/lodges/sawai-shivir-ranthambore",
+			},
+			{
+				label: "Six Senses Fort Barwara",
+				to: "/destinations/ranthambore/lodges/six-senses-fort-barwara",
+			},
+			{
+				label: "Sujah Sher Bagh",
+				to: "/destinations/ranthambore/lodges/sujah-sher-bagh",
+			},
 		],
 	},
 ];
@@ -142,6 +175,7 @@ function NavLink({
 
 export default function Header() {
 	const [scrolled, setScrolled] = useState(false);
+	const [hiddenByStory, setHiddenByStory] = useState(false);
 	const [menuOpen, setMenuOpen] = useState(false);
 	const [hoveredDestination, setHoveredDestination] = useState(
 		lodgesByDestination[0]?.destination ?? ""
@@ -152,17 +186,54 @@ export default function Header() {
 	const navigate = useNavigate();
 	const pathname = router.location.pathname;
 	const isTransparent = !(scrolled || menuOpen);
+	const shouldHideHeader = hiddenByStory && !menuOpen;
 	const hoveredLodgeDestination =
 		lodgesByDestination.find(
 			(park) => park.destination === hoveredDestination
 		) ?? lodgesByDestination[0];
 
 	useEffect(() => {
-		const onScroll = () => setScrolled(window.scrollY > 80);
+		let frame = 0;
+
+		const updateHeaderState = () => {
+			setScrolled(window.scrollY > 80);
+			setHiddenByStory(
+				Array.from(document.querySelectorAll("[data-hide-site-header]")).some(
+					(section) => {
+						const rect = section.getBoundingClientRect();
+						return rect.top <= 80 && rect.bottom >= 80;
+					}
+				)
+			);
+		};
+
+		const onScroll = () => {
+			if (frame) {
+				return;
+			}
+
+			frame = window.requestAnimationFrame(() => {
+				frame = 0;
+				updateHeaderState();
+			});
+		};
+
 		window.addEventListener("scroll", onScroll, { passive: true });
+		window.addEventListener("resize", onScroll);
 		onScroll();
-		return () => window.removeEventListener("scroll", onScroll);
+
+		return () => {
+			window.removeEventListener("scroll", onScroll);
+			window.removeEventListener("resize", onScroll);
+			if (frame) {
+				window.cancelAnimationFrame(frame);
+			}
+		};
 	}, []);
+
+	useEffect(() => {
+		setHiddenByStory(false);
+	}, [pathname]);
 
 	useEffect(() => {
 		document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -176,6 +247,7 @@ export default function Header() {
 			<nav
 				className={cn(
 					"fixed top-0 right-0 left-0 z-40 border-b transition-all duration-300",
+					shouldHideHeader && "pointer-events-none -translate-y-full opacity-0",
 					isTransparent
 						? "border-transparent bg-transparent backdrop-blur-none"
 						: "border-border bg-background/92 backdrop-blur-xl"
@@ -285,40 +357,38 @@ export default function Header() {
 													))}
 												</div>
 												<div className="space-y-1 border-border border-l pl-4">
-													{"categories" in hoveredLodgeDestination ? (
-														hoveredLodgeDestination.categories.map((cat) => (
-															<div className="mb-3" key={cat.category}>
-																<p className="mb-1 px-3 font-bold font-serif text-primary text-sm">
-																	{cat.category}
-																</p>
-																{cat.lodges.map((lodge) => (
-																	<NavigationMenuLink
-																		className={cn(
-																			pathname === lodge.to &&
-																				"text-accent font-semibold"
-																		)}
-																		key={lodge.to}
-																		render={<Link to={lodge.to} />}
-																	>
-																		{lodge.label}
-																	</NavigationMenuLink>
-																))}
+													{"categories" in hoveredLodgeDestination
+														? hoveredLodgeDestination.categories.map((cat) => (
+																<div className="mb-3" key={cat.category}>
+																	<p className="mb-1 px-3 font-bold font-serif text-primary text-sm">
+																		{cat.category}
+																	</p>
+																	{cat.lodges.map((lodge) => (
+																		<NavigationMenuLink
+																			className={cn(
+																				pathname === lodge.to &&
+																					"text-accent font-semibold"
+																			)}
+																			key={lodge.to}
+																			render={<Link to={lodge.to} />}
+																		>
+																			{lodge.label}
+																		</NavigationMenuLink>
+																	))}
 																</div>
-														))
-													) : (
-														hoveredLodgeDestination.lodges.map((lodge) => (
-															<NavigationMenuLink
-																className={cn(
-																	pathname === lodge.to &&
-																		"text-accent font-semibold"
-																)}
-																key={lodge.to}
-																render={<Link to={lodge.to} />}
-															>
-																{lodge.label}
-															</NavigationMenuLink>
-														))
-													)}
+															))
+														: hoveredLodgeDestination.lodges.map((lodge) => (
+																<NavigationMenuLink
+																	className={cn(
+																		pathname === lodge.to &&
+																			"text-accent font-semibold"
+																	)}
+																	key={lodge.to}
+																	render={<Link to={lodge.to} />}
+																>
+																	{lodge.label}
+																</NavigationMenuLink>
+															))}
 												</div>
 											</div>
 										</div>
@@ -446,7 +516,8 @@ export default function Header() {
 											<IconChevronRight
 												className={cn(
 													"h-5 w-5 text-muted-foreground transition-transform",
-													expandedMobileDestination === "destinations" && "rotate-90"
+													expandedMobileDestination === "destinations" &&
+														"rotate-90"
 												)}
 											/>
 										</div>
@@ -503,7 +574,10 @@ export default function Header() {
 											}
 										>
 											<span className="flex items-center gap-3 font-serif text-xl text-foreground">
-												<IconTent className="h-5 w-5 text-accent" strokeWidth={1.5} />
+												<IconTent
+													className="h-5 w-5 text-accent"
+													strokeWidth={1.5}
+												/>
 												Lodge
 											</span>
 											<IconChevronRight
@@ -549,7 +623,9 @@ export default function Header() {
 																		onClick={() => setMenuOpen(false)}
 																		to={lodge.to}
 																	>
-																		<span className="text-base">{lodge.label}</span>
+																		<span className="text-base">
+																			{lodge.label}
+																		</span>
 																	</Link>
 																))}
 															</motion.div>

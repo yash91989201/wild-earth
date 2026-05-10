@@ -101,7 +101,11 @@ function WildlifeScrollytellingSection({
 	});
 
 	return (
-		<section className="relative bg-black" ref={containerRef}>
+		<section
+			className="relative bg-black"
+			data-hide-site-header
+			ref={containerRef}
+		>
 			<div
 				className="relative w-full"
 				style={{ height: `${wildlife.items.length * 100}vh` }}
@@ -157,6 +161,11 @@ function WildlifeItem({
 	);
 
 	const scale = useTransform(progress, [start, end], [1, 1.1]);
+	const contentY = useTransform(
+		progress,
+		[Math.max(0, start - 0.03), start + 0.08, end - 0.12, Math.min(1, end)],
+		[96, 0, 0, -32]
+	);
 
 	const imageSrc = images[index % images.length];
 
@@ -177,7 +186,7 @@ function WildlifeItem({
 
 			<div className="absolute inset-0 flex flex-col justify-end p-6 pb-24 md:p-12 md:pb-32">
 				<div className="mx-auto w-full max-w-7xl">
-					<div className="max-w-2xl">
+					<motion.div className="max-w-2xl" style={{ y: contentY }}>
 						<div className="mb-4 flex items-baseline gap-4">
 							<span className="font-serif text-4xl text-accent md:text-5xl">
 								{String(index + 1).padStart(2, "0")}
@@ -192,7 +201,7 @@ function WildlifeItem({
 						<p className="text-lg text-white/80 leading-relaxed md:text-xl">
 							{animal.description}
 						</p>
-					</div>
+					</motion.div>
 				</div>
 			</div>
 		</motion.div>
