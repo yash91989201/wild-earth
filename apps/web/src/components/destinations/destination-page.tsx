@@ -226,7 +226,7 @@ export default function DestinationPage({
 			<section className="px-6 py-24">
 				<div className="mx-auto max-w-7xl">
 					<motion.div
-						className="mb-16 max-w-3xl"
+						className="max-w-3xl"
 						initial="hidden"
 						variants={fadeUp}
 						viewport={viewportOnce}
@@ -242,9 +242,14 @@ export default function DestinationPage({
 							{destination.overview.description}
 						</p>
 					</motion.div>
+				</div>
+			</section>
 
+			<section className="relative overflow-hidden bg-primary px-6 py-16 text-primary-foreground sm:py-20">
+				<div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom_right,rgba(255,255,255,0.05)_0%,transparent_50%,rgba(0,0,0,0.1)_100%)]" />
+				<div className="mx-auto max-w-7xl">
 					<motion.div
-						className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4"
+						className="relative z-10 grid grid-cols-2 gap-y-12 md:grid-cols-4 md:gap-x-8 md:gap-y-0"
 						initial="hidden"
 						variants={staggerContainer}
 						viewport={viewportOnce}
@@ -252,15 +257,19 @@ export default function DestinationPage({
 					>
 						{destination.keyFacts.map((fact) => (
 							<motion.div
-								className="rounded-lg bg-secondary p-6"
+								className="flex flex-col items-center text-center"
 								key={fact.label}
 								variants={staggerItem}
 							>
-								<fact.icon className="mb-4 h-8 w-8 text-accent" />
-								<p className="mb-1 text-muted-foreground text-sm">
+								<div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-white/5 ring-1 ring-white/20">
+									<fact.icon className="h-6 w-6 text-accent" />
+								</div>
+								<p className="mb-3 font-medium text-primary-foreground/70 text-xs uppercase tracking-[0.2em]">
 									{fact.label}
 								</p>
-								<p className="font-semibold text-foreground">{fact.value}</p>
+								<p className="font-bold font-serif text-2xl text-white tracking-tight md:text-3xl">
+									{fact.value}
+								</p>
 							</motion.div>
 						))}
 					</motion.div>
