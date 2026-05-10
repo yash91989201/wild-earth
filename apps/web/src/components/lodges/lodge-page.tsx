@@ -14,17 +14,15 @@ import {
 	DialogContent,
 	DialogTitle,
 } from "@wild-earth/ui/components/dialog";
+import { cn } from "@wild-earth/ui/lib/utils";
 import { AnimatePresence, motion, useScroll, useTransform } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
 	fadeLeft,
-	fadeRight,
 	fadeUp,
 	staggerContainer,
-	staggerItem,
 	viewportOnce,
 } from "@/lib/animations";
-import { cn } from "@wild-earth/ui/lib/utils";
 import type { LodgePageData, LodgePageRoom } from "@/lib/types";
 
 function RoomGallery({
@@ -147,6 +145,69 @@ function RoomGallery({
 	);
 }
 
+function ExperienceCard({
+	index,
+	item,
+}: {
+	index: number;
+	item: LodgePageData["experiences"][0];
+}) {
+	const ref = useRef<HTMLElement>(null);
+	const { scrollYProgress } = useScroll({
+		target: ref,
+		offset: ["start end", "end start"],
+	});
+	const y = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
+
+	return (
+		<motion.article
+			className="group relative h-[90vh] min-h-[700px] w-full overflow-hidden"
+			initial="hidden"
+			ref={ref}
+			variants={staggerContainer}
+			viewport={{ once: true, margin: "-20%" }}
+			whileInView="visible"
+		>
+			<motion.img
+				alt={item.title}
+				className="absolute inset-0 h-[120%] w-full object-cover"
+				height={1080}
+				src={item.image}
+				style={{ y }}
+				variants={{
+					hidden: { scale: 1.05 },
+					visible: {
+						scale: 1,
+						transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] },
+					},
+				}}
+				width={1920}
+			/>
+			<div className="absolute inset-0 bg-black/35 transition-colors duration-700 group-hover:bg-black/40" />
+			<div className="absolute inset-x-0 bottom-0 h-3/5 bg-linear-to-t from-black/90 via-black/60 to-transparent" />
+
+			<div className="absolute inset-0 flex flex-col justify-end px-6 pb-24 sm:pb-32">
+				<div className="mx-auto w-full max-w-7xl">
+					<motion.div className="max-w-3xl" variants={fadeUp}>
+						<div className="mb-6 flex items-center gap-4">
+							<span className="text-accent text-[0.75rem] font-bold uppercase tracking-[0.2em]">
+								0{index + 1}
+							</span>
+							<div className="h-px w-16 bg-accent" />
+						</div>
+						<h3 className="mb-6 font-serif text-4xl text-white sm:text-5xl md:text-6xl lg:text-7xl">
+							{item.title}
+						</h3>
+						<p className="max-w-xl text-white/90 text-lg leading-relaxed sm:text-xl">
+							{item.description}
+						</p>
+					</motion.div>
+				</div>
+			</div>
+		</motion.article>
+	);
+}
+
 export default function LodgePage({ lodge }: { lodge: LodgePageData }) {
 	const { scrollY } = useScroll();
 	const y = useTransform(scrollY, [0, 800], [0, 280]);
@@ -240,7 +301,7 @@ export default function LodgePage({ lodge }: { lodge: LodgePageData }) {
 
 					<div className="relative mt-10 lg:mt-0">
 						<div className="absolute -inset-y-20 -right-20 -z-10 w-full rounded-l-[100px] bg-secondary/50" />
-						
+
 						<div className="relative mx-auto max-w-lg lg:max-w-none">
 							<motion.div
 								className="relative z-10"
@@ -257,7 +318,7 @@ export default function LodgePage({ lodge }: { lodge: LodgePageData }) {
 									width={900}
 								/>
 							</motion.div>
-							
+
 							<motion.div
 								className="absolute -right-4 -bottom-12 z-20 w-3/5 sm:-right-12 sm:-bottom-20"
 								initial={{ opacity: 0, y: 60 }}
@@ -300,44 +361,7 @@ export default function LodgePage({ lodge }: { lodge: LodgePageData }) {
 
 				<div className="w-full">
 					{lodge.experiences.map((item, index) => (
-						<motion.article 
-							key={item.title}
-							initial="hidden"
-							whileInView="visible"
-							viewport={{ once: true, margin: "-20%" }}
-							variants={staggerContainer}
-							className="group relative h-[80vh] min-h-[600px] w-full overflow-hidden"
-						>
-							<motion.img
-								variants={{
-									hidden: { scale: 1.05 },
-									visible: { scale: 1, transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] } }
-								}}
-								src={item.image}
-								alt={item.title}
-								className="absolute inset-0 h-full w-full object-cover"
-							/>
-							<div className="absolute inset-0 bg-primary/40 transition-colors duration-700 group-hover:bg-primary/50" />
-							
-							<div className="absolute inset-0 flex flex-col justify-end px-6 pb-24 sm:pb-32">
-								<div className="mx-auto w-full max-w-7xl">
-									<motion.div variants={fadeUp} className="max-w-3xl">
-										<div className="mb-6 flex items-center gap-4">
-											<span className="text-accent text-[0.75rem] font-bold uppercase tracking-[0.2em]">
-												0{index + 1}
-											</span>
-											<div className="h-px w-16 bg-accent" />
-										</div>
-										<h3 className="mb-6 font-serif text-4xl text-primary-foreground sm:text-5xl md:text-6xl lg:text-7xl">
-											{item.title}
-										</h3>
-										<p className="max-w-xl text-primary-foreground/90 text-lg leading-relaxed sm:text-xl">
-											{item.description}
-										</p>
-									</motion.div>
-								</div>
-							</div>
-						</motion.article>
+						<ExperienceCard index={index} item={item} key={item.title} />
 					))}
 				</div>
 			</section>
