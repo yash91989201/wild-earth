@@ -5,333 +5,129 @@ import {
 	IconTree,
 } from "@tabler/icons-react";
 import { createFileRoute } from "@tanstack/react-router";
-import { Button } from "@wild-earth/ui/components/button";
-import { motion, useScroll, useTransform } from "motion/react";
-import {
-	fadeUp,
-	staggerContainer,
-	staggerItem,
-	viewportOnce,
-} from "@/lib/animations";
+import DestinationPage, {
+	type DestinationPageData,
+} from "@/components/destinations/destination-page";
 
-const keyFacts = [
-	{ icon: IconMapPin, label: "Location", value: "Assam, India" },
-	{ icon: IconRuler, label: "Area", value: "430 sq km" },
-	{ icon: IconCalendar, label: "Established", value: "1905 (UNESCO WHS)" },
-	{ icon: IconTree, label: "Famous For", value: "One-horned Rhinos" },
-];
-
-const wildlife = [
-	{
-		name: "One-Horned Rhino",
-		desc: "The symbol of Kaziranga, seen grazing peacefully in the tall elephant grass and marshlands. The park hosts two-thirds of the world's population.",
+const kaziranga: DestinationPageData = {
+	hero: {
+		eyebrow: "Assam, India",
+		title: ["Kaziranga", "National Park"],
+		images: [
+			"https://images.unsplash.com/photo-1549366021-9f761d450615?q=80&w=2070&auto=format&fit=crop",
+		],
+		imageAlt: "Kaziranga National Park",
 	},
-	{
-		name: "Asian Elephant",
-		desc: "Massive herds traverse the park, utilizing the abundant water resources of the Brahmaputra and its tributaries.",
+	overview: {
+		eyebrow: "About the Park",
+		title: "The Wetlands of the East",
+		description:
+			"Kaziranga National Park is a massive expanse of tall elephant grass, marshland, and dense tropical moist broadleaf forests, crisscrossed by four major rivers, including the mighty Brahmaputra. Recognized as a UNESCO World Heritage Site, it's a profound conservation success story. It hosts two-thirds of the world's great one-horned rhinoceroses. The park also boasts the highest density of tigers among protected areas in the world and is home to large breeding populations of elephants, wild water buffalo, and swamp deer.",
 	},
-	{
-		name: "Wild Water Buffalo",
-		desc: "Kaziranga hosts one of the last remaining populations of purebred wild water buffalos, often seen wallowing in mud.",
+	keyFacts: [
+		{ icon: IconMapPin, label: "Location", value: "Assam, India" },
+		{ icon: IconRuler, label: "Area", value: "430 sq km" },
+		{
+			icon: IconCalendar,
+			label: "Established",
+			value: "1905 (UNESCO WHS)",
+		},
+		{ icon: IconTree, label: "Famous For", value: "One-horned Rhinos" },
+	],
+	wildlife: {
+		eyebrow: "Wildlife",
+		title: "What You May Encounter",
+		items: [
+			{
+				name: "One-Horned Rhino",
+				description:
+					"The symbol of Kaziranga, seen grazing peacefully in the tall elephant grass and marshlands. The park hosts two-thirds of the world's population.",
+			},
+			{
+				name: "Asian Elephant",
+				description:
+					"Massive herds traverse the park, utilizing the abundant water resources of the Brahmaputra and its tributaries.",
+			},
+			{
+				name: "Wild Water Buffalo",
+				description:
+					"Kaziranga hosts one of the last remaining populations of purebred wild water buffalos, often seen wallowing in mud.",
+			},
+			{
+				name: "Bengal Tiger",
+				description:
+					"The park boasts the highest density of tigers among protected areas in the world, making it a critical conservation stronghold.",
+			},
+			{
+				name: "Swamp Deer",
+				description:
+					"Large breeding populations of swamp deer thrive in the park's marshlands and tall grass ecosystems.",
+			},
+			{
+				name: "Elephant Grass",
+				description:
+					"Growing up to 5 meters tall, these grasslands provide the perfect cover for the park's megafauna and shape the entire landscape.",
+			},
+		],
 	},
-	{
-		name: "Bengal Tiger",
-		desc: "The park boasts the highest density of tigers among protected areas in the world, making it a critical conservation stronghold.",
+	landscape: {
+		eyebrow: "Safari Zones",
+		title: "Navigate the Landscape",
+		items: [
+			{
+				name: "Central Range (Kohora)",
+				description:
+					"The most accessible and popular zone, offering the highest density of one-horned rhinos and frequent tiger sightings along well-maintained trails.",
+			},
+			{
+				name: "Western Range (Bagori)",
+				description:
+					"Known for large herds of elephants and water buffalo, this range features expansive grasslands with exceptional sunset views.",
+			},
+		],
+		gallery: [
+			"https://images.unsplash.com/photo-1549366021-9f761d450615?q=80&w=2070&auto=format&fit=crop",
+			"https://images.unsplash.com/photo-1500964757637-c85e8a162699?q=80&w=1964&auto=format&fit=crop",
+			"https://images.unsplash.com/photo-1535591273668-578e31182c4f?q=80&w=2072&auto=format&fit=crop",
+		],
+		galleryAlt: "Kaziranga",
 	},
-	{
-		name: "Swamp Deer",
-		desc: "Large breeding populations of swamp deer thrive in the park's marshlands and tall grass ecosystems.",
+	bestTime: {
+		eyebrow: "Plan Your Visit",
+		title: "Best Time to Visit",
+		description:
+			"November to April is the ideal window for visiting Kaziranga. The winter months offer pleasant weather and lush green landscapes. The park remains closed during the monsoon season from May to October due to flooding.",
+		seasons: [
+			{
+				name: "Winter",
+				months: "Nov – Feb",
+				description: "Pleasant weather, lush greens",
+			},
+			{
+				name: "Spring",
+				months: "Mar – Apr",
+				description: "Best for wildlife viewing",
+				highlighted: true,
+			},
+			{
+				name: "Monsoon",
+				months: "May – Oct",
+				description: "Park closed",
+			},
+		],
 	},
-	{
-		name: "Elephant Grass",
-		desc: "Growing up to 5 meters tall, these grasslands provide the perfect cover for the park's megafauna and shape the entire landscape.",
+	cta: {
+		title: "Ready to Meet the Rhinos?",
+		description:
+			"Let us craft a bespoke Kaziranga safari experience for you — complete with expert naturalists, zone-optimized game drives, and stays at the finest lodges.",
+		buttonLabel: "Enquire Now",
 	},
-];
-
-const zones = [
-	{
-		name: "Central Range (Kohora)",
-		desc: "The most accessible and popular zone, offering the highest density of one-horned rhinos and frequent tiger sightings along well-maintained trails.",
-	},
-	{
-		name: "Western Range (Bagori)",
-		desc: "Known for large herds of elephants and water buffalo, this range features expansive grasslands with exceptional sunset views.",
-	},
-];
-
-const gallery = [
-	"https://images.unsplash.com/photo-1549366021-9f761d450615?q=80&w=2070&auto=format&fit=crop",
-	"https://images.unsplash.com/photo-1500964757637-c85e8a162699?q=80&w=1964&auto=format&fit=crop",
-	"https://images.unsplash.com/photo-1535591273668-578e31182c4f?q=80&w=2072&auto=format&fit=crop",
-];
+};
 
 export const Route = createFileRoute("/destinations/kaziranga/")({
 	component: RouteComponent,
 });
 
 function RouteComponent() {
-	const { scrollY } = useScroll();
-	const y = useTransform(scrollY, [0, 800], [0, 280]);
-
-	return (
-		<main className="flex-grow bg-background">
-			{/* Hero */}
-			<section className="relative flex h-[70vh] items-center justify-center overflow-hidden">
-				<div className="absolute inset-0 z-0">
-					<motion.img
-						alt="Kaziranga National Park"
-						className="absolute inset-0 h-full w-full object-cover will-change-transform"
-						src="https://images.unsplash.com/photo-1549366021-9f761d450615?q=80&w=2070&auto=format&fit=crop"
-						style={{ y, scale: 1.15 }}
-					/>
-					<div className="absolute inset-0 bg-black/50" />
-				</div>
-				<motion.div
-					className="relative z-10 max-w-4xl px-6 text-center text-white"
-					initial="hidden"
-					variants={fadeUp}
-					viewport={viewportOnce}
-					whileInView="visible"
-				>
-					<span className="mb-4 block font-bold text-accent text-sm uppercase tracking-[0.2em]">
-						Assam, India
-					</span>
-					<h1 className="font-bold font-serif text-5xl leading-tight md:text-7xl">
-						Kaziranga
-						<br />
-						National Park
-					</h1>
-				</motion.div>
-			</section>
-
-			{/* Overview & Key Facts */}
-			<section className="px-6 py-24">
-				<div className="mx-auto max-w-7xl">
-					<motion.div
-						className="mb-16 max-w-3xl"
-						initial="hidden"
-						variants={fadeUp}
-						viewport={viewportOnce}
-						whileInView="visible"
-					>
-						<span className="mb-4 block font-bold text-accent text-sm uppercase tracking-[0.2em]">
-							About the Park
-						</span>
-						<h2 className="mb-6 font-bold font-serif text-3xl text-primary md:text-4xl">
-							The Wetlands of the East
-						</h2>
-						<p className="text-muted-foreground leading-relaxed">
-							Kaziranga National Park is a massive expanse of tall elephant
-							grass, marshland, and dense tropical moist broadleaf forests,
-							crisscrossed by four major rivers, including the mighty
-							Brahmaputra. Recognized as a UNESCO World Heritage Site, it's a
-							profound conservation success story.
-						</p>
-						<p className="mt-4 text-muted-foreground leading-relaxed">
-							It hosts two-thirds of the world's great one-horned rhinoceroses.
-							The park also boasts the highest density of tigers among protected
-							areas in the world and is home to large breeding populations of
-							elephants, wild water buffalo, and swamp deer.
-						</p>
-					</motion.div>
-
-					<motion.div
-						className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4"
-						initial="hidden"
-						variants={staggerContainer}
-						viewport={viewportOnce}
-						whileInView="visible"
-					>
-						{keyFacts.map((fact) => (
-							<motion.div
-								className="rounded-lg bg-secondary p-6"
-								key={fact.label}
-								variants={staggerItem}
-							>
-								<fact.icon className="mb-4 h-8 w-8 text-accent" />
-								<p className="mb-1 text-muted-foreground text-sm">
-									{fact.label}
-								</p>
-								<p className="font-semibold text-foreground">{fact.value}</p>
-							</motion.div>
-						))}
-					</motion.div>
-				</div>
-			</section>
-
-			{/* Wildlife */}
-			<section className="bg-secondary px-6 py-24">
-				<div className="mx-auto max-w-7xl">
-					<motion.div
-						className="mb-16 max-w-3xl"
-						initial="hidden"
-						variants={fadeUp}
-						viewport={viewportOnce}
-						whileInView="visible"
-					>
-						<span className="mb-4 block font-bold text-accent text-sm uppercase tracking-[0.2em]">
-							Wildlife
-						</span>
-						<h2 className="font-bold font-serif text-3xl text-primary md:text-4xl">
-							What You May Encounter
-						</h2>
-					</motion.div>
-
-					<motion.div
-						className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
-						initial="hidden"
-						variants={staggerContainer}
-						viewport={viewportOnce}
-						whileInView="visible"
-					>
-						{wildlife.map((animal) => (
-							<motion.div
-								className="rounded-lg bg-background p-8"
-								key={animal.name}
-								variants={staggerItem}
-							>
-								<h3 className="mb-3 font-bold font-serif text-primary text-xl">
-									{animal.name}
-								</h3>
-								<p className="text-muted-foreground leading-relaxed">
-									{animal.desc}
-								</p>
-							</motion.div>
-						))}
-					</motion.div>
-				</div>
-			</section>
-
-			{/* Safari Zones */}
-			<section className="px-6 py-24">
-				<div className="mx-auto max-w-7xl">
-					<div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
-						<motion.div
-							initial="hidden"
-							variants={fadeUp}
-							viewport={viewportOnce}
-							whileInView="visible"
-						>
-							<span className="mb-4 block font-bold text-accent text-sm uppercase tracking-[0.2em]">
-								Safari Zones
-							</span>
-							<h2 className="mb-6 font-bold font-serif text-3xl text-primary md:text-4xl">
-								Navigate the Landscape
-							</h2>
-							<div className="space-y-8">
-								{zones.map((zone) => (
-									<div key={zone.name}>
-										<h3 className="mb-2 font-bold text-foreground text-lg">
-											{zone.name}
-										</h3>
-										<p className="text-muted-foreground leading-relaxed">
-											{zone.desc}
-										</p>
-									</div>
-								))}
-							</div>
-						</motion.div>
-
-						<motion.div
-							className="grid grid-cols-2 gap-4"
-							initial="hidden"
-							variants={staggerContainer}
-							viewport={viewportOnce}
-							whileInView="visible"
-						>
-							{gallery.map((src, i) => (
-								<motion.div
-									className={`group overflow-hidden rounded-lg ${i === 0 ? "col-span-2 aspect-[16/9]" : "aspect-square"}`}
-									key={src}
-									variants={staggerItem}
-								>
-									<img
-										alt={`Kaziranga ${i + 1}`}
-										className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-										src={src}
-									/>
-								</motion.div>
-							))}
-						</motion.div>
-					</div>
-				</div>
-			</section>
-
-			{/* Best Time */}
-			<section className="bg-primary px-6 py-24 text-primary-foreground">
-				<div className="mx-auto max-w-4xl text-center">
-					<motion.div
-						initial="hidden"
-						variants={fadeUp}
-						viewport={viewportOnce}
-						whileInView="visible"
-					>
-						<span className="mb-4 block font-bold text-accent text-sm uppercase tracking-[0.2em]">
-							Plan Your Visit
-						</span>
-						<h2 className="mb-6 font-bold font-serif text-3xl md:text-4xl">
-							Best Time to Visit
-						</h2>
-						<p className="mx-auto mb-10 max-w-2xl text-primary-foreground/80 leading-relaxed">
-							November to April is the ideal window for visiting Kaziranga. The
-							winter months offer pleasant weather and lush green landscapes.
-							The park remains closed during the monsoon season from May to
-							October due to flooding.
-						</p>
-						<div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-							<div className="rounded-lg border border-white/20 p-6">
-								<p className="mb-2 text-primary-foreground/60 text-sm">
-									Winter
-								</p>
-								<p className="font-bold text-lg">Nov – Feb</p>
-								<p className="mt-2 text-primary-foreground/50 text-sm">
-									Pleasant weather, lush greens
-								</p>
-							</div>
-							<div className="rounded-lg border border-accent bg-accent/10 p-6">
-								<p className="mb-2 text-accent text-sm">Spring</p>
-								<p className="font-bold text-lg">Mar – Apr</p>
-								<p className="mt-2 text-primary-foreground/60 text-sm">
-									Best for wildlife viewing
-								</p>
-							</div>
-							<div className="rounded-lg border border-white/20 p-6">
-								<p className="mb-2 text-primary-foreground/60 text-sm">
-									Monsoon
-								</p>
-								<p className="font-bold text-lg">May – Oct</p>
-								<p className="mt-2 text-primary-foreground/50 text-sm">
-									Park closed
-								</p>
-							</div>
-						</div>
-					</motion.div>
-				</div>
-			</section>
-
-			{/* CTA */}
-			<section className="px-6 py-24">
-				<div className="mx-auto max-w-4xl text-center">
-					<motion.div
-						initial="hidden"
-						variants={fadeUp}
-						viewport={viewportOnce}
-						whileInView="visible"
-					>
-						<h2 className="mb-6 font-bold font-serif text-3xl text-primary md:text-4xl">
-							Ready to Meet the Rhinos?
-						</h2>
-						<p className="mx-auto mb-10 max-w-2xl text-muted-foreground leading-relaxed">
-							Let us craft a bespoke Kaziranga safari experience for you —
-							complete with expert naturalists, zone-optimized game drives, and
-							stays at the finest lodges.
-						</p>
-						<Button className="bg-primary px-8 py-6 font-semibold text-lg text-primary-foreground hover:bg-primary/90">
-							Enquire Now
-						</Button>
-					</motion.div>
-				</div>
-			</section>
-		</main>
-	);
+	return <DestinationPage destination={kaziranga} />;
 }
